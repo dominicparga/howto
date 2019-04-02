@@ -34,7 +34,7 @@ These conventions just extend common Java style, meaning for instance that `came
   Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended, but Java is a very verbose language._
 
-* Use `4 spaces` for indention (p.s.: [could help your salary](https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs)!).
+* Use `4 spaces` for indention (p.s.: [could help your salary][website_salary]!).
 
 ## Coding Conventions
 
@@ -78,7 +78,7 @@ These conventions just extend common Java style, meaning for instance that `came
   Changing the implementation of a class should tend to make no difference for users of this class.
   Furthermore, debugging with breakpoints is much more easier when you only have to make one breakpoint instead of many at different positions.
   Same argument counts for synchronization code snippets.
-  [The code is getting inlined][website_salary]._
+  [The code is getting inlined][website_java_direct_access]._
 
   `getter` starts with `get`, `setter` starts with `set`.
   Those `getter` returning a boolean expression may start differently, but with a verb.
@@ -284,4 +284,5 @@ These conventions just extend common Java style, meaning for instance that `came
   Is a matrix describing graph structures belonging to the matrix or the graph folder?
   It would be annoying to look for such a file in such a folder structure due to non-intuitive subfoldering._
 
-[website_salary]: https://stackoverflow.com/questions/23931546/java-getter-and-setter-faster-than-direct-access
+[website_java_direct_access]: https://stackoverflow.com/questions/23931546/java-getter-and-setter-faster-than-direct-access
+[website_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
