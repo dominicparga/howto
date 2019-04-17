@@ -79,9 +79,8 @@ This means following branches are used:
 * `fix/<name>`: branches for bug fixes branched off `develop`
 
 Following the rules of this, the `master` only contains releases and is only merged `--no-ff`.
-This helps publishing clean releases, but is a bit redundant due to the nice feature-branch concept.
-It helps a lot to keep in mind that `master` should always run without errors and that commits from `develop` could be squashed before merged into `master`.
-If the `master` itself is the "release", it is probably more convenient to merge fast-forwarded if possible.
+Although it feels a bit redundant due to the nice feature-branch concept, this helps publishing clean releases and maintaining a clean git history.
+Further, it helps keeping in mind that `master` should always run without errors.
 
 [website_git_commit_messages]: https://chris.beams.io/posts/git-commit
 [website_gitflow_workflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
