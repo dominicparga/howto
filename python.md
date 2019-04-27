@@ -179,14 +179,14 @@ which may be called `pythonic`.
   Exceptions can be made for special cases to improve readability (see below).
 
   ```diff
-  - e = (- a) * b;
-  + e = (-a) * b;
+  - e = (- a) * b
+  + e = (-a) * b
 
-  - e = a*b;
-  + e = a * b;
+  - e = a*b
+  + e = a * b
 
-  + e = a * b + c * d;    # ok, but not recommended here
-  + e = a*b + c*d;        # improves readability
+  + e = a * b + c * d    # ok, but not recommended here
+  + e = a*b + c*d        # improves readability
   ```
 
 ## Documentation
