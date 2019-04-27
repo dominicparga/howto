@@ -26,6 +26,7 @@ which may be called `pythonic`.
 ## File Style
 
 * Maximum line width is `80`.
+  Exceptions can be made for String-constants and similar.
 
   _Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended._

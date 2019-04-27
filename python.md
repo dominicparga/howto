@@ -54,6 +54,7 @@ which may be called `pythonic`.
   ```
 
 * Maximum line width is `79`, for documentation `72`.
+  Exceptions can be made for String-constants and similar.
 
   _Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended.

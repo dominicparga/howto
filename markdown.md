@@ -12,7 +12,7 @@ Cool is the inline html tag, that allows title names independent of the tag for 
 
 ## Super Duper Mega Fancy Title <a name="fancy-title"></a>
 
-Writing markdown is a lot easier, especially if you are vim-user, if every sentence has its own line.
+Writing markdown is a lot easier, especially if you are vim-user, if every sentence has its own line without any linewidth limit.
 
 ```diff
 + This is a sentence.
