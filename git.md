@@ -2,11 +2,11 @@
 
 This page describes how to work with git in a pretty way.
 
-## [Git Commit Messages][website_git_commit_messages]
+## [Git Commit Messages][www_git_commit_messages]
 
 Commit messages are a _hugely_ important part of working with git.
 They not only help other workers to understand changes quickly, but also are the basement for new releases and their release notes.
-Thus, these following rules [cited from here][website_git_commit_messages] should be accounted in commits.
+Thus, these following rules [cited from here][www_git_commit_messages] should be accounted in commits.
 
 First of all, commits should be `atomic`.
 One commit should contain only changes of a few lines of code (or one single feature).
@@ -65,9 +65,9 @@ Consider using following verbs/flags in commit messages:
 * `style` when code or format style changes occur in the commit
 * `refactor` when changes __DO NOT__ change functionality
 
-## [Gitflow Workflow][website_gitflow_workflow]
+## [Gitflow Workflow][www_gitflow_workflow]
 
-This project uses [Gitflow Workflow][website_gitflow_workflow], a nice and clear way to work effectively.
+This project uses [Gitflow Workflow][www_gitflow_workflow], a nice and clear way to work effectively.
 
 This means following branches are used:
 
@@ -82,5 +82,5 @@ Following the rules of this, the `master` only contains releases and is only mer
 Although it feels a bit redundant due to the nice feature-branch concept, this helps publishing clean releases and maintaining a clean git history.
 Further, it helps keeping in mind that `master` should always run without errors.
 
-[website_git_commit_messages]: https://chris.beams.io/posts/git-commit
-[website_gitflow_workflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+[www_git_commit_messages]: https://chris.beams.io/posts/git-commit
+[www_gitflow_workflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
