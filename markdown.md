@@ -1,6 +1,6 @@
 # Markdown
 
-If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][web_md_cheatsheet].
+If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][www_md_cheatsheet].
 Below comes a table of contents.
 
 ## Table of Contents
@@ -14,8 +14,9 @@ Cool is the inline html tag, that allows title names independent of the tag for 
 
 ## Links <a name="links"></a>
 
-Use links [directly](https://github.com/dominicparga) or with a [reference][web_github_dominicparga].
+Use links [directly](https://github.com/dominicparga) or with a [reference][www_github_dominicparga].
 I prefer always using references for consistency.
+Prefixing link-references with __www__ could help with readability, e.g. `www_github_dominicparga` in this file referring to [me :3][www_github_dominicparga].
 
 ## Super Duper Mega Fancy Title <a name="fancy-title"></a>
 
@@ -56,5 +57,5 @@ You can look at this files raw version to see the written style, but in addition
 - It helps using `__bold__` for __bold__ text and `*italic*` for *italic* text.
   Mixing them could be done like `*__bold and italic__*`, giving *__bold and italic__*, but you should be consistent.
 
-[web_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
-[web_github_dominicparga]: https://github.com/dominicparga
+[www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[www_github_dominicparga]: https://github.com/dominicparga
