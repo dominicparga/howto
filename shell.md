@@ -5,8 +5,8 @@ They help a lot keeping overview and the code clear.
 
 Although the language is bash or zsh, the project's style bases on python's philosophie.
 
-[`The Zen of Python`][website_wikipedia_zen_of_python] should be kept in mind while coding.
-From [Wikipedia - Python][website_wikipedia_python]:  
+[`The Zen of Python`][www_wikipedia_zen_of_python] should be kept in mind while coding.
+From [Wikipedia - Python][www_wikipedia_python]:  
 In general, the language's core philosophy (...) includes
 
 ```text
@@ -188,5 +188,5 @@ which may be called `pythonic`.
   Someone without knowing the whole project structure should be able to find a file at the first try.  
   `In every folder, there should be only one option to continue searching (-> determinism).`
 
-[website_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
-[website_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy
+[www_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
+[www_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy

@@ -2,8 +2,8 @@
 
 The following conventions help keeping overview and the code clear.
 
-Keep [`The Zen of Python`][website_wikipedia_zen_of_python] in mind when coding python.
-From [Wikipedia - Python][website_wikipedia_python]:  
+Keep [`The Zen of Python`][www_wikipedia_zen_of_python] in mind when coding python.
+From [Wikipedia - Python][www_wikipedia_python]:  
 In general, the language's core philosophy (...) includes
 
 ```text
@@ -60,7 +60,7 @@ which may be called `pythonic`.
   In general, more than `80` is not recommended.
   Since python is not such a verbose language, you should stick with this._
 
-* Use `4 spaces` for indention (p.s.: [could help your salary][website_salary]!).
+* Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
 ## Coding Conventions
 
@@ -81,7 +81,7 @@ which may be called `pythonic`.
   ```
 
   They still can be accessed from outside the class, but shouldn't.
-  For more information about the underscore (especially dunderscore) in python, reading [this pretty site][website_python_underscore] is highly recommended.
+  For more information about the underscore (especially dunderscore) in python, reading [this pretty site][www_python_underscore] is highly recommended.
 
 * Use `constants` over `magic numbers`!
 
@@ -259,8 +259,8 @@ which may be called `pythonic`.
   Someone without knowing your whole project structure should be able to find a file at the first try.  
   `In every folder, there should be only one option to continue searching (-> determinism).`
 
-[website_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+[www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
 
-[website_python_underscore]: https://shahriar.svbtle.com/underscores-in-python
-[website_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
-[website_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy
+[www_python_underscore]: https://shahriar.svbtle.com/underscores-in-python
+[www_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
+[www_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy
