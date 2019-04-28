@@ -14,7 +14,7 @@ Some tips and info for using github projects for more than just storing your cod
 
 ## Projects <a name="projects"></a>
 
-TODO
+TODO ([check this page][www_about_project_boards] as well)
 
 ### Kanban board <a name="kanban-board"></a>
 
@@ -41,3 +41,4 @@ TODO
 TODO
 
 [www_closing_issues_using_keywords]: https://help.github.com/en/articles/closing-issues-using-keywords
+[www_about_project_boards]: https://help.github.com/en/articles/about-project-boards
