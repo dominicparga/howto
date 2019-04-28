@@ -1,14 +1,21 @@
 # Markdown
 
+If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][web_md_cheatsheet].
 Below comes a table of contents.
 
 ## Table of Contents
 
 1. [Super Duper Hardcore Mega Fancy Title](#fancy-title)
-    1. [Code styles](#code-styles)
-    2. [Style mentions](#style-mentions)
+    1. [Links](#links)
+    2. [Code styles](#code-styles)
+    3. [Style mentions](#style-mentions)
 
 Cool is the inline html tag, that allows title names independent of the tag for the TOC.
+
+## Links <a name="links"></a>
+
+Use links [directly](https://github.com/dominicparga) or with a [reference][web_github_dominicparga].
+I prefer always using references for consistency.
 
 ## Super Duper Mega Fancy Title <a name="fancy-title"></a>
 
@@ -48,3 +55,6 @@ You can look at this files raw version to see the written style, but in addition
   Otherwise, sub-headings make no sense.
 - It helps using `__bold__` for __bold__ text and `*italic*` for *italic* text.
   Mixing them could be done like `*__bold and italic__*`, giving *__bold and italic__*, but you should be consistent.
+
+[web_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[web_github_dominicparga]: https://github.com/dominicparga
