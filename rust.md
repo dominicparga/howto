@@ -69,20 +69,119 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 * Separate module sections with `//---//` (whole line).
   Take the following code snippet for inspiration.
 
-## Project Conventions
+## Howto setup a complex project
 
-* Prefer package/folder/file management over class mangement if `meaningful`.  
-  __BUT:__ Think in an intuitive, handy and `deterministic`(!) way and don't take structuring and subfolding too far.
+### `mod` vs. `use`
 
-  Always ask yourself:  
-  `How would most of the people search for this module/struct/file?`  
-  Someone without knowing your whole project structure should be able to find a file at the first try.  
-  `In every folder, there should be only one option to continue searching (-> determinism).`
+While `mod` declares a module, `use` reduces verbose code by bringing namespaces into scope.
+For more information, see [here][www_rust_mod_use_examples].
 
-* Bring modules and structs into scope using `use`, but access functions via module or struct.
+```rust
+pub mod a {
+    pub mod b {
+        pub fn some_fn() {
+            // ...
+        }
+    }
+}
+
+use a::b;
+
+// bad style
+// use a::b::somefn;
+
+fn main() {
+    b::some_fn();
+    // instead of a::b::some_fn();
+}
+```
+
+### Module and folder structure
+
+Most of the following folder tree is from [Rust's Manifest Format doc][www_rust_project_overview].
+
+```zsh
+project_name
+├── src/               # directory containing source files
+│   ├── lib.rs         # the main entry point for libraries and packages
+│   ├── main.rs        # the main entry point for packages producing executables
+│   ├── bin/           # (optional) directory containing additional executables
+│   │   └── *.rs
+│   └── */             # (optional) directories containing multi-file executables
+│       └── main.rs
+├── examples/          # (optional) examples
+│   ├── *.rs
+│   └── */             # (optional) directories containing multi-file examples
+│       └── main.rs
+├── tests/             # (optional) integration tests
+│   ├── *.rs
+│   └── */             # (optional) directories containing multi-file tests
+│       └── main.rs
+└── benches/           # (optional) benchmarks
+    ├── *.rs
+    └── */             # (optional) directories containing multi-file benchmarks
+        └── main.rs
+```
+
+Prefer package/folder/file management over class mangement if `meaningful`.  
+__BUT:__ Think in an intuitive, handy and `deterministic`(!) way and don't take structuring and subfolding too far.
+
+Always ask yourself:  
+`How would most of the people search for this module/struct/file?`  
+Someone without knowing your whole project structure should be able to find a file at the first try.  
+`In every folder, there should be only one option to continue searching (-> determinism).`
+
+Besides that, Rust provides other nice ways of managing source files.
+One approach shows a submodule `module_a` as a file.
+
+```zsh
+project_name
+├── src/
+│   ├── module_a.rs
+│   └── ...
+└── ...
+```
+
+```rust
+// project_name/src/module_a.rs
+pub mod module_a {
+    pub mod nice_content {
+        // ...
+    }
+}
+```
+
+It is possible to split the module into multiple files easily as shown below.
+
+```zsh
+project_name
+├── src/
+│   ├── module_a
+│   │   └── mod.rs
+│   └── ...
+└── ...
+```
+
+```rust
+// project_name/src/module_a/mod.rs
+pub mod nice_content {
+    // ...
+}
+```
+
+In both ways, main.rs can access the modules in the same way.
+
+```rust
+// project_name/src/main.rs
+mod module_a;
+
+fn main() {
+    // access module_a::nice_content
+}
+```
 
 [www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
-
 [www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
-
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+[www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
+[www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
