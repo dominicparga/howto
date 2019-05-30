@@ -6,6 +6,3 @@ Further, it helps me remembering all kind of development-related stuff, collects
 ---
 
 ## TODO
-
-* add horizontal lines to markdown.md
-* add markdown syntax explicitly in file (currently it's just shown implicitly by using it in the file)
