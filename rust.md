@@ -1,8 +1,8 @@
 # Rust
 
 The following conventions help keeping overview and the code clear.
-Since there exists an [official Rust Style Guide][website_rust_style_guide], this file just adds or summarizes some useful info.
-Keep the [guiding principles and rationale][website_rust_principles] in mind when coding rust.
+Since there exists an [official Rust Style Guide][www_rust_style_guide], this file just adds or summarizes some useful info.
+Keep the [guiding principles and rationale][www_rust_principles] in mind when coding rust.
 
 ## File Style
 
@@ -13,7 +13,7 @@ Keep the [guiding principles and rationale][website_rust_principles] in mind whe
   Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended._
 
-* Use `4 spaces` for indention (p.s.: [could help your salary][website_salary]!).
+* Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
 ## Coding Conventions
 
@@ -81,8 +81,8 @@ Keep the [guiding principles and rationale][website_rust_principles] in mind whe
 
 * Bring modules and structs into scope using `use`, but access functions via module or struct.
 
-[website_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
+[www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
 
-[website_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
+[www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
 
-[website_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+[www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
