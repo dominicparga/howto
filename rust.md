@@ -64,6 +64,21 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
   + let e = a*b + c*d;        // improves readability
   ```
 
+* In general, use `return` statements.
+  Exception could be short functions to improve the overview.
+
+  ```diff
+  - fn blub() {
+  -     3
+  - }
+
+  + fn blub() { 3 }
+
+  + fn blub() {
+  +     return 3;
+  + }
+  ```
+
 ## Documentation
 
 * Separate module sections with `//---//` (whole line).
