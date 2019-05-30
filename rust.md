@@ -54,14 +54,14 @@ Keep the [guiding principles and rationale][website_rust_principles] in mind whe
   Exceptions can be made for special cases to improve readability (see below).
 
   ```diff
-  - e = (- a) * b;
-  + e = (-a) * b;
+  - let e = (- a) * b;
+  + let e = (-a) * b;
 
-  - e = a*b;
-  + e = a * b;
+  - let e = a*b;
+  + let e = a * b;
 
-  + e = a * b + c * d;    // ok, but not recommended here
-  + e = a*b + c*d;        // improves readability
+  + let e = a * b + c * d;    // ok, but not recommended here
+  + let e = a*b + c*d;        // improves readability
   ```
 
 ## Documentation
