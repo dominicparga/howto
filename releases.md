@@ -26,7 +26,7 @@ These points should be considered and checked for a new release.
 * Has `release` been merged into `master`?
 * Is a new teaser picture needed/recommended?
 
-## [Semantic Versioning][website_semantic_versioning]
+## [Semantic Versioning][www_semantic_versioning]
 
 "Given a version number `MAJOR.MINOR.PATCH`, increment the:
 
@@ -37,6 +37,6 @@ These points should be considered and checked for a new release.
 Exception could be alpha or beta status, when the software hasn't reached 1.0.0 yet.
 Additional labels for pre-release and build metadata are available as extensions to the `MAJOR.MINOR.PATCH`."
 
-For more information, see [the original site][website_semantic_versioning].
+For more information, see [the original site][www_semantic_versioning].
 
-[website_semantic_versioning]: https://semver.org
+[www_semantic_versioning]: https://semver.org
