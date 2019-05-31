@@ -15,6 +15,32 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 
 * Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
+## Some coding details
+
+### Strings
+
+Raw string literals allow writing escape characters without `\`.
+
+[![Visualizing raw string literals][www_raw_strings_img]][www_raw_strings]
+
+Example:
+
+```rust
+let toml = r#"
+    [package]
+    name = "osmgraphing"
+    version = "0.1.0"
+    authors = [
+        "dominicparga <dominic.parga@gmail.com>",
+        "jenasat <jena.s@outlook.de>"
+    ]
+    edition = "2018"
+
+    [dependencies]
+    quick-xml = "*"
+"#;
+```
+
 ## Coding Conventions
 
 * Class names are written in `CamelCase`, functions, fields in `snake_case`.
@@ -198,5 +224,9 @@ fn main() {
 [www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
 [www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+
+[www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
+[www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
+
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
 [www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
