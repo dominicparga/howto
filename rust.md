@@ -17,6 +17,24 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 
 ## Some coding details
 
+### References
+
+Following code blocks from [rust-lang][www_rust_ref_keyword] show two identical lines.
+
+`ref` on the left side of `=` is the same as `&` on the right side.
+
+```rust
+let ref x = 1;
+let x = &1;
+```
+
+`&` on the left side of `=` is the same as `*` on the right side.
+
+```rust
+let &y = x;
+let y = *x;
+```
+
 ### Strings
 
 Raw string literals allow writing escape characters without `\`.
@@ -224,6 +242,8 @@ fn main() {
 [www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
 [www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+
+[www_rust_ref_keyword]: https://users.rust-lang.org/t/ref-keyword-versus/18818/4
 
 [www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
 [www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
