@@ -4,7 +4,19 @@ The following conventions help keeping overview and the code clear.
 Since there exists an [official Rust Style Guide][www_rust_style_guide], this file just adds or summarizes some useful info.
 Keep the [guiding principles and rationale][www_rust_principles] in mind when coding rust.
 
-## File Style
+1. [File style](#file-style)
+1. [Some coding details](#coding-details)
+    1. [Types](#types)
+    1. [References](#refs)
+    1. [Strings](#strings)
+1. [Coding Conventions](#coding-conventions)
+1. [Documentation](#doc)
+1. [Howto setup a complex project](#complex-project)
+    1. [`mod` vs `use`](#mod-vs-use)
+    1. [Module and folder structure](#project-structure)
+    1. [The Manifest Format](#manifest)
+
+## File style <a name="file-style"></a>
 
 * Maximum line width is `100`.
   Exceptions can be made for String-constants and similar.
@@ -15,7 +27,60 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 
 * Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
-## Coding Conventions
+## Some coding details <a name="coding-details"></a>
+
+### Types <a name="types"></a>
+
+To get the type of a variable, consider "asking" the compiler by explicitly setting the type of a variable to `()`.
+
+```rust
+let my_number: () = 3.4;
+// compiler:        ^^^ expected (), found floating-point variable
+```
+
+### References <a name="refs"></a>
+
+Following code blocks from [rust-lang][www_rust_ref_keyword] show two identical lines.
+
+`ref` on the left side of `=` is the same as `&` on the right side.
+
+```rust
+let ref x = 1;
+let x = &1;
+```
+
+`&` on the left side of `=` is the same as `*` on the right side.
+
+```rust
+let &y = x;
+let y = *x;
+```
+
+### Strings <a name="strings"></a>
+
+Raw string literals allow writing escape characters without `\`.
+
+[![Visualizing raw string literals][www_raw_strings_img]][www_raw_strings]
+
+Example:
+
+```rust
+let toml = r#"
+    [package]
+    name = "osmgraphing"
+    version = "0.1.0"
+    authors = [
+        "dominicparga <dominic.parga@gmail.com>",
+        "jenasat <jena.s@outlook.de>"
+    ]
+    edition = "2018"
+
+    [dependencies]
+    quick-xml = "*"
+"#;
+```
+
+## Coding Conventions <a name="coding-conventions"></a>
 
 * Class names are written in `CamelCase`, functions, fields in `snake_case`.
 
@@ -79,14 +144,14 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
   + }
   ```
 
-## Documentation
+## Documentation <a name="doc"></a>
 
 * Separate module sections with `//---//` (whole line).
   Take the following code snippet for inspiration.
 
-## Howto setup a complex project
+## Howto setup a complex project <a name="complex-project"></a>
 
-### `mod` vs. `use`
+### `mod` vs `use` <a name="mod-vs-use"></a>
 
 While `mod` declares a module, `use` reduces verbose code by bringing namespaces into scope.
 For more information, see [here][www_rust_mod_use_examples].
@@ -111,9 +176,10 @@ fn main() {
 }
 ```
 
-### Module and folder structure
+### Module and folder structure <a name="project-structure"></a>
 
 Most of the following folder tree is from [Rust's Manifest Format doc][www_rust_project_overview].
+Information about visibility can be found [here][www_rust_visibility].
 
 ```zsh
 project_name
@@ -195,8 +261,21 @@ fn main() {
 }
 ```
 
+### The Manifest Format <a name="manifest"></a>
+
+A very nice documentation about Rust's Manifest Format is provided [here][www_rust_visibility].
+
 [www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
 [www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
+
+[www_rust_ref_keyword]: https://users.rust-lang.org/t/ref-keyword-versus/18818/4
+
+[www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
+[www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
+
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
 [www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
+[www_rust_visibility]: https://doc.rust-lang.org/reference/visibility-and-privacy.html
+
+[www_rust_manifest]: https://doc.rust-lang.org/nightly/cargo/reference/manifest.html
