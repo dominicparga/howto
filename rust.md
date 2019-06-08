@@ -4,7 +4,18 @@ The following conventions help keeping overview and the code clear.
 Since there exists an [official Rust Style Guide][www_rust_style_guide], this file just adds or summarizes some useful info.
 Keep the [guiding principles and rationale][www_rust_principles] in mind when coding rust.
 
-## File Style
+1. [File style](#file-style)
+1. [Some coding details](#coding-details)
+    1. [Types](#types)
+    1. [References](#refs)
+    1. [Strings](#strings)
+1. [Coding Conventions](#coding-conventions)
+1. [Documentation](#doc)
+1. [Howto setup a complex project](#complex-project)
+    1. [`mod` vs `use`](#mod-vs-use)
+    1. [Module and folder structure](#project-structure)
+
+## File style <a name="file-style"></a>
 
 * Maximum line width is `100`.
   Exceptions can be made for String-constants and similar.
@@ -15,9 +26,18 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 
 * Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
-## Some coding details
+## Some coding details <a name="coding-details"></a>
 
-### References
+### Types <a name="types"></a>
+
+To get the type of a variable, consider "asking" the compiler by explicitly setting the type of a variable to `()`.
+
+```rust
+let my_number: () = 3.4;
+// compiler:        ^^^ expected (), found floating-point variable
+```
+
+### References <a name="refs"></a>
 
 Following code blocks from [rust-lang][www_rust_ref_keyword] show two identical lines.
 
@@ -35,7 +55,7 @@ let &y = x;
 let y = *x;
 ```
 
-### Strings
+### Strings <a name="strings"></a>
 
 Raw string literals allow writing escape characters without `\`.
 
@@ -59,7 +79,7 @@ let toml = r#"
 "#;
 ```
 
-## Coding Conventions
+## Coding Conventions <a name="coding-conventions"></a>
 
 * Class names are written in `CamelCase`, functions, fields in `snake_case`.
 
@@ -123,14 +143,14 @@ let toml = r#"
   + }
   ```
 
-## Documentation
+## Documentation <a name="doc"></a>
 
 * Separate module sections with `//---//` (whole line).
   Take the following code snippet for inspiration.
 
-## Howto setup a complex project
+## Howto setup a complex project <a name="complex-project"></a>
 
-### `mod` vs. `use`
+### `mod` vs `use` <a name="mod-vs-use"></a>
 
 While `mod` declares a module, `use` reduces verbose code by bringing namespaces into scope.
 For more information, see [here][www_rust_mod_use_examples].
@@ -155,7 +175,7 @@ fn main() {
 }
 ```
 
-### Module and folder structure
+### Module and folder structure <a name="project-structure"></a>
 
 Most of the following folder tree is from [Rust's Manifest Format doc][www_rust_project_overview].
 
