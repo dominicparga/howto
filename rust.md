@@ -14,6 +14,7 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 1. [Howto setup a complex project](#complex-project)
     1. [`mod` vs `use`](#mod-vs-use)
     1. [Module and folder structure](#project-structure)
+    1. [The Manifest Format](#manifest)
 
 ## File style <a name="file-style"></a>
 
@@ -178,6 +179,7 @@ fn main() {
 ### Module and folder structure <a name="project-structure"></a>
 
 Most of the following folder tree is from [Rust's Manifest Format doc][www_rust_project_overview].
+Information about visibility can be found [here][www_rust_visibility].
 
 ```zsh
 project_name
@@ -259,6 +261,10 @@ fn main() {
 }
 ```
 
+### The Manifest Format <a name="manifest"></a>
+
+A very nice documentation about Rust's Manifest Format is provided [here][www_rust_visibility].
+
 [www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
 [www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
@@ -270,3 +276,6 @@ fn main() {
 
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
 [www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
+[www_rust_visibility]: https://doc.rust-lang.org/reference/visibility-and-privacy.html
+
+[www_rust_manifest]: https://doc.rust-lang.org/nightly/cargo/reference/manifest.html
