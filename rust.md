@@ -150,20 +150,9 @@ This citation from [this thread on reddit][www_reddit_panic] adds some info wrt.
   + let e = a*b + c*d;        // improves readability
   ```
 
-* In general, use `return` statements.
-  Exception could be short functions to improve the overview.
-
-  ```diff
-  - fn blub() {
-  -     3
-  - }
-
-  + fn blub() { 3 }
-
-  + fn blub() {
-  +     return 3;
-  + }
-  ```
+* In general, use `return` statements in early returns.
+  Rust is an expression-oriented language, which means every chunk of code has a return value (e.g. `match`, `for`, ...).
+  Hence it's clear, that the last code snippet of a code block is the block's value.
 
 ## Documentation <a name="doc"></a>
 
