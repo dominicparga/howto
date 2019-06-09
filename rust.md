@@ -9,6 +9,7 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
     1. [Types](#types)
     1. [References](#refs)
     1. [Strings](#strings)
+    1. [Error handling](#error-handling)
 1. [Coding Conventions](#coding-conventions)
 1. [Documentation](#doc)
 1. [Howto setup a complex project](#complex-project)
@@ -80,6 +81,26 @@ let toml = r#"
 "#;
 ```
 
+### Error handling <a name="error-handling"></a>
+
+[The official Rust docs][www_rust_error_handling] say:
+
+* An explicit `panic` is mainly useful for tests and dealing with unrecoverable errors.
+  It may help with prototyping, but `unimplemented` is better.
+* The `Option` type is for when a value is optional or when the lack of a value is not an error condition.
+  `unwrap` may be used, but `expect` should be preferred.
+* The `Result` type is used when there is a chance that things do go wrong and the caller has to deal with the problem.
+  Although `unwrap` and `expect` is provided, don't use it (unless it's a test or quick prototype).
+
+This citation from [this thread on reddit][www_reddit_panic] adds some info wrt. `panic!()` vs `Result`, `Option`:
+> `panic!()`, `expect("my random logic error")` and `.unwrap()` should only be used when:
+>
+> * An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
+> * For the normal operation of testing frameworks such as [proptest][www_github_proptest].
+> * When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
+>
+> Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?` operator][www_rust_?-operator].
+
 ## Coding Conventions <a name="coding-conventions"></a>
 
 * Class names are written in `CamelCase`, functions, fields in `snake_case`.
@@ -129,15 +150,6 @@ let toml = r#"
   + let e = a*b + c*d;        // improves readability
   ```
 
-* Citation from [this thread on reddit][www_reddit_panic] wrt. `panic!()` vs `Result`, `Option`:
-  > `panic!()`, `expect("my random logic error")` and `.unwrap()` should only be used when:
-  >
-  > * An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
-  > * For the normal operation of testing frameworks such as [proptest][www_github_proptest].
-  > * When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
-  >
-  > Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?` operator][www_rust_?-operator].
-
 * In general, use `return` statements.
   Exception could be short functions to improve the overview.
 
@@ -155,8 +167,73 @@ let toml = r#"
 
 ## Documentation <a name="doc"></a>
 
-* Separate module sections with `//---//` (whole line).
-  Take the following code snippet for inspiration.
+Rust provides pretty code by design due to its namespaces, modules and its clean and powerful project setup (`cargo.toml`).
+If you still need to separate code sections, you may use `//-------//` (whole line).
+Otherwise, take the following code example from [Rust's official documentation][www_rust_comments_example].
+
+```rust
+//! A doc comment that applies to the implicit anonymous module of this crate
+
+pub mod outer_module {
+
+    //!  - Inner line doc
+    //!! - Still an inner line doc (but with a bang at the beginning)
+
+    /*!  - Inner block doc */
+    /*!! - Still an inner block doc (but with a bang at the beginning) */
+
+    //   - Only a comment
+    ///  - Outer line doc (exactly 3 slashes)
+    //// - Only a comment
+
+    /*   - Only a comment */
+    /**  - Outer block doc (exactly) 2 asterisks */
+    /*** - Only a comment */
+
+    pub mod inner_module {}
+
+    pub mod nested_comments {
+        /* In Rust /* we can /* nest comments */ */ */
+
+        // All three types of block comments can contain or be nested inside
+        // any other type:
+
+        /*   /* */  /** */  /*! */  */
+        /*!  /* */  /** */  /*! */  */
+        /**  /* */  /** */  /*! */  */
+        pub mod dummy_item {}
+    }
+
+    pub mod degenerate_cases {
+        // empty inner line doc
+        //!
+
+        // empty inner block doc
+        /*!*/
+
+        // empty line comment
+        //
+
+        // empty outer line doc
+        ///
+
+        // empty block comment
+        /**/
+
+        pub mod dummy_item {}
+
+        // empty 2-asterisk block isn't a doc block, it is a block comment
+        /***/
+
+    }
+
+    /* The next one isn't allowed because outer doc comments
+       require an item that will receive the doc */
+
+    /// Where is my item?
+  mod boo {}
+}
+```
 
 ## Howto setup a complex project <a name="complex-project"></a>
 
@@ -283,9 +360,13 @@ A very nice documentation about Rust's Manifest Format is provided [here][www_ru
 [www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
 [www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
 
+[www_rust_error_handling]: https://doc.rust-lang.org/rust-by-example/error.html
+
 [www_reddit_panic]: https://www.reddit.com/r/rust/comments/9q3jqn/how_is_rust_safe_when_panics_can_happen_out_of/
 [www_github_proptest]: https://github.com/altsysrq/proptest
 [www_rust_?-operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
+
+[www_rust_comments_example]: https://doc.rust-lang.org/reference/comments.html#examples
 
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
 [www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
