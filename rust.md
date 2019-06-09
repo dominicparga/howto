@@ -129,6 +129,15 @@ let toml = r#"
   + let e = a*b + c*d;        // improves readability
   ```
 
+* Citation from [this thread on reddit][www_reddit_panic] wrt. `panic!()` vs `Result`, `Option`:
+  > `panic!()`, `expect("my random logic error")` and `.unwrap()` should only be used when:
+  >
+  > * An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
+  > * For the normal operation of testing frameworks such as [proptest][www_github_proptest].
+  > * When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
+  >
+  > Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?` operator][www_rust_?-operator].
+
 * In general, use `return` statements.
   Exception could be short functions to improve the overview.
 
@@ -273,6 +282,10 @@ A very nice documentation about Rust's Manifest Format is provided [here][www_ru
 
 [www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
 [www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
+
+[www_reddit_panic]: https://www.reddit.com/r/rust/comments/9q3jqn/how_is_rust_safe_when_panics_can_happen_out_of/
+[www_github_proptest]: https://github.com/altsysrq/proptest
+[www_rust_?-operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
 
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
 [www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
