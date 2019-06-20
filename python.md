@@ -191,7 +191,7 @@ which may be called `pythonic`.
 
 ## Documentation
 
-* Separate module sections with `#######` (whole line).
+* Separate module sections with `#------` (whole line).
   Take the following code snippet for inspiration.
 
   ```python
@@ -199,19 +199,19 @@ which may be called `pythonic`.
   <Header>
   '''
 
-  ##########################################################
+  #---------------------------------------------------------
   # group 0, e.g. imports
 
   import numpy as np # unused in this example...
 
-  ##########################################################
+  #---------------------------------------------------------
 
   class Chair:
 
       def __init__(self, color):
           self._color = color
 
-      ######################################################
+      #-----------------------------------------------------
       # group, e.g. some properties
 
       @property
@@ -222,7 +222,7 @@ which may be called `pythonic`.
       def color(self, color):
           self._color = color
 
-      ######################################################
+      #-----------------------------------------------------
       # group
 
       def move(self):
@@ -231,7 +231,7 @@ which may be called `pythonic`.
       def break(self):
         # ...
 
-  ##########################################################
+  #---------------------------------------------------------
     # group (e.g. static functions or main-method)
   ```
 
