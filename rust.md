@@ -103,7 +103,7 @@ This citation from [this thread on reddit][www_reddit_panic] adds some info wrt.
 
 ## Coding Conventions <a name="coding-conventions"></a>
 
-* Class names are written in `CamelCase`, functions, fields in `snake_case`.
+* [These official naming conventions][www_rust_naming_conventions] should be used.
 
 * Use `constants` over `magic numbers`!
 
@@ -150,7 +150,7 @@ This citation from [this thread on reddit][www_reddit_panic] adds some info wrt.
   + let e = a*b + c*d;        // improves readability
   ```
 
-* In general, use `return` statements in early returns.
+* In general, use `return` statements only in early returns.
   Rust is an expression-oriented language, which means every chunk of code has a return value (e.g. `match`, `for`, ...).
   Hence it's clear, that the last code snippet of a code block is the block's value.
 
@@ -355,6 +355,7 @@ A very nice documentation about Rust's Manifest Format is provided [here][www_ru
 [www_github_proptest]: https://github.com/altsysrq/proptest
 [www_rust_?-operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
 
+[www_rust_naming_conventions]: https://doc.rust-lang.org/1.0.0/style/style/naming/README.html
 [www_rust_comments_example]: https://doc.rust-lang.org/reference/comments.html#examples
 
 [www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
