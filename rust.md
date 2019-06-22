@@ -57,6 +57,24 @@ let &y = x;
 let y = *x;
 ```
 
+### `Copy` vs `Clone` <a name="refs"></a>
+
+From [stack __overflow__][www_copy_vs_clone]:
+> The main difference is that cloning is explicit. Implicit notation means move for a non-`Copy` type.
+>
+> ```rust
+> // u8 implements Copy
+> let x: u8 = 123;
+> let y = x;
+> // x can still be used
+> println!("x={}, y={}", x, y)
+>
+> // Vec<u8> implements Clone, but not Copy
+> let v: Vec<u8> = vec![1, 2, 3];
+> let w = v.clone();
+> //let w = v // This would *move* the value, renderinng v unusable.
+> ```
+
 ### Strings <a name="strings"></a>
 
 Raw string literals allow writing escape characters without `\`.
@@ -345,6 +363,8 @@ A very nice documentation about Rust's Manifest Format is provided [here][www_ru
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
 
 [www_rust_ref_keyword]: https://users.rust-lang.org/t/ref-keyword-versus/18818/4
+
+[www_copy_vs_clone]: https://stackoverflow.com/questions/31012923/what-is-the-difference-between-copy-and-clone
 
 [www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
 [www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
