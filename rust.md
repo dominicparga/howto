@@ -157,7 +157,7 @@ This citation from [this thread on reddit][www_reddit_panic] adds some info wrt.
 ## Documentation <a name="doc"></a>
 
 Rust provides pretty code by design due to its namespaces, modules and its clean and powerful project setup (`cargo.toml`).
-If you still need to separate code sections, you may use `//-------//` (whole line).
+If you still need to separate code sections, you may use `//-------` (whole line).
 Otherwise, take the following code example from [Rust's official documentation][www_rust_comments_example].
 
 ```rust
