@@ -6,4 +6,4 @@ Further, it helps me remembering all kind of development-related stuff, collects
 ## LICENSE
 
 This project should help everyone without messing around with licensing.
-All the work of mine is licensed under the [`WTFPL`](LICENSE), so feel free to do whatever you want to do with it. `:)`
+All my work is licensed under the [`WTFPL`](LICENSE), so feel free to do whatever you want to do with it. `:)`
