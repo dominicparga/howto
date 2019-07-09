@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.6.12)  6 JUL 2019 17:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.6.12)  9 JUL 2019 17:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -484,10 +484,10 @@ Before submitting the final camera ready copy, remember to:
 
 [3 <../res/graphics/fig1.png>] (/Users/dominic/Documents/SoftwareDevelopment/projects/howto/latex/src/../build/main.aux) ) 
 Here is how much of TeX's memory you used:
- 4531 strings out of 492616
- 66658 string characters out of 6129481
- 141273 words of memory out of 5000000
- 8334 multiletter control sequences out of 15000+600000
+ 4541 strings out of 492616
+ 66699 string characters out of 6129481
+ 141372 words of memory out of 5000000
+ 8344 multiletter control sequences out of 15000+600000
  55881 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,11n,35p,427b,288s stack positions out of 5000i,500n,10000p,200000b,80000s

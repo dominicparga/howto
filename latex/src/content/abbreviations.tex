@@ -1,5 +1,5 @@
 %%%%
-%% given by IEEE, but as oneliner
+% general
 %
 \def\BibTeX{{%
     \rm B%
@@ -11,14 +11,29 @@
     \kern-.125emX%
 }}%
 %
-%%
-%%%%
+\newcommand{\todo}[0]{}
+\renewcommand{\todo}[1]{{\color{red} TODO: {#1}}}
+%%%
 
 %%%%
-%% manually added
+% typographic
 %
-\newcommand{\todo}[1]{}
-\renewcommand{\todo}[1]{{\color{red} TODO: {#1}}}
-%
-%%
+\newcommand{\eg}[0]{e.g.\xspace}
+\newcommand{\Eg}[0]{E.g.\xspace}
+\newcommand{\ie}[0]{i.e.\xspace}
+\newcommand{\Ie}[0]{I.e.\xspace}
+%%%
+
 %%%%
+% maths
+%
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+%%%
+
+%%%%
+% quotation
+%
+\newcommand{\citep}[2]{\cite[p.~#1]{#2}}
+\newcommand{\citeafter}[2]{after \cite[p.~#1]{#2}}
+\newcommand{\quotes}[1]{``#1''}
+%%%
