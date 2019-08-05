@@ -1,7 +1,14 @@
 # Python
 
+Through the years, a lot of small python-snippets have been very helpful.
+Sometimes, it has taken quite a long time to google them, or snippets were given without enough context to run them.
+That's why I have started collecting such snippets in small projects.
+While here are conventions for python described, the subfolders contain small example-projects for several things.
+Every subproject has its own README.
+
 ## Table of Contents <a name="toc"></a>
 
+1. [The Zen of Python](#zen-of-python)
 1. [File Style](#file-style)
 1. [Coding Conventions](#coding-conventions)
 1. [Documentation](#documentation)
@@ -11,6 +18,8 @@
         1. [Start](#start)
         1. [At a glance](#at-a-glance)
         1. [`Pipfile` and `Pipfile.lock`](#pipfile)
+
+## The Zen of Python <a name="zen-of-python"></a>
 
 The following conventions help keeping overview and the code clear.
 
