@@ -3,13 +3,11 @@
 If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][www_md_cheatsheet].
 Below comes a table of contents.
 
----
-
 ## Table of Contents <a name="toc"></a>
 
 1. [Table of Contents](#toc)
 1. [Links](#links)
-1. [Super Duper Hardcore Mega Fancy Title](#fancy-title)
+1. [Super Fancy Stuff](#fancy-title)
     1. [Code styles](#code-styles)
     1. [Style mentions](#style-mentions)
 
@@ -22,20 +20,16 @@ Typically, the table of contents doesn't appear in the TOC, but here is content 
 ```markdown
 1. [Table of Contents](#toc)
 1. [Links](#links)
-1. [Super Duper Hardcore Mega Fancy Title](#fancy-title)
+1. [Super Fancy Stuff](#fancy-title)
     1. [Code styles](#code-styles)
     1. [Style mentions](#style-mentions)
 
 ...
 
----
-
-## Super Duper Mega Fancy Title <a name="fancy-title"></a>
+## Super Fancy Stuff <a name="fancy-title"></a>
 
 ...
 ```
-
----
 
 ## Links <a name="links"></a>
 
@@ -52,9 +46,20 @@ Use links [directly](https://github.com/dominicparga) or with a [reference][www_
 [www_github_dominicparga]: https://github.com/dominicparga
 ```
 
----
+## Images
 
-## Super Duper Mega Fancy Stuff <a name="fancy-title"></a>
+To include images, you can use [markdown][www_md_cheatsheet_images] or [html][www_md_image_via_html].
+Paths are relative to the README containing the line.
+
+```markdown
+![Replacement if image not found](path/to/image.png "Text when hovering over the image")
+```
+
+```html
+<img src="path/to/image.png" title="Text when hovering over the image" alt="Replacement if image not found" width="256" height="256"/>
+```
+
+## Super Fancy Stuff <a name="fancy-title"></a>
 
 Writing markdown is a lot easier, especially if you are vim-user, if every sentence has its own line without any linewidth limit.
 
@@ -101,4 +106,7 @@ You can look at this files raw version to see the written style, but in addition
 - Horizontal lines (add `---` to an empty line) could help with readability.
 
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
+[www_md_image_via_html]: https://stackoverflow.com/a/14747656
+
 [www_github_dominicparga]: https://github.com/dominicparga
