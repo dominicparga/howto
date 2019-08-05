@@ -59,6 +59,9 @@ Paths are relative to the README containing the line.
 <img src="path/to/image.png" title="Text when hovering over the image" alt="Replacement if image not found" width="256" height="256"/>
 ```
 
+> Note: You can dump width or height and only provide one of them.
+> The other one scales automatically.
+
 ## Super Fancy Stuff <a name="fancy-title"></a>
 
 Writing markdown is a lot easier, especially if you are vim-user, if every sentence has its own line without any linewidth limit.
