@@ -47,14 +47,26 @@ def scale_channels(img, c0=1, c1=1, c2=1, c3=1):
     img[:, :, 3] *= c3
     return img
 
+def rm_channels(img, c0=False, c1=False, c2=False, c3=False):
+    rm_idx = []
+    if c0: rm_idx.append(0)
+    if c1: rm_idx.append(1)
+    if c2: rm_idx.append(2)
+    if c3: rm_idx.append(3)
+    img = np.delete(img, rm_idx, axis=2)
+    if img.shape[-1] == 1:
+        img = img.reshape(img.shape[0:-1])
+    return img
+
 def rm_alpha(img):
     '''
     Return the values (width, height, 3) of the image (width, height, 4)
     without the alpha-column.
     '''
-    return img[:, :, 0:3]
+    img = img[:, :, 0:3]
+    return img
 
-def reduce_channels(img, c_idx):
+def equalize_channels(img, c_idx):
     for x in range(width(img)):
         for y in range(height(img)):
             c = img[x, y, c_idx]
@@ -145,48 +157,114 @@ def YCbCra_to_rgba(
 # application
 
 def plot_rgba(img):
-    fig = plt.figure('rgb')
+    title='rgb-colored'
+
+    fig = plt.figure(title)
 
     a = fig.add_subplot(2, 2, 1)
     imgplot = plt.imshow(img)
     a.set_title('original')
 
     a = fig.add_subplot(2, 2, 2)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 0))
+    imgplot = plt.imshow(scale_channels(img.copy(), 1, 0, 0))
     a.set_title('red')
 
     a = fig.add_subplot(2, 2, 3)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 1))
+    imgplot = plt.imshow(scale_channels(img.copy(), 0, 1, 0))
     a.set_title('green')
 
     a = fig.add_subplot(2, 2, 4)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 2))
+    imgplot = plt.imshow(scale_channels(img.copy(), 0, 0, 1))
     a.set_title('blue')
 
+    print(title)
+    plt.tight_layout()
+    plt.show()
+
+def plot_rgba_grayscale(img):
+    title='rgb-grayscale'
+
+    fig = plt.figure(title)
+
+    a = fig.add_subplot(2, 2, 1)
+    imgplot = plt.imshow(img)
+    a.set_title('original')
+
+    # by equalizing all color-channels
+    a = fig.add_subplot(2, 2, 2)
+    imgplot = plt.imshow(equalize_channels(img.copy(), 0))
+    a.set_title('red')
+
+    # or by removing all dimensions except for one
+    a = fig.add_subplot(2, 2, 3)
+    imgplot = plt.imshow(rm_channels(img.copy(), True, False, True, True))
+    imgplot.set_cmap('gray')
+    a.set_title('green')
+
+    a = fig.add_subplot(2, 2, 4)
+    imgplot = plt.imshow(rm_channels(img.copy(), True, True, False, True))
+    imgplot.set_cmap('gray')
+    a.set_title('blue')
+
+    print(title)
     plt.tight_layout()
     plt.show()
 
 def plot_YCbCr(img):
-    fig = plt.figure('YCbCr')
+    title='YCbCr'
+
+    fig = plt.figure(title)
+
+    new_img = img.copy()
 
     a = fig.add_subplot(2, 2, 1)
-    imgplot = plt.imshow(img)
+    imgplot = plt.imshow(new_img)
     a.set_title('original')
 
-    img = rgba_to_YCbCra(img)
+    new_img = rgba_to_YCbCra(new_img)
 
     a = fig.add_subplot(2, 2, 2)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 0))
+    imgplot = plt.imshow(equalize_channels(new_img.copy(), 0))
     a.set_title('luminance Y')
 
     a = fig.add_subplot(2, 2, 3)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 1))
+    imgplot = plt.imshow(equalize_channels(new_img.copy(), 1))
     a.set_title('Cb')
 
     a = fig.add_subplot(2, 2, 4)
-    imgplot = plt.imshow(reduce_channels(img.copy(), 2))
+    imgplot = plt.imshow(equalize_channels(new_img.copy(), 2))
     a.set_title('Cr')
 
+    print(title)
+    plt.tight_layout()
+    plt.show()
+
+def plot_cmaps(img):
+    title='colormaps'
+
+    fig = plt.figure(title)
+
+    new_img = rm_channels(rgba_to_YCbCra(
+        img.copy()), c1=True, c2=True, c3=True
+    )
+
+    a = fig.add_subplot(2, 2, 1)
+    imgplot = plt.imshow(new_img, cmap='gray')
+    a.set_title('cmap=\'gray\'')
+
+    a = fig.add_subplot(2, 2, 2)
+    imgplot = plt.imshow(new_img, cmap='hot')
+    a.set_title('cmap=\'hot\'')
+
+    a = fig.add_subplot(2, 2, 3)
+    imgplot = plt.imshow(new_img, cmap='viridis')
+    a.set_title('cmap=\'viridis\'')
+
+    a = fig.add_subplot(2, 2, 4)
+    imgplot = plt.imshow(new_img, cmap='nipy_spectral_r')
+    a.set_title('cmap=\'nipy_spectral_r\'')
+
+    print(title)
     plt.tight_layout()
     plt.show()
 
@@ -196,7 +274,8 @@ if __name__ == '__main__':
     '''
 
     img = plt.imread(CONSTANTS['paths']['imgs']['orig'])
-    print(img.shape)
 
     plot_rgba(img)
+    plot_rgba_grayscale(img)
     plot_YCbCr(img)
+    plot_cmaps(img)
