@@ -13,48 +13,56 @@ One commit should contain only changes of a few lines of code (or one single fea
 This method seems to be too verbose and kind of annoying, but when working with Git logs (`git log`) or GitHub's network tree, this is a huge advantage.
 Branch management, releases and especially finding bugs is way easier with small commit messages.
 
-In summary, a properly formed Git commit subject line should always be able to complete the following sentence:  
+In summary, a properly formed Git commit subject line should always be well structured, start with a verb and informative.
+Besides that, it depends on your personal taste.
+A commit message could base on completing the following sentence:  
+  `This commit will <subject line>`  
+Alternatively, you could use third person:  
   `This commit <subject line>`
 
-Some points about the commit message style:
+In the following suggestions, the first version is used.
 
 * Separate `subject` from `body` with a blank line.
   The body explains _what_ has changed and _why_, not _how_ it has changed.
   _How_ can be checked by looking at the commit changes itself.
+
 * Line widths
   * 1st line (`subject`) up to 50 characters
   * 2nd line empty
   * Remaining (`body`) lines up to 72 characters
-* Lowercase the `subject` line
+
+* Uppercase the `subject` line
 
   ```diff
-  - Fixes typo ...
-  + fixes typo ...
+  - fix typo ...
+  + Fix typo ...
   ```
 
 * Do not end the `subject` line with a period
 
   ```diff
-  - refactor brackets of some if-statements.
-  + refactor brackets of some if-statements
+  - Refactor brackets of some if-statements.
+  + Refactor brackets of some if-statements
   ```
 
 * Use the present tense  
 
   ```diff
-  - added feature
-  + adds feature
-  ```
-
-* Use the 3rd person singular mood, no other language styles (no description either)  
-
-  ```diff
+  - Added feature ...
   - move cursor to ...
   - fixed bug ...
   - sweet new API methods ...
-  + moves cursor to ...
-  + fixes bug ...
-  + adds new API methods for ...
+  + Add feature ...
+  + Move cursor to ...
+  + Fix bug ...
+  + Add new API methods for ...
+  ```
+
+* Be informative!
+
+  ```diff
+  - Add build-feature
+  + Add script to build xyz automatically
   ```
 
 Consider using following verbs/flags in commit messages:
