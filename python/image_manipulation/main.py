@@ -161,7 +161,7 @@ def YCbCra_to_rgba(
 # application
 
 def plot_rgba_colored(img):
-    title='rgb-colored'
+    title = 'rgb-colored'
 
     fig = plt.figure(title)
 
@@ -186,7 +186,7 @@ def plot_rgba_colored(img):
     plt.show()
 
 def plot_rgba_grayscale(img):
-    title='rgb-grayscale'
+    title = 'rgb-grayscale'
 
     fig = plt.figure(title)
 
@@ -215,7 +215,7 @@ def plot_rgba_grayscale(img):
     plt.show()
 
 def plot_YCbCr(img):
-    title='YCbCr'
+    title = 'YCbCr'
 
     fig = plt.figure(title)
 
@@ -244,7 +244,7 @@ def plot_YCbCr(img):
     plt.show()
 
 def plot_cmaps(img):
-    title='colormaps'
+    title = 'colormaps'
 
     fig = plt.figure(title)
 
@@ -273,47 +273,59 @@ def plot_cmaps(img):
     plt.show()
 
 def plot_hist(img):
-    title='histograms-grayscale'
+    title = 'luminance-histogram'
 
     fig = plt.figure(title)
 
     lum_img = rm_channels(rgba_to_YCbCra(
         img.copy()), c1=True, c2=True, c3=True
     )
-
     lum_img = 256 * lum_img
 
+    clim_min = 0
+    clim_max = 255
     a = fig.add_subplot(1, 2, 1)
-    plt.hist(lum_img.ravel(), bins=256, range=(0, 255), fc='k', ec='k')
-    a.set_title('0-255')
+    plt.hist(lum_img.ravel(), bins=256, range=(clim_min, clim_max), fc='k', ec='k')
+    a.set_title('{}-{}'.format(clim_min, clim_max))
 
+    clim_min = 20
+    clim_max = 90
     a = fig.add_subplot(1, 2, 2)
-    plt.hist(lum_img.ravel(), bins=256, range=(0, 254), fc='k', ec='k')
-    a.set_title('0-254')
+    plt.hist(lum_img.ravel(), bins=256, range=(clim_min, clim_max), fc='k', ec='k')
+    a.set_title('{}-{}'.format(clim_min, clim_max))
 
     print(title)
     plt.tight_layout()
     plt.show()
 
 def plot_climmed(img):
-    print('\'climmed\' is unsupported yet.')
-    return
-
-    # TODO
-    title='climmed'
+    title = 'climmed'
+    orientation = 'vertical'
+    cmap = 'viridis'
 
     fig = plt.figure(title)
 
-    a = fig.add_subplot(1, 2, 1)
-    imgplot = plt.imshow(lum_img, cmap='gray')
-    a.set_title('Before')
-    plt.colorbar(ticks=[25, 75, 125, 175], orientation='horizontal')
+    lum_img = rm_channels(rgba_to_YCbCra(
+        img.copy()), c1=True, c2=True, c3=True
+    )
+    lum_img = 256 * lum_img
 
-    a = fig.add_subplot(1, 2, 2)
-    imgplot = plt.imshow(lum_img, cmap='gray')
-    imgplot.set_clim(0.0, 175)
-    a.set_title('After')
-    plt.colorbar(ticks=[25, 75, 125, 175], orientation='horizontal')
+    a = fig.add_subplot(2, 2, 1)
+    imgplot = plt.imshow(lum_img, cmap=cmap)
+    a.set_title('Original (luminance)')
+    # plt.colorbar(ticks=[0, 64, 128, 192, 256], orientation='horizontal')
+    plt.colorbar(orientation=orientation)
+
+    def subplot_climmed(clim_min, clim_max, subplot_idx):
+        a = fig.add_subplot(2, 2, subplot_idx)
+        imgplot = plt.imshow(lum_img, cmap=cmap)
+        imgplot.set_clim(clim_min, clim_max)
+        a.set_title('climmed [{}, {}]'.format(clim_min, clim_max))
+        plt.colorbar(orientation=orientation)
+
+    subplot_climmed(0, 256, subplot_idx=2)
+    subplot_climmed(0, 100, subplot_idx=3)
+    subplot_climmed(100, 200, subplot_idx=4)
 
     print(title)
     plt.tight_layout()

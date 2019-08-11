@@ -26,6 +26,14 @@ YCbCr
 
 [<img title="YCbCr separation" src="resources/YCbCr.png" alt="YCbCr separation" width="512"/>](resources/YCbCr.png)
 
-colormaps
+Colormaps
 
 [<img title="Colormaps" src="resources/colormaps.png" alt="Colormaps" width="512"/>](resources/colormaps.png)
+
+Luminance-Histogram
+
+[<img title="Luminance-Histogram" src="resources/luminance_histogram.png" alt="Luminance-Histogram" width="512"/>](resources/luminance_histogram.png)
+
+Climmed Luminance
+
+[<img title="Climmed Luminance" src="resources/luminance_climmed.png" alt="Climmed Luminance" width="512"/>](resources/luminance_climmed.png)
