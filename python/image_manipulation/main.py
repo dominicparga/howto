@@ -29,6 +29,10 @@ CONSTANTS = {
             'orig': os.path.join(RESOURCES, 'original_512x512.png'),
         }
     },
+    'tasks': [
+        'all', 'rgba-colored', 'rgba-grayscale', 'YCbCr', 'cmaps',
+        'histogram', 'climmed'
+    ],
 }
 
 #-----------------------------------------------------------------------------#
@@ -156,7 +160,7 @@ def YCbCra_to_rgba(
 #-----------------------------------------------------------------------------#
 # application
 
-def plot_rgba(img):
+def plot_rgba_colored(img):
     title='rgb-colored'
 
     fig = plt.figure(title)
@@ -215,24 +219,24 @@ def plot_YCbCr(img):
 
     fig = plt.figure(title)
 
-    new_img = img.copy()
+    lum_img = img.copy()
 
     a = fig.add_subplot(2, 2, 1)
-    imgplot = plt.imshow(new_img)
+    imgplot = plt.imshow(lum_img)
     a.set_title('original')
 
-    new_img = rgba_to_YCbCra(new_img)
+    lum_img = rgba_to_YCbCra(lum_img)
 
     a = fig.add_subplot(2, 2, 2)
-    imgplot = plt.imshow(equalize_channels(new_img.copy(), 0))
+    imgplot = plt.imshow(equalize_channels(lum_img.copy(), 0))
     a.set_title('luminance Y')
 
     a = fig.add_subplot(2, 2, 3)
-    imgplot = plt.imshow(equalize_channels(new_img.copy(), 1))
+    imgplot = plt.imshow(equalize_channels(lum_img.copy(), 1))
     a.set_title('Cb')
 
     a = fig.add_subplot(2, 2, 4)
-    imgplot = plt.imshow(equalize_channels(new_img.copy(), 2))
+    imgplot = plt.imshow(equalize_channels(lum_img.copy(), 2))
     a.set_title('Cr')
 
     print(title)
@@ -244,38 +248,137 @@ def plot_cmaps(img):
 
     fig = plt.figure(title)
 
-    new_img = rm_channels(rgba_to_YCbCra(
+    lum_img = rm_channels(rgba_to_YCbCra(
         img.copy()), c1=True, c2=True, c3=True
     )
 
     a = fig.add_subplot(2, 2, 1)
-    imgplot = plt.imshow(new_img, cmap='gray')
+    imgplot = plt.imshow(lum_img, cmap='gray')
     a.set_title('cmap=\'gray\'')
 
     a = fig.add_subplot(2, 2, 2)
-    imgplot = plt.imshow(new_img, cmap='hot')
+    imgplot = plt.imshow(lum_img, cmap='hot')
     a.set_title('cmap=\'hot\'')
 
     a = fig.add_subplot(2, 2, 3)
-    imgplot = plt.imshow(new_img, cmap='viridis')
+    imgplot = plt.imshow(lum_img, cmap='viridis')
     a.set_title('cmap=\'viridis\'')
 
     a = fig.add_subplot(2, 2, 4)
-    imgplot = plt.imshow(new_img, cmap='nipy_spectral_r')
+    imgplot = plt.imshow(lum_img, cmap='nipy_spectral_r')
     a.set_title('cmap=\'nipy_spectral_r\'')
 
     print(title)
     plt.tight_layout()
     plt.show()
 
-if __name__ == '__main__':
+def plot_hist(img):
+    title='histograms-grayscale'
+
+    fig = plt.figure(title)
+
+    lum_img = rm_channels(rgba_to_YCbCra(
+        img.copy()), c1=True, c2=True, c3=True
+    )
+
+    lum_img = 256 * lum_img
+
+    a = fig.add_subplot(1, 2, 1)
+    plt.hist(lum_img.ravel(), bins=256, range=(0, 255), fc='k', ec='k')
+    a.set_title('0-255')
+
+    a = fig.add_subplot(1, 2, 2)
+    plt.hist(lum_img.ravel(), bins=256, range=(0, 254), fc='k', ec='k')
+    a.set_title('0-254')
+
+    print(title)
+    plt.tight_layout()
+    plt.show()
+
+def plot_climmed(img):
+    print('\'climmed\' is unsupported yet.')
+    return
+
+    # TODO
+    title='climmed'
+
+    fig = plt.figure(title)
+
+    a = fig.add_subplot(1, 2, 1)
+    imgplot = plt.imshow(lum_img, cmap='gray')
+    a.set_title('Before')
+    plt.colorbar(ticks=[25, 75, 125, 175], orientation='horizontal')
+
+    a = fig.add_subplot(1, 2, 2)
+    imgplot = plt.imshow(lum_img, cmap='gray')
+    imgplot.set_clim(0.0, 175)
+    a.set_title('After')
+    plt.colorbar(ticks=[25, 75, 125, 175], orientation='horizontal')
+
+    print(title)
+    plt.tight_layout()
+    plt.show()
+
+def parse_cmdline():
+    import argparse
+
+    #-------------------------------------------------------------------------#
+    # define args and parse them
+
+    parser = argparse.ArgumentParser(description=
+        'Playing with images by manipulating them.'
+    )
+
+    help = 'Defines which manipulations should be executed. '
+    help += 'Possible values are {}'.format(CONSTANTS['tasks'])
+    parser.add_argument('-t', '--tasks',
+        metavar=('TASK'),
+        choices=CONSTANTS['tasks'],
+        nargs='+',
+        default=None,
+        required=True,
+        help=help
+    )
+
+    args = parser.parse_args()
+
+    #-------------------------------------------------------------------------#
+    # finalize and return
+
+    params = {}
+
+    params['tasks'] = args.tasks
+
+    return params
+
+def run(params):
     '''
     Show examples of working with images.
     '''
 
     img = plt.imread(CONSTANTS['paths']['imgs']['orig'])
 
-    plot_rgba(img)
-    plot_rgba_grayscale(img)
-    plot_YCbCr(img)
-    plot_cmaps(img)
+    for task in params['tasks']:
+        if task == 'all':
+            plot_rgba_colored(img)
+            plot_rgba_grayscale(img)
+            plot_YCbCr(img)
+            plot_cmaps(img)
+            plot_hist(img)
+            plot_climmed(img)
+        if task == 'rgba-colored':
+            plot_rgba_colored(img)
+        if task == 'rgba-grayscale':
+            plot_rgba_grayscale(img)
+        if task == 'YCbCr':
+            plot_YCbCr(img)
+        if task == 'cmaps':
+            plot_cmaps(img)
+        if task == 'histogram':
+            plot_hist(img)
+        if task == 'climmed':
+            plot_climmed(img)
+
+if __name__ == '__main__':
+    params = parse_cmdline()
+    run(params)
