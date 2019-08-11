@@ -5,8 +5,6 @@ This file shows examples playing with images in python.
 A big help was
 https://matplotlib.org/3.1.0/tutorials/introductory/images.html#sphx-glr-tutorials-introductory-images-py
 '''
-__author__ = 'Dominic Parga Cacheiro'
-__credits__ = 'Dominic Parga Cacheiro,'
 
 import os
 import matplotlib.pyplot as plt

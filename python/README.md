@@ -44,7 +44,7 @@ which may be called `pythonic`.
 ## File Style <a name="file-style"></a>
 
 * Header files should __NOT__ contain redundant information (like date, license).
-  Authors and credits are accepted.
+  Authors and credits are accepted (though version-control like git does manage this as well).
   This is not only to prevent copying code without its authors, it also helps to find a person who (hopefully) understands the code.
 
   _For instance date and license are stored through your VCS (`git`) or repo.
@@ -59,8 +59,8 @@ which may be called `pythonic`.
   (1) Empty lines are on purpose.
   (2) Sort imports in alphabetical order.
   '''
-  __author__ = 'Dominic Parga Cacheiro'
-  __credits__ = 'Dominic Parga Cacheiro, Nicolas Parga Cacheiro,'
+  #__author__ = 'Dominic Parga Cacheiro'
+  #__credits__ = 'Dominic Parga Cacheiro, Nicolas Parga Cacheiro,'
 
   # first: built-in imports
   import argparse
