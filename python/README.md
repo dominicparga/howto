@@ -1,5 +1,26 @@
 # Python
 
+Through the years, a lot of small python-snippets have been very helpful.
+Sometimes, it has taken quite a long time to google them, or snippets were given without enough context to run them.
+That's why I have started collecting such snippets in small projects.
+While here are conventions for python described, the subfolders contain small example-projects for several things.
+Every subproject has its own README.
+
+## Table of Contents <a name="toc"></a>
+
+1. [The Zen of Python](#zen-of-python)
+1. [File Style](#file-style)
+1. [Coding Conventions](#coding-conventions)
+1. [Documentation](#documentation)
+1. [Project Structure](#project-structure)
+    1. [pipenv](#pipenv)
+        1. [Setup](#setup)
+        1. [Start](#start)
+        1. [At a glance](#at-a-glance)
+        1. [`Pipfile` and `Pipfile.lock`](#pipfile)
+
+## The Zen of Python <a name="zen-of-python"></a>
+
 The following conventions help keeping overview and the code clear.
 
 Keep [`The Zen of Python`][www_wikipedia_zen_of_python] in mind when coding python.
@@ -20,7 +41,7 @@ Readability counts.
 
 which may be called `pythonic`.
 
-## File Style
+## File Style <a name="file-style"></a>
 
 * Header files should __NOT__ contain redundant information (like date, license).
   Authors and credits are accepted.
@@ -62,7 +83,7 @@ which may be called `pythonic`.
 
 * Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
 
-## Coding Conventions
+## Coding Conventions <a name="coding-conventions"></a>
 
 * Class names are written in `CamelCase`, functions, fields in `snake_case`.
 
@@ -189,7 +210,7 @@ which may be called `pythonic`.
   + e = a*b + c*d        # improves readability
   ```
 
-## Documentation
+## Documentation <a name="documentation"></a>
 
 * Separate module sections with `#------` (whole line).
   Take the following code snippet for inspiration.
@@ -235,7 +256,7 @@ which may be called `pythonic`.
     # group (e.g. static functions or main-method)
   ```
 
-## Project Conventions
+## Project Structure <a name="project-structure"></a>
 
 * A main file should use
 
@@ -258,6 +279,46 @@ which may be called `pythonic`.
   `How would most of the people search for this module/class/file?`  
   Someone without knowing your whole project structure should be able to find a file at the first try.  
   `In every folder, there should be only one option to continue searching (-> determinism).`
+
+### pipenv <a name="pipenv"></a>
+
+Good page for getting general overview of `pipenv` is [here][www_pipenv_guide].
+
+#### Setup <a name="setup"></a>
+
+For project-local environment folders, add this to your `shellrc`:
+
+```zsh
+export PIPENV_VENV_IN_PROJECT='yes'
+```
+
+More flags can be found [here][www_env_setup].
+
+#### Start <a name="start"></a>
+
+Just start with  
+`pipenv install MODULE`.  
+Pipenv will init by its own.
+
+#### At a glance <a name="at-a-glance"></a>
+
+Found [here][www_docs]:
+> *If a `.env` file is present in your project, `$ pipenv shell` and `$ pipenv run` will automatically load it.*
+
+Further, the `--dev` flag like in  
+`pipenv install --dev pylint`  
+can be used to install modules for development only.
+
+#### `Pipfile` and `Pipfile.lock` <a name="pipfile"></a>
+
+TL;DR: `Pipfile` defines dependency requirements, while `Pipfile.lock` actually represents an instance of them to reproduce the environment in a deterministic way.
+
+Both files should be added to a repo (so none of them should be added to `.gitignore`). Look [here][www_pipfilelock_gitignore] for further info.
+
+[www_pipenv_guide]: https://realpython.com/pipenv-guide/#example-usage
+[www_env_setup]: https://pipenv.readthedocs.io/en/latest/advanced/#configuration-with-environment-variables
+[www_docs]: https://pipenv.readthedocs.io/en/latest/advanced/
+[www_pipfilelock_gitignore]: https://github.com/pypa/pipenv/issues/598
 
 [www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
 
