@@ -23,7 +23,14 @@ Readability counts.
 
 which may be called `pythonic`.
 
-## File Style
+## Table of Contents <a name="toc"></a>
+
+1. [File Style](#file-style)
+1. [Coding Conventions](#coding-conventions)
+1. [Documentation](#documentation)
+1. [Project Conventions](#project-conventions)
+
+## File Style <a name="file-style"></a>
 
 * Maximum line width is `80`.
   Exceptions can be made for String-constants and similar.
@@ -33,7 +40,7 @@ which may be called `pythonic`.
 
 * Use `4 spaces` for indention (p.s.: [could help salary](https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs)!).
 
-## Coding Conventions
+## Coding Conventions <a name="coding-conventions"></a>
 
 * Functions, fields and file names are written in `snake_case`.
 
@@ -155,7 +162,7 @@ which may be called `pythonic`.
     `x=2; { x=4; }; echo ${x}` prints `4`  
     `x=2; ( x=4; ); echo ${x}` prints `2`
 
-## Documentation
+## Documentation <a name="documentation"></a>
 
 * Separate module sections with `#######` (whole line).
   Take the following code snippet for inspiration.
@@ -178,7 +185,7 @@ which may be called `pythonic`.
   fi
   ```
 
-## Project Conventions
+## Project Conventions <a name="project-conventions"></a>
 
 * Prefer package/folder management over file mangement if `meaningful`.  
   __BUT:__ Think in an intuitive, handy and `deterministic`(!) way and don't take structuring and subfolding too far.
