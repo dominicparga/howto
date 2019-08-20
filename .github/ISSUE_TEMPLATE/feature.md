@@ -2,7 +2,6 @@
 name: 'feature'
 about: 'Improvements of old features or new features'
 labels: feature, documentation
-# assignees: dominicparga
 ---
 ### Description
 
@@ -13,13 +12,13 @@ labels: feature, documentation
 
 > Add *__why_a user__* of this project would need or use this feature.
 
-\*\* I need ... \*\*
+** I need ... **
 
 #### As developer
 
 > Add __why a developer__ of this project would need or use this feature.
 
-\*\* I need ... \*\*
+** I need ... **
 
 ### Acceptance Criteria
 
