@@ -1,5 +1,6 @@
 ---
-title: 'Feature'
+name: 'feature'
+about: 'Improvements of old features or new features'
 labels: feature, documentation
 # assignees: dominicparga
 ---
