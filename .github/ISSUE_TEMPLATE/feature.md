@@ -3,17 +3,17 @@ name: 'feature'
 about: 'Improvements of old features or new features'
 labels: feature, documentation
 ---
-## Description
+# Feature
 
 > *__Note:__* Add some context or *__short summary of what__* the feature should do or provide.  
 > Is it solving some problem? --> use bug/bugfix instead
 
-### As user
+## As user
 
 > *__Note:__* Add *__why_a user__* of this project would need or use this feature.  
 > I need ...
 
-### As developer
+## As developer
 
 > *__Note:__* Add __why a developer__ of this project would need or use this feature.  
 > I need ...
