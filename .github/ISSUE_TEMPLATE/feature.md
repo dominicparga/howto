@@ -1,5 +1,5 @@
 ---
-name: 'feature'
+name: 'Feature-request'
 about: 'Improvements of old features or new features'
 labels: feature, documentation
 ---
