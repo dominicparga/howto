@@ -15,7 +15,7 @@ labels: feature, documentation
 
 ## As developer
 
->  Note: Add why a developer of this project would need or use this feature.  
+> Note: Add why a developer of this project would need or use this feature.  
 > I need ...
 
 ## Acceptance Criteria
