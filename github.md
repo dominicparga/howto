@@ -56,6 +56,7 @@ I prefer creating `Projects` (the register next to the `Wiki`) resulting in foll
   The other issue-card gets this label.
 - `feature`: This label refers to some "practical" work, like coding or setting up something.
   Improvements of existing features are covered by this label as well.
+- `testing`: Refers to some testing issue, e.g. when a new test-case should be added.
 
 ### Opening issues <a name="opening-issues"></a>
 
