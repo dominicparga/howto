@@ -21,13 +21,13 @@ TODO ([check this page][www_about_project_boards] as well)
 
 The project-board is separated in 5 columns.
 
-|      Column      | Info |
-|------------------|------|
-| Backlog          | This column is not automated, because it's just collecting unplanned issues. |
-| Todo             | Issues, which are in the current scope, are manually moved to this column. Reopened issues or Pull-Requests are moved to this column automatically. It is very likely, that the Backlog contains more work than can be worked on. |
-| In Progress      | This column is automated, but does nothing automatically. With this, GitHub takes issues in this column into account when calculating the progress-bar. |
-| In Review (beta) | Issues, whose branches are in Pull-Request to master, are in this column. |
-| Done             | Finished tasks lands here. |
+|   Column    | Info |
+|-------------|------|
+| Backlog     | This column is not automated, because it's just collecting unplanned issues. |
+| Todo        | Issues, which are in the current scope, are manually moved to this column. Reopened issues or Pull-Requests are moved to this column automatically. It is very likely, that the Backlog contains more work than can be worked on. |
+| In Progress | This column is automated, but does nothing automatically. With this, GitHub takes issues in this column into account when calculating the progress-bar. |
+| In Review   | Issues, whose branches are in Pull-Request to master, are in this column. |
+| Done        | Finished tasks lands here. |
 
 ## Issues <a name="issues"></a>
 
