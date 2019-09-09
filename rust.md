@@ -8,6 +8,7 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
 1. [Some coding details](#coding-details)
     1. [Types](#types)
     1. [References](#refs)
+    1. [Copy vs Clone](#copy_vs_clone)
     1. [Strings](#strings)
     1. [Error handling](#error-handling)
 1. [Coding Conventions](#coding-conventions)
@@ -57,7 +58,7 @@ let &y = x;
 let y = *x;
 ```
 
-### `Copy` vs `Clone` <a name="refs"></a>
+### `Copy` vs `Clone` <a name="copy_vs_clone"></a>
 
 From [stack __overflow__][www_copy_vs_clone]:
 > The main difference is that cloning is explicit. Implicit notation means move for a non-`Copy` type.
