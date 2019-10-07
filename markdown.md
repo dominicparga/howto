@@ -7,6 +7,8 @@ Below comes a table of contents.
 
 1. [Table of Contents](#toc)
 1. [Links](#links)
+1. [Images](#imgs)
+1. [Emoji](#emoji)
 1. [Super Fancy Stuff](#fancy-title)
     1. [Code styles](#code-styles)
     1. [Style mentions](#style-mentions)
@@ -20,10 +22,11 @@ Typically, the table of contents doesn't appear in the TOC, but here is content 
 ```markdown
 1. [Table of Contents](#toc)
 1. [Links](#links)
+1. [Images](#imgs)
+1. [Emoji](#emoji)
 1. [Super Fancy Stuff](#fancy-title)
     1. [Code styles](#code-styles)
     1. [Style mentions](#style-mentions)
-
 ...
 
 ## Super Fancy Stuff <a name="fancy-title"></a>
@@ -46,7 +49,7 @@ Use links [directly](https://github.com/dominicparga) or with a [reference][www_
 [www_github_dominicparga]: https://github.com/dominicparga
 ```
 
-## Images
+## Images <a name="imgs"></a>
 
 To include images, you can use [markdown][www_md_cheatsheet_images] or [html][www_md_image_via_html].
 Paths are relative to the README containing the line.
@@ -61,6 +64,10 @@ Paths are relative to the README containing the line.
 
 > Note: You can dump width or height and only provide one of them.
 > The other one scales automatically.
+
+## Emoji <a name="emoji"></a>
+
+[Here][www_emoji] is a list of emoji and their codes (e.g. :smirk: `:smirk:`) in markdown.
 
 ## Super Fancy Stuff <a name="fancy-title"></a>
 
@@ -111,5 +118,7 @@ You can look at this files raw version to see the written style, but in addition
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
 [www_md_image_via_html]: https://stackoverflow.com/a/14747656
+
+[www_emoji]: https://gist.github.com/rxaviers/7360908
 
 [www_github_dominicparga]: https://github.com/dominicparga
