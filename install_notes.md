@@ -4,13 +4,13 @@
 
 The following table shows all tools in this file and whether a tool is explained here (:ballot_box_with_check:), not explained here but available (:black_square_button:) or not available at all (:heavy_multiplication_x:).
 
-| tools                         | `macOS`                 |
-|:------------------------------|:-----------------------:|
-| [`Alfred`](#alfred)           | :ballot_box_with_check: |
-| [`Bash`](#bash)               | :ballot_box_with_check: |
-| [`Homebrew`](#brew)           | :ballot_box_with_check: |
-| [Java and Scala](#java-scala) | :ballot_box_with_check: |
-| [LaTex](#latex)               | :ballot_box_with_check: |
+| tools                             | `macOS`                 |
+|:----------------------------------|:-----------------------:|
+| [`Alfred`](#alfred)               | :ballot_box_with_check: |
+| [`Bash`](#bash)                   | :ballot_box_with_check: |
+| [`Homebrew`](#brew)               | :ballot_box_with_check: |
+| [`Java` and `Scala`](#java-scala) | :ballot_box_with_check: |
+| [`LaTex`](#latex)                 | :ballot_box_with_check: |
 
 ## Alfred <a name="alfred"></a>
 
