@@ -5,10 +5,12 @@
 The following table shows all tools in this file and whether a tool is explained here (:ballot_box_with_check:), not explained here but available (:black_square_button:) or not available at all (:heavy_multiplication_x:).
 
 | tools                         | `macOS`                 |
-|-------------------------------|-------------------------|
-| [`alfred`](#alfred)           | :ballot_box_with_check: |
-| [`brew`](#brew)               | :ballot_box_with_check: |
+|:------------------------------|:-----------------------:|
+| [`Alfred`](#alfred)           | :ballot_box_with_check: |
+| [`Bash`](#bash)               | :ballot_box_with_check: |
+| [`Homebrew`](#brew)           | :ballot_box_with_check: |
 | [Java and Scala](#java-scala) | :ballot_box_with_check: |
+| [LaTex](#latex)               | :ballot_box_with_check: |
 
 ## Alfred <a name="alfred"></a>
 
@@ -16,6 +18,13 @@ A very intelligent and handy search-bar for `macOS`
 
 ```zsh
 brew cask install alfred
+```
+
+## Bash <a name="bash"></a>
+
+```zsh
+brew install bash
+brew install bash-completion@2
 ```
 
 ## Homebrew <a name="brew"></a>
@@ -47,6 +56,12 @@ brew install scala
 brew install sbt
 ```
 
+## LaTeX <a name="latex"></a>
+
+```zsh
+brew cask install mactex
+```
+
 ## TODO
 
 ```zsh
@@ -54,9 +69,6 @@ brew install sbt
 # define and install formulae
 
 # unordinary formulae in alphabetical order
-brew install bash
-brew install bash-completion@2
-brew cask install mactex
 brew install coreutils
 brew cask install discord
 brew cask install dropbox
