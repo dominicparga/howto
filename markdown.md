@@ -27,6 +27,7 @@ Typically, the table of contents doesn't appear in the TOC, but here is content 
 1. [Super Fancy Stuff](#fancy-title)
     1. [Code styles](#code-styles)
     1. [Style mentions](#style-mentions)
+
 ...
 
 ## Super Fancy Stuff <a name="fancy-title"></a>
