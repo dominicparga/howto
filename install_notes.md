@@ -2,41 +2,42 @@
 
 ## Overview
 
-The following table shows all tools in this file and whether a tool is explained here (:ballot_box_with_check:), not explained here but available (:black_square_button:) or not available at all (:heavy_multiplication_x:).
+The following table shows all tools in this file and whether a tool is available and explained here (:ballot_box_with_check:), not explained here but maybe available (:black_square_button:) or, for sure, not available at all (:heavy_multiplication_x:).
 
-If some tool is not mentioned in an own section, but is marked in the table as explained, it can be installed easily via the respective package-manager (`brew`/`brew cask` in `macOS`, `apt` in `ubuntu`, ...).
+If some tool is not mentioned in an own section, but is marked in the table as explained, it can be installed easily via the respective package-manager (`brew`/`brew cask` in `macOS`, `apt` in `ubuntu`, ...) or is installed per default.
 
-| tools                             | `macOS`                 |
-|:----------------------------------|:-----------------------:|
-| [`Alfred`](#alfred)               | :ballot_box_with_check: |
-| [`Bash`](#bash)                   | :ballot_box_with_check: |
-| `GNU coreutils`                   | :ballot_box_with_check: |
-| `Discord`                         | :ballot_box_with_check: |
-| `Dropbox`                         | :ballot_box_with_check: |
-| `Enpass`                          | :ballot_box_with_check: |
-| `Firefox`                         | :ballot_box_with_check: |
-| `gimp`                            | :ballot_box_with_check: |
-| `git`                             | :ballot_box_with_check: |
-| `grep`                            | :ballot_box_with_check: |
-| [`Homebrew`](#brew)               | :ballot_box_with_check: |
-| `htop`                            | :ballot_box_with_check: |
-| [`Java` and `Scala`](#java-scala) | :ballot_box_with_check: |
-| `LaTex`                           | :ballot_box_with_check: |
-| `Microsoft-Office`                | :ballot_box_with_check: |
-| `musescore`                       | :ballot_box_with_check: |
-| `neovim`                          | :ballot_box_with_check: |
-| `node`                            | :ballot_box_with_check: |
-| [`python`](#python)               | :ballot_box_with_check: |
-| `spotify`                         | :ballot_box_with_check: |
-| `teamspeak`                       | :ballot_box_with_check: |
-| `Telegram`                        | :ballot_box_with_check: |
-| `tree`                            | :ballot_box_with_check: |
-| [`VisualStudioCode`](#vscode)     | :ballot_box_with_check: |
-| `vlc`                             | :ballot_box_with_check: |
-| `zsh`                             | :ballot_box_with_check: |
-| [`Heroku CLI`](#heroku)           | :ballot_box_with_check: |
-| `virtualbox`                      | :ballot_box_with_check: |
-| `teamviewer`                      | :ballot_box_with_check: |
+| tools                             | `macOS`                  | `ubuntu`                 |
+|:----------------------------------|:------------------------:|:------------------------:|
+| [`Alfred`](#alfred)               | :ballot_box_with_check:  | :black_square_button:    |
+| [`Bash`](#bash)                   | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `GNU coreutils`                   | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `Discord`                         | :ballot_box_with_check:  | :black_square_button:    |
+| `Dropbox`                         | :ballot_box_with_check:  | :black_square_button:    |
+| `Enpass`                          | :ballot_box_with_check:  | :black_square_button:    |
+| `Firefox`                         | :ballot_box_with_check:  | :black_square_button:    |
+| `gimp`                            | :ballot_box_with_check:  | :black_square_button:    |
+| `git`                             | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `grep`                            | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`Homebrew`](#brew)               | :ballot_box_with_check:  | :heavy_multiplication_x: |
+| `htop`                            | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`Java` and `Scala`](#java-scala) | :ballot_box_with_check:  | :black_square_button:    |
+| `LaTex`                           | :ballot_box_with_check:  | :black_square_button:    |
+| `Microsoft-Office`                | :ballot_box_with_check:  | :black_square_button:    |
+| `musescore`                       | :ballot_box_with_check:  | :black_square_button:    |
+| `neovim`                          | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `node`                            | :ballot_box_with_check:  | :black_square_button:    |
+| [`Nord`](#nord) (color-scheme)    | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`python`](#python)               | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `spotify`                         | :ballot_box_with_check:  | :black_square_button:    |
+| `teamspeak`                       | :ballot_box_with_check:  | :black_square_button:    |
+| `Telegram`                        | :ballot_box_with_check:  | :black_square_button:    |
+| `tree`                            | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`VisualStudioCode`](#vscode)     | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| `vlc`                             | :ballot_box_with_check:  | :black_square_button:    |
+| `zsh`                             | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`Heroku CLI`](#heroku)           | :ballot_box_with_check:  | :black_square_button:    |
+| `virtualbox`                      | :ballot_box_with_check:  | :black_square_button:    |
+| `teamviewer`                      | :ballot_box_with_check:  | :black_square_button:    |
 
 ## Alfred <a name="alfred"></a>
 
@@ -107,6 +108,14 @@ brew install scala
 brew install sbt
 ```
 
+### ubuntu
+
+```zsh
+# important execution order!
+sudo apt-get install -y openjdk-11-jdk
+sudo apt-get install -y scala
+```
+
 ## LaTeX <a name="latex"></a>
 
 ### macOS
@@ -114,6 +123,11 @@ brew install sbt
 ```zsh
 brew cask install mactex
 ```
+
+## Nord (color-scheme) <a name="nord"></a>
+
+This dark-scheme is light and pretty and available for all kind of software.
+All documentation can be found on their [homepage](https://www.nordtheme.com/) or the respective [GitHub-repo](https://github.com/arcticicestudio/nord).
 
 ## python <a name="python"></a>
 
@@ -146,7 +160,18 @@ brew install python
 brew install python@2
 ```
 
+### ubuntu
+
+```zsh
+sudo apt-get install -y python3
+sudo apt-get install -y python
+```
+
 ## VisualStudioCode <a name="vscode"></a>
+
+### extensions
+
+Handy extensions can be found in [these dotfiles](https://github.com/dominicparga/dotfiles)
 
 ### macOS
 
@@ -156,7 +181,7 @@ brew cask install visual-studio-code
 
 ### ubuntu
 
-TODO not installable via apt?
+See [vscode-docs](https://code.visualstudio.com/docs/setup/linux)
 
 ## Heroku <a name="heroku"></a>
 
