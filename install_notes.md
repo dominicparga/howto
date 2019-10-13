@@ -65,6 +65,7 @@ The Web-Search-setting looks like this:
 - Search-URL: `https://translate.google.com/#from/to/{query}`,  
   e.g. `https://translate.google.com/#en/de/{query}`
 - Title: `From -> To: {query}`
+- Keyword: `to` (custom; e.g. `engl` for `Deutsch -> English`)
 
 ## Bash <a name="bash"></a>
 
@@ -98,6 +99,12 @@ else
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 ```
+
+#### keg-only
+
+- [very poor comment on that by brew itself..](https://docs.brew.sh/FAQ#what-does-keg-only-mean)
+- [stackoverflow explanation, quite helpful](https://stackoverflow.com/questions/4691403/keg-only-homebrew-formulas)
+- [github issues explanation, less helpful but may help](https://github.com/Homebrew/homebrew-core/issues/11091)
 
 ## Java and Scala <a name="java-scala"></a>
 
