@@ -27,7 +27,9 @@ If some tool is not mentioned in an own section, but is marked in the table as e
 | `neovim`                          | :ballot_box_with_check:  | :ballot_box_with_check:  |
 | `node`                            | :ballot_box_with_check:  | :black_square_button:    |
 | [`Nord`](#nord) (color-scheme)    | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`npm`](#npm)                     | :ballot_box_with_check:  | :ballot_box_with_check:  |
 | [`python`](#python)               | :ballot_box_with_check:  | :ballot_box_with_check:  |
+| [`rust`](#rust)                   | :ballot_box_with_check:  | :ballot_box_with_check:  |
 | `spotify`                         | :ballot_box_with_check:  | :black_square_button:    |
 | `teamspeak`                       | :ballot_box_with_check:  | :black_square_button:    |
 | `Telegram`                        | :ballot_box_with_check:  | :black_square_button:    |
@@ -129,6 +131,34 @@ brew cask install mactex
 This dark-scheme is light and pretty and available for all kind of software.
 All documentation can be found on their [homepage](https://www.nordtheme.com/) or the respective [GitHub-repo](https://github.com/arcticicestudio/nord).
 
+## npm <a name="npm"></a>
+
+### ubuntu
+
+Since installing on `Ubuntu 18.04` could fail, the following code snippets helps with installation.
+
+```zsh
+# since installing on Ubuntu 18.04 could fail
+
+# NOTE
+# PATH in shellrc.sh is related to ${npm_version} and ${npm_distro}
+
+npm_version='v11.10.0'
+npm_distro='linux-x64'
+
+dest_dir="/usr/local/lib/nodejs"
+
+
+sudo mkdir -p "${dest_dir}"
+wget -c https://nodejs.org/download/release/latest/node-${npm_version}-${npm_distro}.tar.xz -O - | sudo tar -xJv -C "${dest_dir}"
+```
+
+Don't forget to update `${PATH}`.
+
+```zsh
+export PATH="/usr/local/lib/nodejs/node-${npm_version}-${npm_distro}/bin:${PATH}"
+```
+
 ## python <a name="python"></a>
 
 ### general
@@ -166,6 +196,12 @@ brew install python@2
 sudo apt-get install -y python3
 sudo apt-get install -y python
 ```
+
+## Rust <a name="rust"></a>
+
+Just take a look at [the homepage](https://www.rust-lang.org/tools/install).
+
+Keep in mind that updating `rustup` is needed, e.g. for the compiler `rustc`, since `brew` for instance (`macOS`) has `rust` as `formulae`.
 
 ## VisualStudioCode <a name="vscode"></a>
 
