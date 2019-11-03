@@ -10,10 +10,20 @@ Good pages to start
 
 ## General snippets
 
+### Add a user
+
 ```zsh
 useradd -m -G wheel -s /usr/bin/zsh USERNAME
 passwd USERNAME
 visudo # for wheel-user-group
+```
+
+### Check colors in terminal
+
+From [stackoverflow][www_stackoverflow_color_test]
+
+```zsh
+msgcat --color=test
 ```
 
 ## Bootloader rEFInd
@@ -83,6 +93,7 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 
 [www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
 [www_arch_group_overview]: https://www.archlinux.org/groups/
+[www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
 [www_arch_refind]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [www_arch_steps_after_install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
 
