@@ -8,7 +8,7 @@ Good pages to start
 - as orientation: [Arch - steps after installation][www_arch_steps_after_install]
 - [Package-group overview][www_arch_group_overview]
 
-## General snippets
+## General snippets and interesting stuff
 
 ### Add a user
 
@@ -25,6 +25,10 @@ From [stackoverflow][www_stackoverflow_color_test]
 ```zsh
 msgcat --color=test
 ```
+
+### Mouse-polling-rate
+
+Check with [`sudo evhz`][www_arch_mouse_polling_rate]
 
 ## Bootloader rEFInd
 
@@ -94,6 +98,7 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 [www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
 [www_arch_group_overview]: https://www.archlinux.org/groups/
 [www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
+[www_arch_mouse_polling_rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
 [www_arch_refind]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [www_arch_steps_after_install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
 
