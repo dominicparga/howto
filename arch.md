@@ -30,6 +30,23 @@ msgcat --color=test
 
 Check with [`sudo evhz`][www_arch_mouse_polling_rate]
 
+### Random-number-generator
+
+```zsh
+yay -S haveged
+```
+
+### Install printer
+
+```zsh
+yay -S cups cups-pdf
+yay -S hplip
+```
+
+Then enter `http://localhost:631/admin` and add a new printer.
+In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
+If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
+
 ## Bootloader rEFInd
 
 - [rEFInd installation guide for Arch][www_arch_refind]
@@ -101,6 +118,9 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 [www_arch_mouse_polling_rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
 [www_arch_refind]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [www_arch_steps_after_install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
+
+[www_aur_hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
+[www_hp_printer_plugin_list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
 
 [www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
 [www_kde_bug]: https://bugs.kde.org/show_bug.cgi?id=413223
