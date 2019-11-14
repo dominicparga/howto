@@ -45,7 +45,7 @@ which may be called `pythonic`.
 * Functions, fields and file names are written in `snake_case`.
 
   Since functions and fields are added to the shell's environment, their names are slightly changed to prevent conflicts or verbose autocompletion and help understanding the code:
-  * private fields' names begin with a __single underscore__
+  * private fields' names are in `snake_case`
   * exported ("public") fields' names are written in __CAPSLOCK__
   * private functions' names begin with __double underscore__
   * public functions' names doesn't begin with any underscore
@@ -64,13 +64,13 @@ which may be called `pythonic`.
   # GOOD
   # used in the shell, hence no leading dunderscore
   greet() {
-      local _used_shell="unknown"
-      if [[ -n "${ZSH_NAME}" ]]; then _used_shell="zsh"; fi
-      if [[ -n "${BASH}" ]];     then _used_shell="bash"; fi
+      local used_shell="unknown"
+      if [ -n "${ZSH_NAME}" ]; then used_shell="zsh"; fi
+      if [ -n "${BASH}" ];     then used_shell="bash"; fi
 
       echo ""
       echo "Hello ${USER}."
-      echo "I'm a ${_used_shell} window at your service."
+      echo "I'm a ${used_shell} window at your service."
       echo ""
   }
 
@@ -97,11 +97,11 @@ which may be called `pythonic`.
   # BAD
   # because the path is often used
 
-  if [[ -d "<path to shell lib>/func" ]]; then
+  if [ -d "<path to shell lib>/func" ]; then
       ...
   fi
 
-  if [[ -d "<path to shell lib>/prompts" ]]; then
+  if [ -d "<path to shell lib>/prompts" ]; then
       ...
   fi
 
@@ -109,12 +109,12 @@ which may be called `pythonic`.
 
   # GOOD
 
-  _shell_lib="<path to shell lib>"
-  if [[ -d "${_shell_lib}/func" ]]; then
+  shell_lib="<path to shell lib>"
+  if [ -d "${shell_lib}/func" ]; then
       ...
   fi
 
-  if [[ -d "${_shell_lib}/prompts" ]]; then
+  if [ -d "${shell_lib}/prompts" ]; then
       ...
   fi
   ```
@@ -153,35 +153,35 @@ which may be called `pythonic`.
   ```
 
 * `[[ ... ]]` vs `[ ... ]` vs `((...))` vs `(...)` vs `{...}`  
-  See this super [stackoverflow answers][stackoverflow_brackets].
+  See this super [stackoverflow answers][www_stackoverflow_brackets].
   In a nutshell:
-  * `[[ ... ]]` has additional features over `[ ... ]` and is preferred.
+  * `[[ ... ]]` is `bash-extension` and has additional features over `[ ... ]`, but latter is `POSIX` and preferred always.
   * `(...)` executes shell commands and influences execution order.
   * `((...))` executes arithmetic instructions (no floats)
   * `{...}` groups commands which only influences parsing, so it doesn't change the execution order. Example:  
-    `x=2; { x=4; }; echo ${x}` prints `4`  
+    `x=2; { x=4; }; echo ${x}` prints `4` but  
     `x=2; ( x=4; ); echo ${x}` prints `2`
 
 ## Documentation <a name="documentation"></a>
 
-* Separate module sections with `#######` (whole line).
+* Separate module sections with `#-----#` (whole line).
   Take the following code snippet for inspiration.
 
   ```python
-  ##########################################################
+  #--------------------------------------------------------#
   # exports
 
-  . "${_shell_lib}/exports.sh"
-  if [[ -f "${_custom_shell_lib}/exports.sh" ]]; then
-      . "${_custom_shell_lib}/exports.sh"
+  . "${shell_lib}/exports.sh"
+  if [ -f "${custom_shell_lib}/exports.sh" ]; then
+      . "${custom_shell_lib}/exports.sh"
   fi
 
-  ##########################################################
+  #--------------------------------------------------------#
   # aliases
 
-  . "${_shell_lib}/aliases.sh"
-  if [[ -f "${_custom_shell_lib}/aliases.sh" ]]; then
-      . "${_custom_shell_lib}/aliases.sh"
+  . "${shell_lib}/aliases.sh"
+  if [ -f "${custom_shell_lib}/aliases.sh" ]; then
+      . "${custom_shell_lib}/aliases.sh"
   fi
   ```
 
@@ -197,3 +197,4 @@ which may be called `pythonic`.
 
 [www_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
 [www_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy
+[www_stackoverflow_brackets]: https://stackoverflow.com/a/47576482
