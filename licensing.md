@@ -21,17 +21,15 @@ The `MIT`-license can be found [here][www_mit_license].
 
 ## Apache 2.0 vs. MIT
 
-> As already mentioned, please read the licenses by yourself and see the following description as help, not as guarantee.
+> As already mentioned, please read the licenses by yourself and view the following descriptions as guideline, not as a legally solid document.
 
-While the `MIT`-license and `Apache-2.0`-license are quite similar in their basic meaning, the `Apache-2.0`-license uses much more details and describes the issue for lawyers.
-This does not mean, that they are very different, but they are not identical, which slightly effects the use of code licensed under them.
-Hence, the `Apache-2.0` has some extras and small restrictions compared to the `MIT`-license.
+While the `MIT`-license and `Apache-2.0`-license are quite similar in their basic concept, the `Apache-2.0`-license provides much more details and describes the issues from a more lawyer-centered perspective.Though they are comparable from a legal perspective they are not totally identical, which, obviously, affects the use of code licensed under them. To be more precise, the `Apache-2.0` has some extras and small restrictions compared to the `MIT`-license.
 
-Basically, with both licenses, you are allowed to distribute, change and commercially use the code as you wish, as long as you are mentioning the original creator of it.
+Basically, with both licenses, you are allowed to distribute, change and commercially use the code as you wish, as long as you are mentioning its original creator.
 The main difference lays in `§4-Redistribution` and `§6-Trademarks` of the `Apache-2.0`-license.
 While the `MIT`-license tries to simplify these topics, leading to more freedom, the `Apache-2.0` specifies some conditions.
 
-- `Redistribution`: The `Apache-2.0`-license demands you mentioning changes somewhere.
+- `Redistribution`: The `Apache-2.0`-license demands mentioning changes somewhere.
   The `NOTICE`-file can be added for the `Apache-2.0` for additional comments.
   As far as I understand the license, you may use it for these changes as well.
 - `Trademarks`: The `Apache-2.0`-license does not permit the usage of trademarks.
