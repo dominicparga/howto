@@ -12,12 +12,12 @@ Don't forget to edit copied licenses-text, e.g. adding the year and your name.
 
 ## Apache 2.0
 
-The Apache-2.0-license can be found [here][www_apache_2_license].
+The `Apache-2.0`-license can be found [here][www_apache_2_license].
 An example for a `NOTICE`-file can be found [here][www_apache_2_notice].
 
 ## MIT
 
-The MIT-license can be found [here][www_mit_license].
+The `MIT`-license can be found [here][www_mit_license].
 
 ## Apache 2.0 vs. MIT
 
@@ -28,7 +28,7 @@ This does not mean, that they are very different, but they are not identical, wh
 Hence, the `Apache-2.0` has some extras and small restrictions compared to the `MIT`-license.
 
 Basically, with both licenses, you are allowed to distribute, change and commercially use the code as you wish, as long as you are mentioning the original creator of it.
-The main difference lays in `§4-Redistribution` and `$6-Trademarks` of the `Apache-2.0`-license.
+The main difference lays in `§4-Redistribution` and `§6-Trademarks` of the `Apache-2.0`-license.
 While the `MIT`-license tries to simplify these topics, leading to more freedom, the `Apache-2.0` specifies some conditions.
 
 - `Redistribution`: The `Apache-2.0`-license demands you mentioning changes somewhere.
@@ -38,6 +38,12 @@ While the `MIT`-license tries to simplify these topics, leading to more freedom,
 
 Long story short, `Apache-2.0` grants more protection to the creator and his/her work by mentioning changes and protecting trademarks, while `MIT` focusses on the redistribution of the work.
 
+## WTFPL
+
+The `WTFPL`-license can be found [here][www_wtfpl].
+It is what it's called: "You just DO WHAT THE FUCK YOU WANT TO".
+
 [www_apache_2_license]: https://www.apache.org/licenses/LICENSE-2.0
 [www_apache_2_notice]: https://www.apache.org/licenses/example-NOTICE.txt
 [www_mit_license]: https://opensource.org/licenses/mit-license.php
+[www_wtfpl]: http://www.wtfpl.net/about/
