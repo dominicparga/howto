@@ -42,13 +42,15 @@ which may be called `pythonic`.
 
 ## Coding Conventions <a name="coding-conventions"></a>
 
+First of all, a great linter [`shellcheck`][www_github_koalaman_shellcheck] helps distinguishing between styles/standards like `POSIX`, `bash`.
+
 * Functions, fields and file names are written in `snake_case`.
 
   Since functions and fields are added to the shell's environment, their names are slightly changed to prevent conflicts or verbose autocompletion and help understanding the code:
-  * private fields' names are in `snake_case`
-  * exported ("public") fields' names are written in __CAPSLOCK__
-  * private functions' names begin with __double underscore__
-  * public functions' names doesn't begin with any underscore
+  * exported ("public") fields' names are written in `UPPER_CASE_SNAKE_CASE`
+  * private fields' names are written in `__UPPER_CASE_SNAKE_CASE` (double-underscore!)
+  * public functions' names are written in `snake_case`
+  * private functions' names are written in `__snake_case` (double-underscore)
 
   ```zsh
   # BAD
@@ -62,22 +64,27 @@ which may be called `pythonic`.
 
 
   # GOOD
+  __finished() {
+      echo "Finished"
+  }
+
   # used in the shell, hence no leading dunderscore
   greet() {
-      local used_shell="unknown"
-      if [ -n "${ZSH_NAME}" ]; then used_shell="zsh"; fi
-      if [ -n "${BASH}" ];     then used_shell="bash"; fi
+      local __USED_SHELL="unknown"
+      if [ -n "${ZSH_NAME}" ]; then __USED_SHELL="zsh"; fi
+      if [ -n "${BASH}" ];     then __USED_SHELL="bash"; fi
 
       echo ""
       echo "Hello ${USER}."
-      echo "I'm a ${used_shell} window at your service."
+      echo "I'm a ${__USED_SHELL} window at your service."
       echo ""
   }
 
   export DOTFILES="..."
+  __finished
   ```
 
-* Always use `${VAR}` over `$VAR` for sake of consistency.
+* Always use `${VAR}` over `$VAR` for sake of consistency (searching, vim, ...).
 
   _It helps a lot in doing automatic stuff like replacing code in an automatic way (e.g. using vi)._
 
@@ -198,3 +205,4 @@ which may be called `pythonic`.
 [www_wikipedia_zen_of_python]: https://en.wikipedia.org/wiki/Zen_of_Python
 [www_wikipedia_python]: https://en.wikipedia.org/wiki/Python_(programming_language)#Features_and_philosophy
 [www_stackoverflow_brackets]: https://stackoverflow.com/a/47576482
+[www_github_koalaman_shellcheck]: https://github.com/koalaman/shellcheck
