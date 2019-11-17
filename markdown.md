@@ -9,28 +9,28 @@ Below comes a table of contents.
 1. [Links](#links)
 1. [Images](#imgs)
 1. [Emoji](#emoji)
-1. [Super Fancy Stuff](#fancy-title)
-    1. [Code styles](#code-styles)
-    1. [Style mentions](#style-mentions)
+1. [Style mentions](#style-mentions)
+1. [Code-blocks](#code-blocks)
+1. [Super Fancy Stuff](#super-fancy-stuff)
 
 This TOC's source code is shown below.
 Please notice that every item starts with number 1.
 Also cool is the inline html tag, that allows title names being independent of the tag for the TOC.
 
-Typically, the table of contents doesn't appear in the TOC, but here is content referred to the chapter.
+Typically, the table of contents doesn't appear in the TOC, but here, this content is referred to the chapter.
 
 ```markdown
 1. [Table of Contents](#toc)
 1. [Links](#links)
 1. [Images](#imgs)
 1. [Emoji](#emoji)
-1. [Super Fancy Stuff](#fancy-title)
-    1. [Code styles](#code-styles)
-    1. [Style mentions](#style-mentions)
+1. [Style mentions](#style-mentions)
+1. [Code-blocks](#code-blocks)
+1. [Super Fancy Stuff](#super-fancy-stuff)
 
 ...
 
-## Super Fancy Stuff <a name="fancy-title"></a>
+## Super Fancy Stuff <a name="super-fancy-stuff"></a>
 
 ...
 ```
@@ -70,7 +70,7 @@ Paths are relative to the README containing the line.
 
 [Here][www_emoji] is a list of emoji and their codes (e.g. :smirk: `:smirk:`) in markdown.
 
-## Super Fancy Stuff <a name="fancy-title"></a>
+## Style mentions <a name="style-mentions"></a>
 
 Writing markdown is a lot easier, especially if you are vim-user, if every sentence has its own line without any linewidth limit.
 
@@ -86,7 +86,17 @@ Writing markdown is a lot easier, especially if you are vim-user, if every sente
 > As you see here, even notes can follow the multiline rule.
 > Notes' lines start with `>`.
 
-### Code-styles <a name="code-styles"></a>
+You can look at this files raw version to see the written style, but in addition:
+
+- Never add two __headings__ right after each other, but add at least one sentence in between.
+  Just looks more professional.
+- Add __sub-headings__ only if *__more__* than one sub-heading is added.
+  Otherwise, sub-headings make no sense.
+- It helps using `__bold__` for __bold__ text and `*italic*` for *italic* text.
+  Mixing them could be done like `*__bold and italic__*`, giving *__bold and italic__*, but you should be consistent.
+- Horizontal lines (add `---` to an empty line) could help with readability.
+
+## Code-blocks <a name="code-blocks"></a>
 
 Every code block should define a style.
 Some examples (given in a code block):
@@ -104,17 +114,19 @@ Some examples (given in a code block):
 
 Highlighted monospace text can be written like `this`.
 
-### Style mentions <a name="style-mentions"></a>
+## Super Fancy Stuff <a name="super-fancy-stuff"></a>
 
-You can look at this files raw version to see the written style, but in addition:
+<details>
+<summary>Summary of a hidden text</summary>
+Hidden text hihi.
+</details>
 
-- Never add two __headings__ right after each other, but add at least one sentence in between.
-  Just looks more professional.
-- Add __sub-headings__ only if *__more__* than one sub-heading is added.
-  Otherwise, sub-headings make no sense.
-- It helps using `__bold__` for __bold__ text and `*italic*` for *italic* text.
-  Mixing them could be done like `*__bold and italic__*`, giving *__bold and italic__*, but you should be consistent.
-- Horizontal lines (add `---` to an empty line) could help with readability.
+```markdown
+<details>
+<summary>Summary of a hidden text</summary>
+Hidden text.
+</details>
+```
 
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
