@@ -8,9 +8,29 @@ Good pages to start
 - as orientation: [Arch - steps after installation][www_arch_steps_after_install]
 - [Package-group overview][www_arch_group_overview]
 
-## General snippets and interesting stuff
+## Table of Contents <a name="toc"></a>
 
-### Add a user
+1. [General snippets and interesting stuff](#general)
+    1. [Add a user](#add-a-user)
+    1. [Check colors in terminal](#check-colors-in-terminal)
+    1. [Mouse-polling-rate](#mouse-polling-rate)
+    1. [Random-number-generator](#random-number-generator)
+    1. [Install printer](#install-printer)
+1. [Bootloader rEFInd](#refind)
+1. [GNOME](#gnome)
+1. [Display-Server (xorg, wayland)](#xorg-wayland)
+1. [KDE-Plasma5](#kde)
+    1. [Desktop-Environment itself](#desktop-env)
+    1. [Login-Manager](#login-mgr)
+    1. [Wayland](#wayland)
+    1. [Applications](#applications)
+1. [Cool themes and icons](#themes-and-icons)
+1. [Troubleshooting](#troubleshooting)
+    1. [Logging](#logging)
+
+## General snippets and interesting stuff <a name="general"></a>
+
+### Add a user <a name="add-a-user"></a>
 
 ```zsh
 useradd -m -G wheel -s /usr/bin/zsh USERNAME
@@ -18,7 +38,7 @@ passwd USERNAME
 visudo # for wheel-user-group
 ```
 
-### Check colors in terminal
+### Check colors in terminal <a name="check-colors-in-terminal"></a>
 
 From [stackoverflow][www_stackoverflow_color_test]
 
@@ -26,17 +46,17 @@ From [stackoverflow][www_stackoverflow_color_test]
 msgcat --color=test
 ```
 
-### Mouse-polling-rate
+### Mouse-polling-rate <a name="mouse-polling-rate"></a>
 
 Check with [`sudo evhz`][www_arch_mouse_polling_rate]
 
-### Random-number-generator
+### Random-number-generator <a name="random-number-generator"></a>
 
 ```zsh
 yay -S haveged
 ```
 
-### Install printer
+### Install printer <a name="install-printer"></a>
 
 ```zsh
 yay -S cups cups-pdf
@@ -47,26 +67,26 @@ Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
 If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
 
-## Bootloader rEFInd
+## Bootloader rEFInd <a name="refind"></a>
 
 - [rEFInd installation guide for Arch][www_arch_refind]
 - [theme: rEFInd-minimal][www_refind_theme_minimal]
 
-## GNOME
+## GNOME <a name="gnome"></a>
 
-## Display-Server (xorg, wayland)
+## Display-Server (xorg, wayland) <a name="xorg-wayland"></a>
 
 ```zsh
 sudo pacman -S xorg-server xorg-xinit
 sudo pacman -S xf86-video-amdgpu
 ```
 
-## KDE-Plasma5
+## KDE-Plasma5 <a name="kde"></a>
 
 Repeadingly removes my home-directory when trying to uninstall a color-theme.
 Hence goodbye KDE-Plasma, hello GNOME.
 
-### Desktop-Environment itself
+### Desktop-Environment itself <a name="desktop-env"></a>
 
 ```zsh
 sudo pacman -S plasma-meta
@@ -79,7 +99,7 @@ sudo pacman -S kdegames-meta
 sudo pacman -S kde-gtk-config
 ```
 
-### Login-Manager
+### Login-Manager <a name="login-mgr"></a>
 
 KDE uses sddm (`sudo pacman -S sddm sddm-kcm` according to ).
 Based on Google Images, the theme `breeze` is the same as `Manjaro` is using.
@@ -94,21 +114,33 @@ setxkbmap de,us
 to enable a selection.
 More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][www_askubuntu_sddm_wrong_lang] or [US keyboard layout always used][www_gentoo_sddm_us_keyboard_layout] or [ArchLinux Forum SDDM Keyboard Selection][www_archlinux_sddm_keyboard_selection].
 
-### Wayland
+### Wayland <a name="wayland"></a>
 
 - `sudo pacman -S plasma-wayland-session`
 - [crashes with `RX 5700 XT`][www_kde_bug]
 
-### Applications
+### Applications <a name="applications"></a>
 
 If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][www_discover_no_backends].
 
-## Troubleshooting
+## Cool themes and icons <a name="themes-and-icons"></a>
+
+- `aur/nordic-theme-git` (dark version)
+- `aur/nordic-polar-theme-git` (light version)
+- `ant-dracula-gtk-theme`
+- `community/materia-gtk-theme`
+- `community/arc-gtk-theme`
+
+- `community/arc-icon-theme`
+- `community/papirus-icon-theme`
+- `aur/zafiro-icon-theme`
+
+## Troubleshooting <a name="troubleshooting"></a>
 
 `CTRL`, `ALT` and e.g. `F2` selects another `tty`.
 This can be used to check logs or access the system if something is not running accordingly.
 
-### Logging
+### Logging <a name="logging"></a>
 
 Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 
