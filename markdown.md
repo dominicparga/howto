@@ -128,6 +128,10 @@ Hidden text.
 </details>
 ```
 
+and badges ([`shields.io`](https://shields.io)) like
+
+[![License][www_license_badge]][www_license]
+
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
 [www_md_image_via_html]: https://stackoverflow.com/a/14747656
@@ -135,3 +139,6 @@ Hidden text.
 [www_emoji]: https://gist.github.com/rxaviers/7360908
 
 [www_github_dominicparga]: https://github.com/dominicparga
+
+[www_license_badge]: https://img.shields.io/github/license/dominicparga/howto
+[www_license]: https://github.com/dominicparga/howto/blob/master/LICENSE
