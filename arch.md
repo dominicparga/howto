@@ -25,6 +25,7 @@ Good pages to start
     1. [Wayland](#wayland)
     1. [Applications](#applications)
 1. [Cool themes and icons](#themes-and-icons)
+1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
     1. [Logging](#logging)
 
@@ -135,6 +136,20 @@ If discover shows `No application back-ends found, please report to your distrib
 - `community/papirus-icon-theme`
 - `aur/zafiro-icon-theme`
 
+## Fonts <a name="fonts"></a>
+
+Some cool monospace-fonts
+
+- `Cascadia Code` via [github][www_github_cascadia_code] or [AUR][www_aur_cascadia_code]
+- `Fira Code` via [github][www_github_fira_code] or [AUR][www_aur_fira_code]
+- `Inconsolata` via AUR
+
+More useful fonts/fonts-pkgs can be found [here][www_archwiki_schriftarten], e.g.
+
+- `ttf-liberation`, which is used in `libreoffice`-templates
+- [`ttf-ms-win10`][www_aur_ttf_ms_win10], which is a wrapper for local ms-fonts.
+  Microsoft-Fonts can be added from an Windows-ISO as described [here][www_archwiki_msfonts].
+
 ## Troubleshooting <a name="troubleshooting"></a>
 
 `CTRL`, `ALT` and e.g. `F2` selects another `tty`.
@@ -161,3 +176,11 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 [www_askubuntu_sddm_wrong_lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
 [www_gentoo_sddm_us_keyboard_layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
 [www_archlinux_sddm_keyboard_selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
+
+[www_github_cascadia_code]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
+[www_aur_cascadia_code]: https://www.archlinux.org/packages/community/any/ttf-cascadia-code/
+[www_github_fira_code]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
+[www_aur_fira_code]: https://www.archlinux.org/packages/community/any/otf-fira-code/
+[www_archwiki_msfonts]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
+[www_aur_ttf_ms_win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
+[www_archwiki_schriftarten]: https://wiki.archlinux.de/title/Schriftarten
