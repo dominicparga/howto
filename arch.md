@@ -28,6 +28,7 @@ Good pages to start
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
     1. [Logging](#logging)
+    1. [Unrecognized external HDD or tools or whatever](#unrecognized-hdd)
 
 ## General snippets and interesting stuff <a name="general"></a>
 
@@ -159,6 +160,15 @@ This can be used to check logs or access the system if something is not running 
 
 Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 
+### Unrecognized external HDD or tools or whatever <a name="unrecognized-hdd"></a>
+
+If you have updated your system, e.g. via `yay`, do a restart.
+
+Kernel-updates lead to missing support.
+In my case the external HDD hasn't been detected anymore (`exFAT`).
+I imagine, that old versions should be loaded that are already removed due to the system-update.
+A restart fixed my problem with the unrecognized external HDD.
+
 [www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
 [www_arch_group_overview]: https://www.archlinux.org/groups/
 [www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
@@ -184,3 +194,4 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 [www_archwiki_msfonts]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
 [www_aur_ttf_ms_win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
 [www_archwiki_schriftarten]: https://wiki.archlinux.de/title/Schriftarten
+)
