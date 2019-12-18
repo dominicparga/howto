@@ -16,6 +16,7 @@ Good pages to start
     1. [Mouse-polling-rate](#mouse-polling-rate)
     1. [Random-number-generator](#random-number-generator)
     1. [Install printer](#install-printer)
+    1. [LaTeX or TeX Live](#latex)
 1. [Bootloader rEFInd](#refind)
 1. [GNOME](#gnome)
 1. [Display-Server (xorg, wayland)](#xorg-wayland)
@@ -68,6 +69,10 @@ yay -S hplip
 Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
 If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
+
+### LaTeX or TeX Live <a name="latex"></a>
+
+Install the packages mentioned in the ArchWiki-page.
 
 ## Bootloader rEFInd <a name="refind"></a>
 
