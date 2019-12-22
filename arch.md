@@ -17,7 +17,8 @@ Good pages to start
     1. [Random-number-generator](#random-number-generator)
     1. [Install printer](#install-printer)
     1. [LaTeX or TeX Live](#latex)
-1. [Installation notes](#install)
+    1. [Python](#python)
+1. [Notes when installing Arch](#install)
 1. [Bootloader rEFInd](#refind)
 1. [GNOME](#gnome)
 1. [Display-Server (xorg, wayland)](#xorg-wayland)
@@ -75,7 +76,12 @@ If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), y
 
 Install the packages mentioned in the ArchWiki-page.
 
-## Installation notes <a name="install"></a>
+### Python <a name="python"></a>
+
+Just install python and pip-modules with your package-manager (e.g. `yay`).
+No need to use `pip` (yesss).
+
+## Notes when installing Arch <a name="install"></a>
 
 - install `networkmanager` (including `nmcli`) for wifi and execute `systemctl enable NetworkManager.service` (should be explained in the Archwiki)
 
