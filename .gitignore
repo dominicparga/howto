@@ -1,5 +1,6 @@
-################################################################################
+#------------------------------------------------------------------------------#
 # gitignore
+
 # Created by https://www.gitignore.io/api/macos,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=macos,visualstudiocode
 
@@ -9,7 +10,7 @@
 .AppleDouble
 .LSOverride
 
-# Icon must end with two 
+# Icon must end with two \r
 Icon
 
 # Thumbnails
@@ -44,10 +45,8 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/macos,visualstudiocode
 
-
-
-################################################################################
-# Custom
+#------------------------------------------------------------------------------#
+# custom
 
 /custom/
 
