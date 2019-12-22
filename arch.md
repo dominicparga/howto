@@ -17,6 +17,7 @@ Good pages to start
     1. [Random-number-generator](#random-number-generator)
     1. [Install printer](#install-printer)
     1. [LaTeX or TeX Live](#latex)
+1. [Installation notes](#install)
 1. [Bootloader rEFInd](#refind)
 1. [GNOME](#gnome)
 1. [Display-Server (xorg, wayland)](#xorg-wayland)
@@ -74,12 +75,19 @@ If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), y
 
 Install the packages mentioned in the ArchWiki-page.
 
+## Installation notes <a name="install"></a>
+
+- install `networkmanager` (including `nmcli`) for wifi and execute `systemctl enable NetworkManager.service` (should be explained in the Archwiki)
+
 ## Bootloader rEFInd <a name="refind"></a>
 
 - [rEFInd installation guide for Arch][www_arch_refind]
 - [theme: rEFInd-minimal][www_refind_theme_minimal]
 
 ## GNOME <a name="gnome"></a>
+
+Just install as mentioned in the Archwiki.
+When logging in, the default is wayland, but currently (end 2019), wayland doesn't support app-switching, e.g. when `Enpass` wants to authenticate via `browser`, going back to the app afterwards.
 
 ## Display-Server (xorg, wayland) <a name="xorg-wayland"></a>
 
