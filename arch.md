@@ -13,11 +13,12 @@ Good pages to start
 1. [General snippets and interesting stuff](#general)
     1. [Add a user](#add-a-user)
     1. [Check colors in terminal](#check-colors-in-terminal)
-    1. [Mouse-polling-rate](#mouse-polling-rate)
-    1. [Random-number-generator](#random-number-generator)
+    1. [Event-Listening with evtest](#evtest)
     1. [Install printer](#install-printer)
     1. [LaTeX or TeX Live](#latex)
+    1. [Mouse-polling-rate](#mouse-polling-rate)
     1. [Python](#python)
+    1. [Random-number-generator](#random-number-generator)
 1. [Notes when installing Arch](#install)
 1. [Bootloader rEFInd](#refind)
 1. [GNOME](#gnome)
@@ -51,15 +52,9 @@ From [stackoverflow][www_stackoverflow_color_test]
 msgcat --color=test
 ```
 
-### Mouse-polling-rate <a name="mouse-polling-rate"></a>
+### Event-Listening with evtest <a name="evtest"></a>
 
-Check with [`sudo evhz`][www_arch_mouse_polling_rate]
-
-### Random-number-generator <a name="random-number-generator"></a>
-
-```zsh
-yay -S haveged
-```
+Execute `sudo evtest` and follow instructions.
 
 ### Install printer <a name="install-printer"></a>
 
@@ -76,10 +71,20 @@ If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), y
 
 Install the packages mentioned in the ArchWiki-page.
 
+### Mouse-polling-rate <a name="mouse-polling-rate"></a>
+
+Check with [`sudo evhz`][www_arch_mouse_polling_rate]
+
 ### Python <a name="python"></a>
 
 Just install python and pip-modules with your package-manager (e.g. `yay`).
 No need to use `pip` (yesss).
+
+### Random-number-generator <a name="random-number-generator"></a>
+
+```zsh
+yay -S haveged
+```
 
 ## Notes when installing Arch <a name="install"></a>
 
@@ -188,29 +193,29 @@ In my case the external HDD hasn't been detected anymore (`exFAT`).
 I imagine, that old versions should be loaded that are already removed due to the system-update.
 A restart fixed my problem with the unrecognized external HDD.
 
-[www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
+### Screen flicker after resume from suspend (Radeon GPU)
+
+See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
+
 [www_arch_group_overview]: https://www.archlinux.org/groups/
-[www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
+[www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
 [www_arch_mouse_polling_rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
+[www_arch_radeon_screen_flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
 [www_arch_refind]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [www_arch_steps_after_install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
-
-[www_aur_hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
-[www_hp_printer_plugin_list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
-
-[www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
-[www_kde_bug]: https://bugs.kde.org/show_bug.cgi?id=413223
-[www_discover_no_backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
-
-[www_askubuntu_sddm_wrong_lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
-[www_gentoo_sddm_us_keyboard_layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
 [www_archlinux_sddm_keyboard_selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
-
-[www_github_cascadia_code]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
-[www_aur_cascadia_code]: https://www.archlinux.org/packages/community/any/ttf-cascadia-code/
-[www_github_fira_code]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
-[www_aur_fira_code]: https://www.archlinux.org/packages/community/any/otf-fira-code/
 [www_archwiki_msfonts]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
-[www_aur_ttf_ms_win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
 [www_archwiki_schriftarten]: https://wiki.archlinux.de/title/Schriftarten
-)
+[www_askubuntu_sddm_wrong_lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
+[www_aur_cascadia_code]: https://www.archlinux.org/packages/community/any/ttf-cascadia-code/
+[www_aur_fira_code]: https://www.archlinux.org/packages/community/any/otf-fira-code/
+[www_aur_hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
+[www_aur_ttf_ms_win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
+[www_discover_no_backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
+[www_gentoo_sddm_us_keyboard_layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
+[www_github_cascadia_code]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
+[www_github_fira_code]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
+[www_hp_printer_plugin_list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
+[www_kde_bug]: https://bugs.kde.org/show_bug.cgi?id=413223
+[www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
+[www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
