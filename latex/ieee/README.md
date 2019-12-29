@@ -47,6 +47,6 @@ Made changes are just structure-, not content-related:
 * Its bibliography-examples has been changed slightly.
 * Indentions and a `graphicspath` were added.
 * The LaTeX-code has been refactored such that every line contains at most one sentence.
-* This helps a lot (especially, but not only, when using `vim`).
+  This helps a lot (especially, but not only, when using `vim`).
 
 [www_ieee_org]: https://www.ieee.org/conferences/publishing/templates.html
