@@ -20,7 +20,7 @@ LaTeX-root
 │   └── graphics
 │       └── fig1.png
 ├── scripts
-│   └── gitignore.sh        # sh scripts/.gitignore > .gitignore
+│   └── echo_gitignore.sh # sh ./scripts/create_gitignore > .gitignore
 └── src
     ├── IEEEtran.cls
     ├── bibliography.bib
