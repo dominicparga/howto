@@ -132,17 +132,20 @@ badges ([`shields.io`](https://shields.io)) like
 
 [![License][www_license_badge]][www_license]
 
-[Visual Studio Code Linter Plugin](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) enabling in-place linting of markdown files and thus ensuring consistency of Markdown files.
+[Visual Studio Code Linter Plugin][www_vscode_marketplace_markdownlint] enabling in-place linting of `markdown` files and thus ensuring consistency of Markdown files.
 
-[awesome markdown list](https://github.com/mundimark/awesome-markdown/pull/26/files) - an [awesome list](https://github.com/topics/awesome-list) showing the most awesome things one can do with markdown.
+[awesome markdown list][www_github_mundimark] - an [awesome list][www_github_awesome_list] showing the most awesome things one can do with markdown.
 
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
 [www_md_image_via_html]: https://stackoverflow.com/a/14747656
+[www_vscode_marketplace_markdownlint]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
 
 [www_emoji]: https://gist.github.com/rxaviers/7360908
 
 [www_github_dominicparga]: https://github.com/dominicparga
+[www_github_mundimark]: https://github.com/mundimark/awesome-markdown/pull/26/files
+[www_github_awesome_list]: https://github.com/topics/awesome-list
 
 [www_license_badge]: https://img.shields.io/github/license/dominicparga/howto
 [www_license]: https://github.com/dominicparga/howto/blob/master/LICENSE
