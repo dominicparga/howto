@@ -128,9 +128,13 @@ Hidden text.
 </details>
 ```
 
-and badges ([`shields.io`](https://shields.io)) like
+badges ([`shields.io`](https://shields.io)) like
 
 [![License][www_license_badge]][www_license]
+
+[Visual Studio Code Linter Plugin](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) enabling in-place linting of markdown files and thus ensuring consistency of Markdown files.
+
+[awesome markdown list](https://github.com/mundimark/awesome-markdown/pull/26/files) - an [awesome list](https://github.com/topics/awesome-list) showing the most awesome things one can do with markdown.
 
 [www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 [www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
