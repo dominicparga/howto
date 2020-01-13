@@ -5,7 +5,7 @@ There are plenty of help-pages, so this md-page just collects some useful snippe
 Good pages to start
 
 - [Arch installation guide][www_arch_install_guide]
-- as orientation: [Arch - steps after installation][www_arch_steps_after_install]
+- as orientation (but don't install everything from there!): [Arch - steps after installation][www_arch_steps_after_install]
 - [Package-group overview][www_arch_group_overview]
 
 ## Table of Contents <a name="toc"></a>
@@ -34,7 +34,9 @@ Good pages to start
     1. [Logging](#logging)
     1. [Unrecognized external HDD or tools or whatever](#unrecognized-hdd)
 
-## General snippets and interesting stuff <a name="general"></a>
+## Notes when installing Arch <a name="install"></a>
+
+In addition to the [installation-guide on archwiki][www_arch_install_guide], the following notes could be helpful and save google-time. `:)`
 
 ### Add a user <a name="add-a-user"></a>
 
@@ -43,6 +45,91 @@ useradd -m -G wheel -s /usr/bin/zsh USERNAME
 passwd USERNAME
 visudo # for wheel-user-group
 ```
+
+### systemd and systemctl
+
+Basic systemctl-stuff can be found [here][archlinux/systemd/basic]
+Note that `enable` means the service to start automatically on reboot, while `start` means starting it right now for once.
+
+### wifi on reboot
+
+Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot via `systemctl enable NetworkManager.service` (should be explained in the Archwiki).
+
+### Bootloader rEFInd <a name="refind"></a>
+
+- [rEFInd installation guide for Arch][www_arch_refind]
+- [theme: rEFInd-minimal][www_refind_theme_minimal]
+
+## Notes when setting up Arch <a name="setup"></a>
+
+### Install printer <a name="install-printer"></a>
+
+```zsh
+yay -S cups cups-pdf
+yay -S hplip
+```
+
+Then enter `http://localhost:631/admin` and add a new printer.
+In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
+If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
+
+### GNOME <a name="gnome"></a>
+
+Just install as mentioned in the Archwiki.
+When logging in, the default is wayland, but currently (end 2019), wayland doesn't support app-switching, e.g. when `Enpass` wants to authenticate via `browser`, going back to the app afterwards.
+
+### Display-Server (xorg, wayland) <a name="xorg-wayland"></a>
+
+```zsh
+sudo pacman -S xorg-server xorg-xinit
+sudo pacman -S xf86-video-amdgpu
+```
+
+### KDE-Plasma5 <a name="kde"></a>
+
+> deprecated
+
+Repeadingly removes my home-directory when trying to uninstall a color-theme.
+Hence goodbye KDE-Plasma, hello GNOME.
+
+#### Desktop-Environment itself <a name="desktop-env"></a>
+
+```zsh
+sudo pacman -S plasma-meta
+
+sudo pacman -S kdebase-meta
+sudo pacman -S kdegraphics-meta
+sudo pacman -S kdeutils-meta
+sudo pacman -S kdeadmin-meta
+sudo pacman -S kdegames-meta
+sudo pacman -S kde-gtk-config
+```
+
+#### Login-Manager <a name="login-mgr"></a>
+
+KDE uses sddm (`sudo pacman -S sddm sddm-kcm` according to ).
+Based on Google Images, the theme `breeze` is the same as `Manjaro` is using.
+
+Changing keyboard-layout for login with `SDDM` (a display-manager for `KDE`) can be done in the file `/usr/share/sddm/scripts/Xsetup`.
+Add the line
+
+```zsh
+setxkbmap de,us
+```
+
+to enable a selection.
+More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][www_askubuntu_sddm_wrong_lang] or [US keyboard layout always used][www_gentoo_sddm_us_keyboard_layout] or [ArchLinux Forum SDDM Keyboard Selection][www_archlinux_sddm_keyboard_selection].
+
+#### Wayland <a name="wayland"></a>
+
+- `sudo pacman -S plasma-wayland-session`
+- [crashes with `RX 5700 XT`][www_kde_bug]
+
+#### Applications <a name="applications"></a>
+
+If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][www_discover_no_backends].
+
+## General snippets and interesting stuff <a name="general"></a>
 
 ### Check colors in terminal <a name="check-colors-in-terminal"></a>
 
@@ -55,17 +142,6 @@ msgcat --color=test
 ### Event-Listening with evtest <a name="evtest"></a>
 
 Execute `sudo evtest` and follow instructions.
-
-### Install printer <a name="install-printer"></a>
-
-```zsh
-yay -S cups cups-pdf
-yay -S hplip
-```
-
-Then enter `http://localhost:631/admin` and add a new printer.
-In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
-If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
 
 ### LaTeX or TeX Live <a name="latex"></a>
 
@@ -86,70 +162,10 @@ No need to use `pip` (yesss).
 yay -S haveged
 ```
 
-## Notes when installing Arch <a name="install"></a>
-
-- install `networkmanager` (including `nmcli`) for wifi and execute `systemctl enable NetworkManager.service` (should be explained in the Archwiki)
-
-## Bootloader rEFInd <a name="refind"></a>
-
-- [rEFInd installation guide for Arch][www_arch_refind]
-- [theme: rEFInd-minimal][www_refind_theme_minimal]
-
-## GNOME <a name="gnome"></a>
-
-Just install as mentioned in the Archwiki.
-When logging in, the default is wayland, but currently (end 2019), wayland doesn't support app-switching, e.g. when `Enpass` wants to authenticate via `browser`, going back to the app afterwards.
-
-## Display-Server (xorg, wayland) <a name="xorg-wayland"></a>
-
-```zsh
-sudo pacman -S xorg-server xorg-xinit
-sudo pacman -S xf86-video-amdgpu
-```
-
-## KDE-Plasma5 <a name="kde"></a>
-
-Repeadingly removes my home-directory when trying to uninstall a color-theme.
-Hence goodbye KDE-Plasma, hello GNOME.
-
-### Desktop-Environment itself <a name="desktop-env"></a>
-
-```zsh
-sudo pacman -S plasma-meta
-
-sudo pacman -S kdebase-meta
-sudo pacman -S kdegraphics-meta
-sudo pacman -S kdeutils-meta
-sudo pacman -S kdeadmin-meta
-sudo pacman -S kdegames-meta
-sudo pacman -S kde-gtk-config
-```
-
-### Login-Manager <a name="login-mgr"></a>
-
-KDE uses sddm (`sudo pacman -S sddm sddm-kcm` according to ).
-Based on Google Images, the theme `breeze` is the same as `Manjaro` is using.
-
-Changing keyboard-layout for login with `SDDM` (a display-manager for `KDE`) can be done in the file `/usr/share/sddm/scripts/Xsetup`.
-Add the line
-
-```zsh
-setxkbmap de,us
-```
-
-to enable a selection.
-More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][www_askubuntu_sddm_wrong_lang] or [US keyboard layout always used][www_gentoo_sddm_us_keyboard_layout] or [ArchLinux Forum SDDM Keyboard Selection][www_archlinux_sddm_keyboard_selection].
-
-### Wayland <a name="wayland"></a>
-
-- `sudo pacman -S plasma-wayland-session`
-- [crashes with `RX 5700 XT`][www_kde_bug]
-
-### Applications <a name="applications"></a>
-
-If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][www_discover_no_backends].
 
 ## Cool themes and icons <a name="themes-and-icons"></a>
+
+Install them using `yay`, like `yay nordic-theme-git`.
 
 - `aur/nordic-theme-git` (dark version)
 - `aur/nordic-polar-theme-git` (light version)
@@ -184,7 +200,12 @@ This can be used to check logs or access the system if something is not running 
 
 Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 
-### Unrecognized external HDD or tools or whatever <a name="unrecognized-hdd"></a>
+### Could not find tools on server when updating/installing tools <a name="tools-not-found-while-updating"></a>
+
+Arch is strict in versioning, meaning if your system is too old (could mean days), you won't find tools in the mirror-servers.
+Just update the system (e.g. via `yay`) and reboot.
+
+### Unrecognized tools or external HDD or whatever <a name="unrecognized-hdd"></a>
 
 If you have updated your system, e.g. via `yay`, do a restart.
 
@@ -219,3 +240,4 @@ See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
 [www_kde_bug]: https://bugs.kde.org/show_bug.cgi?id=413223
 [www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
 [www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
+[archlinux/systemd/basic]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
