@@ -292,7 +292,7 @@ See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
 __TL;DR__ Solution is updating BIOS (source: [Manjaro-Forum][manjaro/forum/cpu-rng-warning]).
-If you have a motherboard from `msi` as I do, check [this 3-min-video][youtube/update-bios] out.
+If you have a mainboard from `msi`, check [this 3-min-video][youtube/update-bios] out.
 
 My AMD-CPU seems to have a bug or something, throwing the message
 
