@@ -26,6 +26,7 @@ Good pages to start
         1. [Applications](#applications)
     1. [Install printer](#install-printer)
 1. [General snippets and interesting stuff](#general)
+    1. [Printing system-info](#printing-system-info)
     1. [Check colors in terminal](#check-colors-in-terminal)
     1. [Event-Listening with evtest](#evtest)
     1. [LaTeX or TeX Live](#latex)
@@ -169,6 +170,34 @@ In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the r
 If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][hp/printer-plugin-list].
 
 ## General snippets and interesting stuff <a name="general"></a>
+
+### Printing system-info <a name="printing-system-info"></a>
+
+You can use `uname -a` for quick-info.
+For a more fancy output, do `yay -S archey` followed by `archey` printing something like
+
+```text
+[dominic:~]$ archey
+
+               +                 User: dominic
+               #                 Hostname: aqua
+              ###                Model: motherboard
+             #####               Distro: Arch Linux [x86_64]
+             ######              Kernel: 5.4.11-arch1-1
+            ; #####;             Uptime: 26 minutes
+           +##.#####             WindowManager: Not detected
+          +##########            DesktopEnvironment: GNOME
+         #############;          Shell: /usr/bin/zsh
+        ###############+         Terminal: xterm-256color ## ## ## ## ## ## ##
+       #######   #######         Packages: 1147
+     .######;     ;###;`".       Temperature: 16.8 C (Max. 16.8 C)
+    .#######;     ;#####.        CPU: ...
+    #########.   .########`      GPU: ...
+   ######'           '######     RAM: 1934 MB / 16024 MB
+  ;####                 ####;    Disk: 167 GB / 522 GB
+  ##'                     '##    LAN_IP: ...
+ #'                         `#   WAN_IP: ...
+```
 
 ### Check colors in terminal <a name="check-colors-in-terminal"></a>
 
