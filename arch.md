@@ -32,6 +32,7 @@ Good pages to start
     1. [Mouse-polling-rate](#mouse-polling-rate)
     1. [Python](#python)
     1. [Random-number-generator](#random-number-generator)
+    1. [Check kernel-default-settings](#kernel-default-settings)
 1. [Cool themes and icons](#themes-and-icons)
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
@@ -90,6 +91,13 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
 - Manual `stanzas` (`menuentry`s) and their options for `refind.conf` can be found [here][rodsbooks/refind/configfile#stanzas].
 - `/efi/EFI/refind/refind.conf` vs `/boot/refind_linux.conf`: Former is the manually written config while latter is taken for automatically detected kernels.
   Take a look at [the archwiki][archlinux/wiki/refind_linux.conf] for more info.
+
+### Configure Kernel
+
+Take a look [at this super link][kernel/v5.4/params] for documentation of the options.
+Note that you could have another version as used in the URL.
+
+To check your kernel-version, execute `uname -r`.
 
 ## Notes when setting up Arch <a name="setup-arch"></a>
 
@@ -193,6 +201,10 @@ No need to use `pip` (yesss).
 yay -S haveged
 ```
 
+### Check kernel-default-settings <a name="kernel-default-settings"></a>
+
+Snippet: `zcat /proc/config.gz | grep CONFIG_RANDOM_TRUST_CPU`
+
 ## Cool themes and icons <a name="themes-and-icons"></a>
 
 Install them using `yay`, like `yay nordic-theme-git`.
@@ -250,7 +262,47 @@ See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
 
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
-See [in the archlinux-forum][archlinux/forum/0xffffffff]
+__TL;DR__ Solution is updating BIOS (source: [Manjaro-Forum][manjaro/forum/cpu-rng-warning]).
+If you have a motherboard from `msi` as I do, check [this 3-min-video][youtube/update-bios] out.
+
+My AMD-CPU seems to have a bug or something, throwing the message
+
+```text
+WARNING: CPU random generator seem to be failing, disable hardware random number generation
+WARNING: RDRND generated: 0xffffffff 0xffffffff 0xffffffff 0xffffffff
+```
+
+resulting in bad random numbers (only `fff...ff`) [when using `QT`][kde/invent/fix-rdm-init-on-amd-cpus] (e.g. in `matplotlib`).
+
+You can check the random-number-generator of your cpu via the following c-script, using an inline-assembler-snippet to access the hardware-random-generator directly, not through your `OS`.
+
+If the code is saved as script named `rdrand-test.c`, just execute `gcc rdrand-test.c && ./a.out` to print the random number.
+
+```c
+/*
+   The code has been derived from systemd:
+   https://github.com/systemd/systemd/blob/master/src/basic/random-util.c
+
+   SPDX-License-Identifier: LGPL-2.1+
+*/
+
+#include <stdio.h>
+
+int main() {
+  unsigned char success;
+  unsigned long v;
+  asm volatile("rdrand %0;"
+               "setc %1"
+               : "=r"(v), "=qm"(success));
+
+  printf("success: %i  value: %lx\n", success, v);
+}
+```
+
+Though, you can check the output of `head -c 8 /dev/urandom | xxd`.
+If it is random stuff, your `OS` probably has detected the issue by its own.
+
+Source: [archlinux-forum][archlinux/forum/0xffffffff]
 
 [archlinux/forum/0xffffffff]: https://bbs.archlinux.org/viewtopic.php?id=250624
 [archlinux/forum/radeon-screen-flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
@@ -279,5 +331,9 @@ See [in the archlinux-forum][archlinux/forum/0xffffffff]
 [hp/printer-plugin-list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
 [itsfoss.com/steps-after-install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
 [kde/bugs/plasma-wayland-crashes-after-login]: https://bugs.kde.org/show_bug.cgi?id=413223
+[kde/invent/fix-rdm-init-on-amd-cpus]: https://invent.kde.org/kde/krita/commit/2fdd504dfe6ec63b654ee0878c9f95cb69d4a6ad
+[kernel/v5.4/params]: https://www.kernel.org/doc/html/v5.4/admin-guide/kernel-parameters.html
 [rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
 [texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
+[manjaro/forum/cpu-rng-warning]: https://forum.manjaro.org/t/i-get-a-cpu-random-generator-warning-advising-me-to-disable-hardware-random-number-generation/116796
+[youtube/update-bios]: https://youtu.be/SgTokymDCcs
