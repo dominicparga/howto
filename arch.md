@@ -91,6 +91,7 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
   You can check existing labels via `ll /dev/disk/by-label` (and `fdisk -l` for respective mount-names).
 - Manual `stanzas` (`menuentry`s) and their options for `refind.conf` can be found [here][rodsbooks/refind/configfile#stanzas].
 - `/efi/EFI/refind/refind.conf` vs `/boot/refind_linux.conf`: Former is the manually written config while latter is taken for automatically detected kernels.
+  Generate a `refind_conf.linux` via `mkrlconf`.
   Take a look at [the archwiki][archlinux/wiki/refind_linux.conf] for more info.
 
 ### Configure Kernel
