@@ -4,9 +4,9 @@ There are plenty of help-pages, so this md-page just collects some useful snippe
 
 Good pages to start
 
-- [Arch installation guide][www_arch_install_guide]
-- as orientation (but don't install everything from there!): [Arch - steps after installation][www_arch_steps_after_install]
-- [Package-group overview][www_arch_group_overview]
+- [Arch installation guide][archlinux/wiki/installation-guide]
+- as orientation (but don't install everything from there!): [Arch - steps after installation][itsfoss.com/steps-after-install]
+- [Package-group overview][archlinux/groups]
 
 ## Table of Contents <a name="toc"></a>
 
@@ -42,7 +42,7 @@ Good pages to start
 
 ## Notes when installing Arch <a name="install-arch"></a>
 
-In addition to the [installation-guide on archwiki][www_arch_install_guide], the following notes could be helpful and save google-time. `:)`
+In addition to the [installation-guide on archwiki][archlinux/wiki/installation-guide], the following notes could be helpful and save google-time. `:)`
 
 ### Add a user <a name="add-a-user"></a>
 
@@ -54,7 +54,7 @@ visudo # for wheel-user-group
 
 ### systemd and systemctl <a name="systemd-and-systemctl"></a>
 
-Basic systemctl-stuff can be found [here][archlinux/systemd/basic]
+Basic systemctl-stuff can be found [here][archlinux/systemd#basic-usage]
 Note that `enable` means the service to start automatically on reboot, while `start` means starting it right now for once.
 
 ### wifi on reboot <a name="wifi-on-reboot"></a>
@@ -63,13 +63,14 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
 
 ### Bootloader rEFInd <a name="refind"></a>
 
-- [rEFInd installation guide for Arch][www_arch_refind]
-- [theme: rEFInd-minimal][www_refind_theme_minimal]
-- [Labeling the filesystem with Gnome's `disk`-utility][www_labeling] is needed for `rEFInd`s entry `volume` in a `menuentry`.
+- [rEFInd installation guide for Arch][archlinux/wiki/refind#refind_linux.conf]
+- [theme: rEFInd-minimal][github/evanprukhiser/refind-minimal]
+- [configs inclusive rEFInd-minimal][github/dominicparga/refind]
+- [Labeling the filesystem with Gnome's `disk`-utility][texmint.com/change-disk-partition-label] is needed for `rEFInd`s entry `volume` in a `menuentry`.
   You can check existing labels via `ll /dev/disk/by-label` (and `fdisk -l` for respective mount-names).
-- Manual `stanzas` (`menuentry`s) and their options for `refind.conf` can be found [here][stanzas].
+- Manual `stanzas` (`menuentry`s) and their options for `refind.conf` can be found [here][rodsbooks/refind/configfile#stanzas].
 - `/efi/EFI/refind/refind.conf` vs `/boot/refind_linux.conf`: Former is the manually written config while latter is taken for automatically detected kernels.
-  Take a look at [the archwiki][archwiki/refind_linux] for more info.
+  Take a look at [the archwiki][archlinux/wiki/refind_linux.conf] for more info.
 
 ## Notes when setting up Arch <a name="setup-arch"></a>
 
@@ -118,16 +119,16 @@ setxkbmap de,us
 ```
 
 to enable a selection.
-More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][www_askubuntu_sddm_wrong_lang] or [US keyboard layout always used][www_gentoo_sddm_us_keyboard_layout] or [ArchLinux Forum SDDM Keyboard Selection][www_archlinux_sddm_keyboard_selection].
+More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][askubuntu/sddm-wrong-lang] or [US keyboard layout always used][gentoo/forum/sddm-us-keyboard-layout] or [ArchLinux Forum SDDM Keyboard Selection][archlinux/forum/sddm-keyboard-selection].
 
 #### Wayland <a name="wayland"></a>
 
 - `sudo pacman -S plasma-wayland-session`
-- [crashes with `RX 5700 XT`][www_kde_bug]
+- [crashes with `RX 5700 XT`][kde/bugs/plasma-wayland-crashes-after-login]
 
 #### Applications <a name="applications"></a>
 
-If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][www_discover_no_backends].
+If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][archlinux/wiki/kde#discover-no-backends].
 
 ### Install printer <a name="install-printer"></a>
 
@@ -137,14 +138,14 @@ yay -S hplip
 ```
 
 Then enter `http://localhost:631/admin` and add a new printer.
-In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
-If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
+In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][archlinux/pkgs/hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
+If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][hp/printer-plugin-list].
 
 ## General snippets and interesting stuff <a name="general"></a>
 
 ### Check colors in terminal <a name="check-colors-in-terminal"></a>
 
-From [stackoverflow][www_stackoverflow_color_test]
+From [stackoverflow][askubuntu/color-test]
 
 ```zsh
 msgcat --color=test
@@ -160,7 +161,7 @@ Install the packages mentioned in the ArchWiki-page.
 
 ### Mouse-polling-rate <a name="mouse-polling-rate"></a>
 
-Check with [`sudo evhz`][www_arch_mouse_polling_rate]
+Check with [`sudo evhz`][archlinux/wiki/mouse-polling-rate]
 
 ### Python <a name="python"></a>
 
@@ -191,15 +192,15 @@ Install them using `yay`, like `yay nordic-theme-git`.
 
 Some cool monospace-fonts
 
-- `Cascadia Code` via [github][www_github_cascadia_code] or [AUR][www_aur_cascadia_code]
-- `Fira Code` via [github][www_github_fira_code] or [AUR][www_aur_fira_code]
+- `Cascadia Code` via [github][github/wiki/cascadia-code/install] or [AUR][archlinux/pkgs/ttf-cascadia-code]
+- `Fira Code` via [github][github/wiki/fira-code/install] or [AUR][archlinux/pkgs/otf-fira-code]
 - `Inconsolata` via AUR
 
-More useful fonts/fonts-pkgs can be found [here][www_archwiki_schriftarten], e.g.
+More useful fonts/fonts-pkgs can be found [in the Archwiki][archlinux/wiki/schriftarten], e.g.
 
 - `ttf-liberation`, which is used in `libreoffice`-templates
 - [`ttf-ms-win10`][www_aur_ttf_ms_win10], which is a wrapper for local ms-fonts.
-  Microsoft-Fonts can be added from an Windows-ISO as described [here][www_archwiki_msfonts].
+  Microsoft-Fonts can be added from an Windows-ISO as described [in the Archwiki][archlinux/wiki/msfonts-from-iso].
 
 ## Troubleshooting <a name="troubleshooting"></a>
 
@@ -226,36 +227,38 @@ A restart fixed my problem with the unrecognized external HDD.
 
 ### Screen flicker after resume from suspend (Radeon GPU) <a name="screen-flicker-after-suspend"></a>
 
-See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
+See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
 
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
-See [in the archlinux-forum][archlinux-forum-rnd]
+See [in the archlinux-forum][archlinux/forum/0xffffffff]
 
-[www_arch_group_overview]: https://www.archlinux.org/groups/
-[www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
-[www_arch_mouse_polling_rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
-[www_arch_radeon_screen_flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
-[www_arch_refind]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
-[www_arch_steps_after_install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
-[www_archlinux_sddm_keyboard_selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
-[www_archwiki_msfonts]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
-[www_archwiki_schriftarten]: https://wiki.archlinux.de/title/Schriftarten
-[www_askubuntu_sddm_wrong_lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
-[www_aur_cascadia_code]: https://www.archlinux.org/packages/community/any/ttf-cascadia-code/
-[www_aur_fira_code]: https://www.archlinux.org/packages/community/any/otf-fira-code/
-[www_aur_hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
-[www_aur_ttf_ms_win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
-[www_discover_no_backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
-[www_gentoo_sddm_us_keyboard_layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
-[www_github_cascadia_code]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
-[www_github_fira_code]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
-[www_hp_printer_plugin_list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
-[www_kde_bug]: https://bugs.kde.org/show_bug.cgi?id=413223
-[www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
-[www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
-[archlinux/systemd/basic]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
-[www_labeling]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
-[stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
-[archwiki/refind_linux]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
-[archlinux-forum-rnd]: https://bbs.archlinux.org/viewtopic.php?id=250624
+[archlinux/forum/0xffffffff]: https://bbs.archlinux.org/viewtopic.php?id=250624
+[archlinux/forum/radeon-screen-flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
+[archlinux/forum/sddm-keyboard-selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
+[archlinux/groups]: https://www.archlinux.org/groups/
+[archlinux/pkgs]: https://www.archlinux.org/packages/
+[archlinux/pkgs/hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
+[archlinux/pkgs/otf-fira-code]: https://www.archlinux.org/packages/community/any/otf-fira-code/
+[archlinux/pkgs/ttf-cascadia-code]: https://www.archlinux.org/packages/community/any/ttf-cascadia-code/
+[archlinux/pkgs/ttf-ms-win10]: https://aur.archlinux.org/packages/ttf-ms-win10/
+[archlinux/systemd#basic-usage]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
+[archlinux/wiki/installation-guide]: https://wiki.archlinux.org/index.php/installation_guide
+[archlinux/wiki/kde#discover-no-backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
+[archlinux/wiki/mouse-polling-rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
+[archlinux/wiki/msfonts-from-iso]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
+[archlinux/wiki/refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
+[archlinux/wiki/refind#refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
+[archlinux/wiki/schriftarten]: https://wiki.archlinux.de/title/Schriftarten
+[askubuntu/color-test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
+[askubuntu/sddm-wrong-lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
+[gentoo/forum/sddm-us-keyboard-layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
+[github/dominicparga/refind]: https://github.com/dominicparga/refind
+[github/evanprukhiser/refind-minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
+[github/wiki/cascadia-code/install]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
+[github/wiki/fira-code/install]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
+[hp/printer-plugin-list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
+[itsfoss.com/steps-after-install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
+[kde/bugs/plasma-wayland-crashes-after-login]: https://bugs.kde.org/show_bug.cgi?id=413223
+[rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
+[texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
