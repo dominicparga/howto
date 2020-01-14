@@ -11,6 +11,7 @@ Good pages to start
 ## Table of Contents <a name="toc"></a>
 
 1. [Notes when installing Arch](#install-arch)
+    1. [Partitioning](#partitioning)
     1. [Add a user](#add-a-user)
     1. [systemd and systemctl](#systemd-and-systemctl)
     1. [wifi on reboot](#wifi-on-reboot)
@@ -43,6 +44,24 @@ Good pages to start
 ## Notes when installing Arch <a name="install-arch"></a>
 
 In addition to the [installation-guide on archwiki][archlinux/wiki/installation-guide], the following notes could be helpful and save google-time. `:)`
+
+### Partitioning <a name="partitioning"></a>
+
+Use `fdisk -l` to find the respective partition- and disk-names.
+Note, that the `Device`-names for Disks, like `/dev/sdb` or `/dev/sda`, can change between reboots.
+Hence don't use these names without lookup via `fdisk -l`.
+Then, partition the disk-name (not a partition-name) via `fdisk`, e.g. `fdisk /dev/sdb`.
+Made changes in the resulting mode will change the actual disk-partitions only if you save them.
+So don't hesitate in executing the `fdisk`-command.
+
+You will need following types, which can be added inside the `fdisk`-mode:
+
+- `EFI System`
+- `Linux filesystem`
+- `Linux swap`
+
+The swap-partition can have a size of `~4 GB`.
+With hibernation (meaning saving RAM to HDD when turning off to restore RAM after reboot), you should take the whole RAM-size plus some extra space, but I don't use hibernation.
 
 ### Add a user <a name="add-a-user"></a>
 
