@@ -10,31 +10,37 @@ Good pages to start
 
 ## Table of Contents <a name="toc"></a>
 
-1. [General snippets and interesting stuff](#general)
+1. [Notes when installing Arch](#install-arch)
     1. [Add a user](#add-a-user)
+    1. [systemd and systemctl](#systemd-and-systemctl)
+    1. [wifi on reboot](#wifi-on-reboot)
+    1. [Bootloader rEFInd](#refind)
+1. [Notes when setting up Arch](#setup-arch)
+    1. [GNOME](#gnome)
+    1. [Display-Server (xorg, wayland)](#xorg-wayland)
+    1. [KDE-Plasma5](#kde)
+        1. [Desktop-Environment itself](#desktop-env)
+        1. [Login-Manager](#login-mgr)
+        1. [Wayland](#wayland)
+        1. [Applications](#applications)
+    1. [Install printer](#install-printer)
+1. [General snippets and interesting stuff](#general)
     1. [Check colors in terminal](#check-colors-in-terminal)
     1. [Event-Listening with evtest](#evtest)
-    1. [Install printer](#install-printer)
     1. [LaTeX or TeX Live](#latex)
     1. [Mouse-polling-rate](#mouse-polling-rate)
     1. [Python](#python)
     1. [Random-number-generator](#random-number-generator)
-1. [Notes when installing Arch](#install)
-1. [Bootloader rEFInd](#refind)
-1. [GNOME](#gnome)
-1. [Display-Server (xorg, wayland)](#xorg-wayland)
-1. [KDE-Plasma5](#kde)
-    1. [Desktop-Environment itself](#desktop-env)
-    1. [Login-Manager](#login-mgr)
-    1. [Wayland](#wayland)
-    1. [Applications](#applications)
 1. [Cool themes and icons](#themes-and-icons)
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
     1. [Logging](#logging)
-    1. [Unrecognized external HDD or tools or whatever](#unrecognized-hdd)
+    1. [Could not find tools on server when updating/installing tools](#tools-not-found-while-updating)
+    1. [Unrecognized tools or external HDD or whatever](#unrecognized-tools)
+    1. [Screen flicker after resume from suspend (Radeon GPU)](#screen-flicker-after-suspend)
+    1. [CPU random generator seems to be failing (0xffffffff)](#0xffffffff)
 
-## Notes when installing Arch <a name="install"></a>
+## Notes when installing Arch <a name="install-arch"></a>
 
 In addition to the [installation-guide on archwiki][www_arch_install_guide], the following notes could be helpful and save google-time. `:)`
 
@@ -46,12 +52,12 @@ passwd USERNAME
 visudo # for wheel-user-group
 ```
 
-### systemd and systemctl
+### systemd and systemctl <a name="systemd-and-systemctl"></a>
 
 Basic systemctl-stuff can be found [here][archlinux/systemd/basic]
 Note that `enable` means the service to start automatically on reboot, while `start` means starting it right now for once.
 
-### wifi on reboot
+### wifi on reboot <a name="wifi-on-reboot"></a>
 
 Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot via `systemctl enable NetworkManager.service` (should be explained in the Archwiki).
 
@@ -65,7 +71,7 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
 - `/efi/EFI/refind/refind.conf` vs `/boot/refind_linux.conf`: Former is the manually written config while latter is taken for automatically detected kernels.
   Take a look at [the archwiki][archwiki/refind_linux] for more info.
 
-## Notes when setting up Arch <a name="setup"></a>
+## Notes when setting up Arch <a name="setup-arch"></a>
 
 ### GNOME <a name="gnome"></a>
 
@@ -209,7 +215,7 @@ Via `journalctl`, e.g. `journalctl --unit=sddm.service`
 Arch is strict in versioning, meaning if your system is too old (could mean days), you won't find tools in the mirror-servers.
 Just update the system (e.g. via `yay`) and reboot.
 
-### Unrecognized tools or external HDD or whatever <a name="unrecognized-hdd"></a>
+### Unrecognized tools or external HDD or whatever <a name="unrecognized-tools"></a>
 
 If you have updated your system, e.g. via `yay`, do a restart.
 
@@ -218,11 +224,11 @@ In my case the external HDD hasn't been detected anymore (`exFAT`).
 I imagine, that old versions should be loaded that are already removed due to the system-update.
 A restart fixed my problem with the unrecognized external HDD.
 
-### Screen flicker after resume from suspend (Radeon GPU)
+### Screen flicker after resume from suspend (Radeon GPU) <a name="screen-flicker-after-suspend"></a>
 
 See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
 
-### CPU random generator seems to be failing (0xffffffff)
+### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
 See [in the archlinux-forum][archlinux-forum-rnd]
 
