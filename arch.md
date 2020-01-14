@@ -174,7 +174,7 @@ If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), y
 ### Printing system-info <a name="printing-system-info"></a>
 
 You can use `uname -a` for quick-info.
-For a more fancy output, do `yay -S archey` followed by `archey` printing something like
+For a more fancy output, do `yay -S archey4` followed by `archey` printing something like
 
 ```text
 [dominic:~]$ archey
