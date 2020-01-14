@@ -59,19 +59,13 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
 
 - [rEFInd installation guide for Arch][www_arch_refind]
 - [theme: rEFInd-minimal][www_refind_theme_minimal]
+- [Labeling the filesystem with Gnome's `disk`-utility][www_labeling] is needed for `rEFInd`s entry `volume` in a `menuentry`.
+  You can check existing labels via `ll /dev/disk/by-label` (and `fdisk -l` for respective mount-names).
+- Manual `stanzas` (`menuentry`s) and their options for `refind.conf` can be found [here][stanzas].
+- `/efi/EFI/refind/refind.conf` vs `/boot/refind_linux.conf`: Former is the manually written config while latter is taken for automatically detected kernels.
+  Take a look at [the archwiki][archwiki/refind_linux] for more info.
 
 ## Notes when setting up Arch <a name="setup"></a>
-
-### Install printer <a name="install-printer"></a>
-
-```zsh
-yay -S cups cups-pdf
-yay -S hplip
-```
-
-Then enter `http://localhost:631/admin` and add a new printer.
-In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
-If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
 
 ### GNOME <a name="gnome"></a>
 
@@ -129,6 +123,17 @@ More information from [askubuntu - Wrong language displayed by SDDM on login Kub
 
 If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][www_discover_no_backends].
 
+### Install printer <a name="install-printer"></a>
+
+```zsh
+yay -S cups cups-pdf
+yay -S hplip
+```
+
+Then enter `http://localhost:631/admin` and add a new printer.
+In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][www_aur_hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
+If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][www_hp_printer_plugin_list].
+
 ## General snippets and interesting stuff <a name="general"></a>
 
 ### Check colors in terminal <a name="check-colors-in-terminal"></a>
@@ -161,7 +166,6 @@ No need to use `pip` (yesss).
 ```zsh
 yay -S haveged
 ```
-
 
 ## Cool themes and icons <a name="themes-and-icons"></a>
 
@@ -218,6 +222,10 @@ A restart fixed my problem with the unrecognized external HDD.
 
 See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
 
+### CPU random generator seems to be failing (0xffffffff)
+
+See [in the archlinux-forum][archlinux-forum-rnd]
+
 [www_arch_group_overview]: https://www.archlinux.org/groups/
 [www_arch_install_guide]: https://wiki.archlinux.org/index.php/installation_guide
 [www_arch_mouse_polling_rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
@@ -241,3 +249,7 @@ See [in the archlinux-wiki][www_arch_radeon_screen_flicker]
 [www_refind_theme_minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
 [www_stackoverflow_color_test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
 [archlinux/systemd/basic]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
+[www_labeling]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
+[stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
+[archwiki/refind_linux]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
+[archlinux-forum-rnd]: https://bbs.archlinux.org/viewtopic.php?id=250624
