@@ -292,7 +292,8 @@ See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
 __TL;DR__ Solution is updating BIOS (source: [Manjaro-Forum][manjaro/forum/cpu-rng-warning]).
-If you have a mainboard from `msi`, check [this 3-min-video][youtube/update-bios] out.
+If you have a mainboard from `msi`, check [this 3-min-video][youtube/update-bios/msi].
+For the `x570 Aorus Elite`, check [this video][youtube/update-bios/gigabyte].
 
 My AMD-CPU seems to have a bug or something, throwing the message
 
@@ -362,7 +363,8 @@ Source: [archlinux-forum][archlinux/forum/0xffffffff]
 [kde/bugs/plasma-wayland-crashes-after-login]: https://bugs.kde.org/show_bug.cgi?id=413223
 [kde/invent/fix-rdm-init-on-amd-cpus]: https://invent.kde.org/kde/krita/commit/2fdd504dfe6ec63b654ee0878c9f95cb69d4a6ad
 [kernel/v5.4/params]: https://www.kernel.org/doc/html/v5.4/admin-guide/kernel-parameters.html
+[manjaro/forum/cpu-rng-warning]: https://forum.manjaro.org/t/i-get-a-cpu-random-generator-warning-advising-me-to-disable-hardware-random-number-generation/116796
 [rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
 [texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
-[manjaro/forum/cpu-rng-warning]: https://forum.manjaro.org/t/i-get-a-cpu-random-generator-warning-advising-me-to-disable-hardware-random-number-generation/116796
-[youtube/update-bios]: https://youtu.be/SgTokymDCcs
+[youtube/update-bios/gigabyte]: https://youtu.be/1SiJpDQ083Q
+[youtube/update-bios/msi]: https://youtu.be/SgTokymDCcs
