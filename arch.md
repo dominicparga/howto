@@ -25,6 +25,7 @@ Good pages to start
         1. [Wayland](#wayland)
         1. [Applications](#applications)
     1. [Install printer](#install-printer)
+    1. [Install Visual-Studio-Code](#install-vscode)
 1. [General snippets and interesting stuff](#general)
     1. [Printing system-info](#printing-system-info)
     1. [Check colors in terminal](#check-colors-in-terminal)
@@ -169,6 +170,12 @@ yay -S hplip
 Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][archlinux/pkgs/hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
 If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][hp/printer-plugin-list].
+
+### Install Visual-Studio-Code <a name="install-vscode"></a>
+
+I'm using the Open-Source-Build of `vscode`, installed via `yay -S code`, and it runs very nice.
+Note that the `vscode-home-directory` changes.
+For more information, see the [archwiki][archlinux/wiki/vscode].
 
 ## General snippets and interesting stuff <a name="general"></a>
 
@@ -335,6 +342,19 @@ If it is random stuff, your `OS` probably has detected the issue by its own.
 
 Source: [archlinux-forum][archlinux/forum/0xffffffff]
 
+### vscode's cmd 'Open Containing Folder' opens vscode instead of Files
+
+The default-application for opening folders has changed somehow, but your gnome-settings doesn't show it in its section `Default Applications`.
+To solve this,
+
+1. open `Files`,
+1. right-click on a folder,
+1. select `Open With Other Application` (or similar)
+1. and select `Files` since this is probably your preferred application to open folders.
+1. Maybe (cannot tell since I just have done it): Restart all open `vscode`-windows.
+
+Now, `vscode` should open containing folders in `Files` again.
+
 [archlinux/forum/0xffffffff]: https://bbs.archlinux.org/viewtopic.php?id=250624
 [archlinux/forum/radeon-screen-flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
 [archlinux/forum/sddm-keyboard-selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
@@ -352,6 +372,7 @@ Source: [archlinux-forum][archlinux/forum/0xffffffff]
 [archlinux/wiki/refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
 [archlinux/wiki/refind#refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [archlinux/wiki/schriftarten]: https://wiki.archlinux.de/title/Schriftarten
+[archlinux/wiki/vscode]: https://wiki.archlinux.org/index.php/Visual_Studio_Code
 [askubuntu/color-test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
 [askubuntu/sddm-wrong-lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
 [gentoo/forum/sddm-us-keyboard-layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
