@@ -43,6 +43,7 @@ Good pages to start
     1. [Unrecognized tools or external HDD or whatever](#unrecognized-tools)
     1. [Screen flicker after resume from suspend (Radeon GPU)](#screen-flicker-after-suspend)
     1. [CPU random generator seems to be failing (0xffffffff)](#0xffffffff)
+    1. [vscode's cmd 'Open Containing Folder' opens vscode instead of Files](#vscode-open-folder)
 
 ## Notes when installing Arch <a name="install-arch"></a>
 
@@ -342,7 +343,7 @@ If it is random stuff, your `OS` probably has detected the issue by its own.
 
 Source: [archlinux-forum][archlinux/forum/0xffffffff]
 
-### vscode's cmd 'Open Containing Folder' opens vscode instead of Files
+### vscode's cmd 'Open Containing Folder' opens vscode instead of Files <a name="vscode-open-folder"></a>
 
 The default-application for opening folders has changed somehow, but your gnome-settings doesn't show it in its section `Default Applications`.
 To solve this,
