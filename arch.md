@@ -8,6 +8,7 @@ Good pages to start
 - as orientation (but don't install everything from there!): [Arch - steps after installation][itsfoss.com/steps-after-install]
 - [Package-group overview][archlinux/groups]
 
+
 ## Table of Contents <a name="toc"></a>
 
 1. [Notes when installing Arch](#install-arch)
@@ -45,9 +46,11 @@ Good pages to start
     1. [CPU random generator seems to be failing (0xffffffff)](#0xffffffff)
     1. [vscode's cmd 'Open Containing Folder' opens vscode instead of Files](#vscode-open-folder)
 
+
 ## Notes when installing Arch <a name="install-arch"></a>
 
 In addition to the [installation-guide on archwiki][archlinux/wiki/installation-guide], the following notes could be helpful and save google-time. `:)`
+
 
 ### Partitioning <a name="partitioning"></a>
 
@@ -67,6 +70,7 @@ You will need following types, which can be added inside the `fdisk`-mode:
 The swap-partition can have a size of `~4 GB`.
 With hibernation (meaning saving RAM to HDD when turning off to restore RAM after reboot), you should take the whole RAM-size plus some extra space, but I don't use hibernation.
 
+
 ### Add a user <a name="add-a-user"></a>
 
 ```zsh
@@ -75,14 +79,37 @@ passwd USERNAME
 visudo # for wheel-user-group
 ```
 
+
 ### systemd and systemctl <a name="systemd-and-systemctl"></a>
 
 Basic systemctl-stuff can be found [here][archlinux/systemd#basic-usage]
 Note that `enable` means the service to start automatically on reboot, while `start` means starting it right now for once.
 
+
 ### wifi on reboot <a name="wifi-on-reboot"></a>
 
 Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot via `systemctl enable NetworkManager.service` (should be explained in the Archwiki).
+
+Helpful commands:
+
+```zsh
+# Show little overview
+nmcli
+
+# Show network-devices (e.g. wifi-sticks)
+ip link # or
+nmcli device show
+
+# List nearby wifi networks
+nmcli device wifi list
+
+# Connect to a wifi network without password being stored in history
+vim tmp_pw.txt
+__SSID='my-wlan'
+nmcli device wifi connect "${__SSID}" password "$(cat tmp_pw.txt)"
+rm tmp_pw.txt
+```
+
 
 ### Bootloader rEFInd <a name="refind"></a>
 
@@ -96,12 +123,14 @@ Install `networkmanager` (including `nmcli`) for wifi and enable it on reboot vi
   Generate a `refind_conf.linux` via `mkrlconf`.
   Take a look at [the archwiki][archlinux/wiki/refind_linux.conf] for more info.
 
+
 ### Configure Kernel
 
 Take a look [at this super link][kernel/v5.4/params] for documentation of the options.
 Note that you could have another version as used in the URL.
 
 To check your kernel-version, execute `uname -r`.
+
 
 ## Notes when setting up Arch <a name="setup-arch"></a>
 
@@ -110,6 +139,7 @@ To check your kernel-version, execute `uname -r`.
 Just install as mentioned in the Archwiki.
 When logging in, the default is wayland, but currently (end 2019), wayland doesn't support app-switching, e.g. when `Enpass` wants to authenticate via `browser`, going back to the app afterwards.
 
+
 ### Display-Server (xorg, wayland) <a name="xorg-wayland"></a>
 
 ```zsh
@@ -117,12 +147,14 @@ sudo pacman -S xorg-server xorg-xinit
 sudo pacman -S xf86-video-amdgpu
 ```
 
+
 ### KDE-Plasma5 <a name="kde"></a>
 
 > deprecated
 
 Repeadingly removes my home-directory when trying to uninstall a color-theme.
 Hence goodbye KDE-Plasma, hello GNOME.
+
 
 #### Desktop-Environment itself <a name="desktop-env"></a>
 
@@ -136,6 +168,7 @@ sudo pacman -S kdeadmin-meta
 sudo pacman -S kdegames-meta
 sudo pacman -S kde-gtk-config
 ```
+
 
 #### Login-Manager <a name="login-mgr"></a>
 
@@ -152,14 +185,17 @@ setxkbmap de,us
 to enable a selection.
 More information from [askubuntu - Wrong language displayed by SDDM on login Kubuntu 18.04][askubuntu/sddm-wrong-lang] or [US keyboard layout always used][gentoo/forum/sddm-us-keyboard-layout] or [ArchLinux Forum SDDM Keyboard Selection][archlinux/forum/sddm-keyboard-selection].
 
+
 #### Wayland <a name="wayland"></a>
 
 - `sudo pacman -S plasma-wayland-session`
 - [crashes with `RX 5700 XT`][kde/bugs/plasma-wayland-crashes-after-login]
 
+
 #### Applications <a name="applications"></a>
 
 If discover shows `No application back-ends found, please report to your distribution.`, then install `package-qt5` according to [this doc][archlinux/wiki/kde#discover-no-backends].
+
 
 ### Install printer <a name="install-printer"></a>
 
@@ -172,11 +208,13 @@ Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][archlinux/pkgs/hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
 If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][hp/printer-plugin-list].
 
+
 ### Install Visual-Studio-Code <a name="install-vscode"></a>
 
 I'm using the Open-Source-Build of `vscode`, installed via `yay -S code`, and it runs very nice.
 Note that the `vscode-home-directory` changes.
 For more information, see the [archwiki][archlinux/wiki/vscode].
+
 
 ## General snippets and interesting stuff <a name="general"></a>
 
@@ -208,6 +246,7 @@ For a more fancy output, do `yay -S archey4` followed by `archey` printing somet
  #'                         `#   WAN_IP: ...
 ```
 
+
 ### Check colors in terminal <a name="check-colors-in-terminal"></a>
 
 From [stackoverflow][askubuntu/color-test]
@@ -216,22 +255,27 @@ From [stackoverflow][askubuntu/color-test]
 msgcat --color=test
 ```
 
+
 ### Event-Listening with evtest <a name="evtest"></a>
 
 Execute `sudo evtest` and follow instructions.
+
 
 ### LaTeX or TeX Live <a name="latex"></a>
 
 Install the packages mentioned in the ArchWiki-page.
 
+
 ### Mouse-polling-rate <a name="mouse-polling-rate"></a>
 
 Check with [`sudo evhz`][archlinux/wiki/mouse-polling-rate]
+
 
 ### Python <a name="python"></a>
 
 Just install python and pip-modules with your package-manager (e.g. `yay`).
 No need to use `pip` (yesss).
+
 
 ### Random-number-generator <a name="random-number-generator"></a>
 
@@ -239,9 +283,11 @@ No need to use `pip` (yesss).
 yay -S haveged
 ```
 
+
 ### Check kernel-default-settings <a name="kernel-default-settings"></a>
 
 Snippet: `zcat /proc/config.gz | grep CONFIG_RANDOM_TRUST_CPU`
+
 
 ## Cool themes and icons <a name="themes-and-icons"></a>
 
@@ -257,6 +303,7 @@ Install them using `yay`, like `yay nordic-theme-git`.
 - `community/papirus-icon-theme`
 - `aur/zafiro-icon-theme`
 
+
 ## Fonts <a name="fonts"></a>
 
 Some cool monospace-fonts
@@ -271,19 +318,23 @@ More useful fonts/fonts-pkgs can be found [in the Archwiki][archlinux/wiki/schri
 - [`ttf-ms-win10`][www_aur_ttf_ms_win10], which is a wrapper for local ms-fonts.
   Microsoft-Fonts can be added from an Windows-ISO as described [in the Archwiki][archlinux/wiki/msfonts-from-iso].
 
+
 ## Troubleshooting <a name="troubleshooting"></a>
 
 `CTRL`, `ALT` and e.g. `F2` selects another `tty`.
 This can be used to check logs or access the system if something is not running accordingly.
 
+
 ### Logging <a name="logging"></a>
 
 Via `journalctl`, e.g. `journalctl --unit=sddm.service`
+
 
 ### Could not find tools on server when updating/installing tools <a name="tools-not-found-while-updating"></a>
 
 Arch is strict in versioning, meaning if your system is too old (could mean days), you won't find tools in the mirror-servers.
 Just update the system (e.g. via `yay`) and reboot.
+
 
 ### Unrecognized tools or external HDD or whatever <a name="unrecognized-tools"></a>
 
@@ -294,9 +345,11 @@ In my case the external HDD hasn't been detected anymore (`exFAT`).
 I imagine, that old versions should be loaded that are already removed due to the system-update.
 A restart fixed my problem with the unrecognized external HDD.
 
+
 ### Screen flicker after resume from suspend (Radeon GPU) <a name="screen-flicker-after-suspend"></a>
 
 See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
+
 
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
@@ -342,6 +395,7 @@ Though, you can check the output of `head -c 8 /dev/urandom | xxd`.
 If it is random stuff, your `OS` probably has detected the issue by its own.
 
 Source: [archlinux-forum][archlinux/forum/0xffffffff]
+
 
 ### vscode's cmd 'Open Containing Folder' opens vscode instead of Files <a name="vscode-open-folder"></a>
 
