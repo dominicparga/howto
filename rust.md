@@ -1,8 +1,8 @@
 # Rust
 
 The following conventions help keeping overview and the code clear.
-Since there exists an [official Rust Style Guide][www_rust_style_guide], this file just adds or summarizes some useful info.
-Keep the [guiding principles and rationale][www_rust_principles] in mind when coding rust.
+Since there exists an [official Rust Style Guide][github/rust-dev-tools/fmt-rfcs/guide/style], this file just adds or summarizes some useful info.
+Keep the [guiding principles and rationale][github/rust-dev-tools/fmt-rfcs/guide/principles] in mind when coding rust.
 
 1. [File style](#file-style)
 1. [Some coding details](#coding-details)
@@ -18,6 +18,7 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
     1. [Module and folder structure](#project-structure)
     1. [The Manifest Format](#manifest)
 
+
 ## File style <a name="file-style"></a>
 
 * Maximum line width is `100`.
@@ -27,7 +28,8 @@ Keep the [guiding principles and rationale][www_rust_principles] in mind when co
   Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended._
 
-* Use `4 spaces` for indention (p.s.: [could help your salary][www_salary]!).
+* Use `4 spaces` for indention (p.s.: [could help your salary][stackoverflow/salary]!).
+
 
 ## Some coding details <a name="coding-details"></a>
 
@@ -40,9 +42,10 @@ let my_number: () = 3.4;
 // compiler:        ^^^ expected (), found floating-point variable
 ```
 
+
 ### References <a name="refs"></a>
 
-Following code blocks from [rust-lang][www_rust_ref_keyword] show two identical lines.
+Following code blocks from [rust-lang][rust/users/ref-keyword] show two identical lines.
 
 `ref` on the left side of `=` is the same as `&` on the right side.
 
@@ -58,9 +61,10 @@ let &y = x;
 let y = *x;
 ```
 
+
 ### `Copy` vs `Clone` <a name="copy_vs_clone"></a>
 
-From [stack __overflow__][www_copy_vs_clone]:
+From [stack __overflow__][stackoverflow/copy-vs-clone]:
 > The main difference is that cloning is explicit. Implicit notation means move for a non-`Copy` type.
 >
 > ```rust
@@ -76,11 +80,12 @@ From [stack __overflow__][www_copy_vs_clone]:
 > //let w = v // This would *move* the value, renderinng v unusable.
 > ```
 
+
 ### Strings <a name="strings"></a>
 
 Raw string literals allow writing escape characters without `\`.
 
-[![Visualizing raw string literals][www_raw_strings_img]][www_raw_strings]
+[![Visualizing raw string literals][rahul-thakoor/img/rust-raw-string]][rahul-thakoor/rust-raw-string-literals]
 
 Example:
 
@@ -100,9 +105,10 @@ let toml = r#"
 "#;
 ```
 
+
 ### Error handling <a name="error-handling"></a>
 
-[The official Rust docs][www_rust_error_handling] say:
+[The official Rust docs][rust/docs/examples/error-handling] say:
 
 * An explicit `panic` is mainly useful for tests and dealing with unrecoverable errors.
   It may help with prototyping, but `unimplemented` is better.
@@ -111,18 +117,19 @@ let toml = r#"
 * The `Result` type is used when there is a chance that things do go wrong and the caller has to deal with the problem.
   Although `unwrap` and `expect` is provided, don't use it (unless it's a test or quick prototype).
 
-This citation from [this thread on reddit][www_reddit_panic] adds some info wrt. `panic!()` vs `Result`, `Option`:
+This citation from [this thread on reddit][reddit/rust/how-is-rust-safe-when-panics] adds some info wrt. `panic!()` vs `Result`, `Option`:
 > `panic!()`, `expect("my random logic error")` and `.unwrap()` should only be used when:
 >
 > * An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
-> * For the normal operation of testing frameworks such as [proptest][www_github_proptest].
+> * For the normal operation of testing frameworks such as [proptest][github/altsysrq/proptest].
 > * When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
 >
-> Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?` operator][www_rust_?-operator].
+> Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?`-operator][rust/docs/question-mark-operator].
+
 
 ## Coding Conventions <a name="coding-conventions"></a>
 
-* [These official naming conventions][www_rust_naming_conventions] should be used.
+* [These official naming conventions][rust/docs/style/naming-conventions] should be used.
 
 * Use `constants` over `magic numbers`!
 
@@ -173,11 +180,12 @@ This citation from [this thread on reddit][www_reddit_panic] adds some info wrt.
   Rust is an expression-oriented language, which means every chunk of code has a return value (e.g. `match`, `for`, ...).
   Hence it's clear, that the last code snippet of a code block is the block's value.
 
+
 ## Documentation <a name="doc"></a>
 
-Rust provides pretty code by design due to its namespaces, modules and its clean and powerful project setup (`cargo.toml`).
-If you still need to separate code sections, you may use `//-------` (whole line).
-Otherwise, take the following code example from [Rust's official documentation][www_rust_comments_example].
+Rust provides pretty code by design due to its namespaces, modules and its clean and powerful project setup (`Cargo.toml`).
+If you still need to separate code sections, you may use `//-------` (whole line), but due to rusts `impl`-blocks, this approach also can get a little ugly.
+Otherwise, take the following code example from [Rust's official documentation][rust/docs/comments].
 
 ```rust
 //! A doc comment that applies to the implicit anonymous module of this crate
@@ -243,12 +251,13 @@ pub mod outer_module {
 }
 ```
 
+
 ## Howto setup a complex project <a name="complex-project"></a>
 
 ### `mod` vs `use` <a name="mod-vs-use"></a>
 
 While `mod` declares a module, `use` reduces verbose code by bringing namespaces into scope.
-For more information, see [here][www_rust_mod_use_examples].
+For more information, see [here][dev.to/hertz4/howto-use-modules].
 
 ```rust
 pub mod a {
@@ -270,10 +279,11 @@ fn main() {
 }
 ```
 
+
 ### Module and folder structure <a name="project-structure"></a>
 
-Most of the following folder tree is from [Rust's Manifest Format doc][www_rust_project_overview].
-Information about visibility can be found [here][www_rust_visibility].
+Most of the following folder tree is from [Rust's Manifest Format doc][rust/docs/cargo/manifest/configuring-a-target].
+Information about visibility can be found [here][rust/docs/visibility-and-privacy].
 
 ```zsh
 project_name
@@ -355,32 +365,26 @@ fn main() {
 }
 ```
 
+
 ### The Manifest Format <a name="manifest"></a>
 
-A very nice documentation about Rust's Manifest Format is provided [here][www_rust_visibility].
+A very nice documentation about Rust's Manifest Format is provided [here][rust/nightly/docs/cargo/manifest].
 
-[www_rust_style_guide]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
-[www_rust_principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
-[www_salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
 
-[www_rust_ref_keyword]: https://users.rust-lang.org/t/ref-keyword-versus/18818/4
-
-[www_copy_vs_clone]: https://stackoverflow.com/questions/31012923/what-is-the-difference-between-copy-and-clone
-
-[www_raw_strings]: https://rahul-thakoor.github.io/rust-raw-string-literals/
-[www_raw_strings_img]: https://rahul-thakoor.github.io/img/rust_raw_string.png
-
-[www_rust_error_handling]: https://doc.rust-lang.org/rust-by-example/error.html
-
-[www_reddit_panic]: https://www.reddit.com/r/rust/comments/9q3jqn/how_is_rust_safe_when_panics_can_happen_out_of/
-[www_github_proptest]: https://github.com/altsysrq/proptest
-[www_rust_?-operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
-
-[www_rust_naming_conventions]: https://doc.rust-lang.org/1.0.0/style/style/naming/README.html
-[www_rust_comments_example]: https://doc.rust-lang.org/reference/comments.html#examples
-
-[www_rust_mod_use_examples]: https://dev.to/hertz4/rust-module-essentials-12oi
-[www_rust_project_overview]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
-[www_rust_visibility]: https://doc.rust-lang.org/reference/visibility-and-privacy.html
-
-[www_rust_manifest]: https://doc.rust-lang.org/nightly/cargo/reference/manifest.html
+[dev.to/hertz4/howto-use-modules]: https://dev.to/hertz4/rust-module-essentials-12oi
+[github/altsysrq/proptest]: https://github.com/altsysrq/proptest
+[github/rust-dev-tools/fmt-rfcs/guide/principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
+[github/rust-dev-tools/fmt-rfcs/guide/style]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md
+[rahul-thakoor/img/rust-raw-string]: https://rahul-thakoor.github.io/img/rust_raw_string.png
+[rahul-thakoor/rust-raw-string-literals]: https://rahul-thakoor.github.io/rust-raw-string-literals/
+[reddit/rust/how-is-rust-safe-when-panics]: https://www.reddit.com/r/rust/comments/9q3jqn/how_is_rust_safe_when_panics_can_happen_out_of/
+[rust/docs/cargo/manifest/configuring-a-target]: https://doc.rust-lang.org/cargo/reference/manifest.html#configuring-a-target
+[rust/docs/comments]: https://doc.rust-lang.org/reference/comments.html#examples
+[rust/docs/examples/error-handling]: https://doc.rust-lang.org/rust-by-example/error.html
+[rust/docs/question-mark-operator]: https://doc.rust-lang.org/edition-guide/rust-2018/error-handling-and-panics/the-question-mark-operator-for-easier-error-handling.html
+[rust/docs/style/naming-conventions]: https://doc.rust-lang.org/1.0.0/style/style/naming/README.html
+[rust/docs/visibility-and-privacy]: https://doc.rust-lang.org/reference/visibility-and-privacy.html
+[rust/nightly/docs/cargo/manifest]: https://doc.rust-lang.org/nightly/cargo/reference/manifest.html
+[rust/users/ref-keyword]: https://users.rust-lang.org/t/ref-keyword-versus/18818/4
+[stackoverflow/copy-vs-clone]: https://stackoverflow.com/questions/31012923/what-is-the-difference-between-copy-and-clone
+[stackoverflow/salary]: https://stackoverflow.blog/2017/06/15/developers-use-spaces-make-money-use-tabs
