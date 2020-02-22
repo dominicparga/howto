@@ -64,8 +64,8 @@ While `w` jumps a word (see below), input `3w` will jump 3 words.
 | <kbd>k</kbd> | `li_ne 1` -> `li_ne 0` | normal | Move cursor up. |
 | <kbd>0</kbd> | `Some text _in a line.` -> `_Some text in a line.` | normal | Move cursor to the start of line. |
 | <kbd>$</kbd> | `Some text _in a line.` -> `Some text in a line._` | normal | Move cursor to the end of line. |
-| <kbd>strg</kbd> + <kbd>u</kbd> | normal | Let cursor jump several lines up. |
-| <kbd>strg</kbd> + <kbd>d</kbd> | normal | Let cursor jump several lines down. |
+| <kbd>strg</kbd> + <kbd>u</kbd> || normal | Let cursor jump several lines up. |
+| <kbd>strg</kbd> + <kbd>d</kbd> || normal | Let cursor jump several lines down. |
 
 The current view can be changed.
 
