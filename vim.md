@@ -197,6 +197,7 @@ In the following, some examples are given, working for both `d` and `c`.
 | <kbd>.</kbd> | `he_llo, vim` -> `he_lo, vim` -> `he_o, vim` | normal | Repeats the last executed command. |
 | <kbd>strg</kbd> + <kbd>a</kbd> | `1` -> `2` | normal | Increments a number under the cursor. |
 | <kbd>strg</kbd> + <kbd>x</kbd> | `2` -> `1` | normal | Decrements a number under the cursor. |
+| <kbd>%</kbd> | `((hello, vim_))` -> `(_(hello, vim))` | normal, visual | Jump to opposite bracket. |
 
 
 [vscode]: https://code.visualstudio.com/
