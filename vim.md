@@ -19,12 +19,20 @@ With the overview of this page, it should be pretty easy to get into it. `:)`
 
 ## Table-of-contents
 
+1. [Table-of-contents](#table-of-contents)
 1. [Vim-inputs in general](#inputs-in-general)
-1. [Normal-mode](#normal-mode)
-    1. [Basic cursor-movement](#basic-cursor-movement)
-    1. [Jumping words](#jumping-words)
-1. [Insert-mode](#insert-mode)
-1. [Visual-mode](#visual-mode)
+1. [General commands](#general-commands)
+1. [Basic cursor-movement](#basic-cursor-movement)
+1. [Copy-and-paste](#copy-and-paste)
+1. [Jumping words](#jumping-words)
+1. [Jumping by search](#jumping-by-search)
+1. [Jumping lines](#jumping-lines)
+1. [Changing mode](#changing-mode)
+1. [Targets](#targets)
+1. [Deleting text without specified target](#deleting-text-without-target)
+1. [Deleting text with target](#deleting-text-with-target)
+1. [Replacing text](#replacing-text)
+1. [Others](#others)
 
 
 ## Vim-inputs in general <a name="inputs-in-general"></a>
@@ -41,7 +49,7 @@ Further, most commands can be repeated automatically by adding a number before t
 While `w` jumps a word (see below), input `3w` will jump 3 words.
 
 
-### General commands <a name="general-commands"></a>
+## General commands <a name="general-commands"></a>
 
 |      input     |  mode  | action |
 |:--------------:|:------:|:------:|
@@ -54,7 +62,7 @@ While `w` jumps a word (see below), input `3w` will jump 3 words.
 | <kbd>strg</kbd> + <kbd>r</kbd> | normal | Undo undo. |
 
 
-### Basic cursor-movement <a name="basic-cursor-movement"></a>
+## Basic cursor-movement <a name="basic-cursor-movement"></a>
 
 |    input     | example |  mode  | action |
 |:------------:|:--------|:------:|:------:|
@@ -75,7 +83,7 @@ The current view can be changed.
 | <kbd>strg</kbd> + <kbd>y</kbd> | normal | Let view move one line down. |
 
 
-### Copy-and-paste <a name="copy-and-paste"></a>
+## Copy-and-paste <a name="copy-and-paste"></a>
 
 |      input     |  mode  | action |
 |:--------------:|:------:|:------:|
@@ -87,7 +95,7 @@ The current view can be changed.
 Note: Keep in mind that deleting text does store the deleted text in th clipbard.
 
 
-### Jumping words <a name="jumping-words"></a>
+## Jumping words <a name="jumping-words"></a>
 
 |    input     | action | example |
 |:------------:|:-------|:--------|
@@ -99,7 +107,7 @@ Note: Keep in mind that deleting text does store the deleted text in th clipbard
 | <kbd>B</kbd> | Jump to the previous first character before a space. | `hello, _vim` -> `_hello, vim` |
 
 
-### Jumping by search <a name="jumping-by-search"></a>
+## Jumping by search <a name="jumping-by-search"></a>
 
 |    input     | action | example |
 |:------------:|:-------|:--------|
@@ -109,7 +117,7 @@ Note: Keep in mind that deleting text does store the deleted text in th clipbard
 | <kbd>T</kbd> + <kbd>any character (e.g. `l`)</kbd> | Jump to the previous occurence of the provided character (exclusive). | `hello, v_im` -> `hell_o, vim` |
 
 
-### Jumping lines <a name="jumping-lines"></a>
+## Jumping lines <a name="jumping-lines"></a>
 
 |    input     | action | example |
 |:------------:|:-------|:--------|
@@ -118,7 +126,7 @@ Note: Keep in mind that deleting text does store the deleted text in th clipbard
 | <kbd>G</kbd> | Jump to start of last line. | `lin_e 5102` -> `_last line` |
 
 
-### Changing mode <a name="changing-mode"></a>
+## Changing mode <a name="changing-mode"></a>
 
 |    input     | example |  mode  | action |
 |:------------:|:--------|:------:|:------|
@@ -133,7 +141,7 @@ Note: Keep in mind that deleting text does store the deleted text in th clipbard
 | <kbd>v</kbd> | `hell_o, vim` -> `hell_o, vim` | normal -> visual | Go to visual-mode. After entering the visual-mode, you can move the cursor around and delete or copy this marked text to get back to normal-mode. |
 
 
-### Targets <a name="targets"></a>
+## Targets <a name="targets"></a>
 
 For examples, see their usage when [deleting text](#deleting-text) or [marking text](#marking-text).
 
@@ -143,7 +151,7 @@ For examples, see their usage when [deleting text](#deleting-text) or [marking t
 | <kbd>a</kbd> + <kbd>some character</kbd> | Inner text between characters like brackets or quotations in addition to the specified characters. |
 
 
-### Deleting text without specified target <a name="deleting-text-without-target></a>
+## Deleting text without specified target <a name="deleting-text-without-target"></a>
 
 |    input      | example |  mode  | action |
 |:-------------:|:--------|:------:|:------|
@@ -154,7 +162,7 @@ For examples, see their usage when [deleting text](#deleting-text) or [marking t
 | <kbd>x</kbd> | `line0 \n li_ne1 \n line2` -> `line0 \n li_e1 \n line2` | normal | Cut out the cursor's current character. |
 
 
-### Deleting text with target <a name="deleting-text-with-target"></a>
+## Deleting text with target <a name="deleting-text-with-target"></a>
 
 Usually, deletions are initiated with `d`, followed by a cursor-movement-command (see above) or a target (see above).
 You can delete text with `c` entering insert-mode afterwards.
@@ -174,7 +182,7 @@ In the following, some examples are given, working for both `d` and `c`.
 | ... | ... | ... | ... |
 
 
-### Replacing text <a name="replacing-text"></a>
+## Replacing text <a name="replacing-text"></a>
 
 |    input      | example |  mode  | action |
 |:-------------:|:--------|:------:|:------|
@@ -182,7 +190,7 @@ In the following, some examples are given, working for both `d` and `c`.
 | <kbd>R</kbd> + <kbd>any character</kbd> | `he_llo, vim` -> `hekkkkk_vim` | normal | Enter kind of a replace-mode, overwriting current text. |
 
 
-### Others
+## Others <a name="others"></a>
 
 |    input      | example |  mode  | action |
 |:-------------:|:--------|:------:|:------|
