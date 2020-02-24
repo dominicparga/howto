@@ -54,7 +54,7 @@ While `w` jumps a word (see below), input `3w` will jump 3 words.
 ## General commands <a name="general-commands"></a>
 
 |      input     |  mode  | action |
-|:--------------:|:------:|:------:|
+|:--------------:|:------:|:-------|
 | <kbd>esc</kbd> | normal, visual, insert | Go to normal-mode. |
 | <kbd>:w</kbd> | normal | Save file to disk. |
 | <kbd>:q</kbd> | normal | Exit file/vim, but ask user before exiting, if file hasn't been saved. |
@@ -67,7 +67,7 @@ While `w` jumps a word (see below), input `3w` will jump 3 words.
 ## Basic cursor-movement <a name="basic-cursor-movement"></a>
 
 |    input     | example |  mode  | action |
-|:------------:|:--------|:------:|:------:|
+|:------------:|:--------|:------:|:-------|
 | <kbd>h</kbd> | `li[n]e 1` -> `l[i]ne 1` | normal | Move cursor left. |
 | <kbd>l</kbd> | `li[n]e 1` -> `lin[e] 1` | normal | Move cursor right. |
 | <kbd>j</kbd> | `li[n]e 1` -> `li[n]e 2` | normal | Move cursor down. |
@@ -80,7 +80,7 @@ While `w` jumps a word (see below), input `3w` will jump 3 words.
 The current view can be changed.
 
 |    input     |  mode  | action |
-|:------------:|:------:|:------:|
+|:------------:|:------:|:-------|
 | <kbd>strg</kbd> + <kbd>e</kbd> | normal | Let view move one line up. |
 | <kbd>strg</kbd> + <kbd>y</kbd> | normal | Let view move one line down. |
 
@@ -90,7 +90,7 @@ The current view can be changed.
 You can change to visual-mode as described [below](#changing-mode).
 
 |      input     |  mode  | action |
-|:--------------:|:------:|:------:|
+|:--------------:|:------:|:-------|
 | <kbd>y</kbd> | visual -> normal | Copy marked text. |
 | <kbd>yy</kbd> | normal | Copy the cursor's current line. |
 | <kbd>p</kbd> | normal, visual | Paste copied text at cursor. If some text is marked, it will be removed! If some text is marked, it will be removed! |
@@ -133,15 +133,15 @@ You can change to visual-mode as described [below](#changing-mode).
 ## Changing mode <a name="changing-mode"></a>
 
 |    input     | example |  mode  | action |
-|:------------:|:--------|:------:|:------|
+|:------------:|:--------|:------:|:-------|
 | <kbd>i</kbd> | `hell[o], vim` -> `hell[o], vim` | normal -> insert | Go to insert-mode in front of current character. |
-| <kbd>I</kbd> | `hell[o], vim` -> `[h]ello, vim` | normal -> insert | Go to insert-mode in front of current line. |
+| <kbd>I</kbd> | `hell[o], vim` -> `[h]ello, vim` | normal -> insert | short for `0i` |
 | <kbd>a</kbd> | `hell[o], vim` -> `hello[,] vim` | normal -> insert | Go to insert-mode behind current character. |
 | <kbd>A</kbd> | `hell[o], vim` -> `hello, vi[m]` | normal -> insert | short for `$a` |
-| <kbd>s</kbd> | `hell[o], vim` -> `hell[,] vim` | normal -> insert | Remove cursor-character and go to insert-mode at this character's position. |
+| <kbd>s</kbd> | `hell[o], vim` -> `hell[,] vim` | normal -> insert | Remove character at cursor's position and go to insert-mode. |
 | <kbd>S</kbd> | `hell[o], vim` -> `[]` | normal -> insert | Remove line's content (without the line-break) and go to insert-mode. |
-| <kbd>o</kbd> | `hell[o], vim` -> `hell[o], vim \n |` | normal -> insert | Add a new line __below__ the cursor's current line, go to this line and enter insert-mode. |
-| <kbd>O</kbd> | `hell[o], vim` -> `hello, vim \n []` | normal -> insert | Add a new line __above__ the cursor's current line, go to this line and enter insert-mode. |
+| <kbd>o</kbd> | `hell[o], vim` -> `hello, vim \n []` | normal -> insert | Add a new line __below__ the cursor's current line, go to this line and enter insert-mode. |
+| <kbd>O</kbd> | `hell[o], vim` -> `[] \n hello, vim` | normal -> insert | Add a new line __above__ the cursor's current line, go to this line and enter insert-mode. |
 | <kbd>v</kbd> | `hell[o], vim` -> `hell[o], vim` | normal -> visual | Go to visual-mode. After entering the visual-mode, you can move the cursor around and delete or copy this marked text to get back to normal-mode. |
 | <kbd>V</kbd> | `hell[o], vim` -> `hell[o], vim` | normal -> visual | Go to visual-mode, marking lines instead of characters. After entering the visual-mode, you can move the cursor around and delete or copy this marked text to get back to normal-mode. |
 
@@ -155,16 +155,18 @@ For examples, see their usage when [deleting text](#deleting-text) or [marking t
 | <kbd>i</kbd> + <kbd>some character</kbd> | Inner text between characters like brackets or quotations. |
 | <kbd>a</kbd> + <kbd>some character</kbd> | Inner text between characters like brackets or quotations in addition to the specified characters. |
 
+> Note: 'Some character' means enclosing characters, like brackets, quotations or `<`, `>`.
+
 
 ## Deleting text without specified target <a name="deleting-text-without-target"></a>
 
 |    input      | example |  mode  | action |
-|:-------------:|:--------|:------:|:------|
+|:-------------:|:--------|:------:|:-------|
 | <kbd>dd</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n [l]ine2` | normal | Cut out the cursor's current line. |
 | <kbd>ddp</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n line2 \n [l]ine1` | normal | Handy command-order for swapping lines. |
 | <kbd>D</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n li[] \n line2` | normal | Cut out the cursor's current line, starting from the cursor. |
-| <kbd>C</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n li[] \n line2` | normal | short for `Da` |
-| <kbd>x</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n li[e]1 \n line2` | normal | Cut out the cursor's current character. |
+| <kbd>C</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n li[] \n line2` | normal -> insert | short for `Da`. A small `c` needs a target like `d` (see [below](#deleting-text-with-target)). |
+| <kbd>x</kbd> | `line0 \n li[n]e1 \n line2` -> `line0 \n li[e]1 \n line2` | normal, visual | Cut out the cursor's current character (or the marked text in visual-mode). |
 
 
 ## Deleting text with target <a name="deleting-text-with-target"></a>
@@ -174,7 +176,7 @@ You can delete text with `c` entering insert-mode afterwards.
 In the following, some examples are given, working for both `d` and `c`.
 
 |    input      | example |  mode  | action |
-|:-------------:|:--------|:------:|:------|
+|:-------------:|:--------|:------:|:-------|
 | <kbd>de</kbd> | `he[l]lo, vim` -> `he[,] vim` | normal | Delete to the next last character of a word (inclusive). |
 | <kbd>dt</kbd> + <kbd>any character</kbd> | `he[l]lo, vim` -> `he[,] vim` | normal | Delete to the next occurence of the provided character (exclusive). |
 | <kbd>df</kbd> + <kbd>any character</kbd> | `he[l]lo, vim` -> `he[ ]vim` | normal | Delete to the next occurence of the provided character (inclusive). |
@@ -190,7 +192,7 @@ In the following, some examples are given, working for both `d` and `c`.
 ## Replacing text <a name="replacing-text"></a>
 
 |    input      | example |  mode  | action |
-|:-------------:|:--------|:------:|:------|
+|:-------------:|:--------|:------:|:-------|
 | <kbd>r</kbd> + <kbd>any character</kbd> | `he[l]lo, vim` -> `he[k]lo, vim` | normal, visual | Replace cursor's character by the provided character. If multiple characters are marked, replaces every marked character by the provided one. |
 | <kbd>R</kbd> + <kbd>any character</kbd> | `he[l]lo, vim` -> `hekkkkk[v]im` | normal | Enter kind of a replace-mode, overwriting current text. |
 
@@ -198,7 +200,7 @@ In the following, some examples are given, working for both `d` and `c`.
 ## Others <a name="others"></a>
 
 |    input      | example |  mode  | action |
-|:-------------:|:--------|:------:|:------|
+|:-------------:|:--------|:------:|:-------|
 | <kbd>.</kbd> | `he[l]lo, vim` -> `he[l]o, vim` -> `he[o], vim` | normal | Repeats the last executed command. |
 | <kbd>strg</kbd> + <kbd>a</kbd> | `1` -> `2` | normal | Increments a number under the cursor. |
 | <kbd>strg</kbd> + <kbd>x</kbd> | `2` -> `1` | normal | Decrements a number under the cursor. |
