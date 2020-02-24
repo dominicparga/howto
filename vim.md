@@ -87,14 +87,16 @@ The current view can be changed.
 
 ## Copy-and-paste <a name="copy-and-paste"></a>
 
+You can change to visual-mode as described [below](#changing-mode).
+
 |      input     |  mode  | action |
 |:--------------:|:------:|:------:|
-| <kbd>y</kbd> | visual | Copy marked text. |
+| <kbd>y</kbd> | visual -> normal | Copy marked text. |
 | <kbd>yy</kbd> | normal | Copy the cursor's current line. |
 | <kbd>p</kbd> | normal, visual | Paste copied text at cursor. If some text is marked, it will be removed! If some text is marked, it will be removed! |
 | <kbd>P</kbd> | normal, visual | Paste copied text after cursor's current character. If some text is marked, it will be removed! |
 
-Note: Keep in mind that deleting text does store the deleted text in th clipbard.
+> Note: Keep in mind that deleting text does store the deleted text in th clipbard.
 
 
 ## Jumping words <a name="jumping-words"></a>
@@ -141,6 +143,7 @@ Note: Keep in mind that deleting text does store the deleted text in th clipbard
 | <kbd>o</kbd> | `hell[o], vim` -> `hell[o], vim \n |` | normal -> insert | Add a new line __below__ the cursor's current line, go to this line and enter insert-mode. |
 | <kbd>O</kbd> | `hell[o], vim` -> `hello, vim \n []` | normal -> insert | Add a new line __above__ the cursor's current line, go to this line and enter insert-mode. |
 | <kbd>v</kbd> | `hell[o], vim` -> `hell[o], vim` | normal -> visual | Go to visual-mode. After entering the visual-mode, you can move the cursor around and delete or copy this marked text to get back to normal-mode. |
+| <kbd>V</kbd> | `hell[o], vim` -> `hell[o], vim` | normal -> visual | Go to visual-mode, marking lines instead of characters. After entering the visual-mode, you can move the cursor around and delete or copy this marked text to get back to normal-mode. |
 
 
 ## Targets <a name="targets"></a>
