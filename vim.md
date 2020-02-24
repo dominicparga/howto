@@ -94,7 +94,7 @@ You can change to visual-mode as described [below](#changing-mode).
 | <kbd>y</kbd> | visual -> normal | Copy marked text. |
 | <kbd>yy</kbd> | normal | Copy the cursor's current line. |
 | <kbd>p</kbd> | normal, visual | Paste copied text at cursor. If some text is marked, it will be removed! If some text is marked, it will be removed! |
-| <kbd>P</kbd> | normal, visual | Paste copied text after cursor's current character. If some text is marked, it will be removed! |
+| <kbd>P</kbd> | normal, visual | Paste copied text in front of cursor's current character. If some text is marked, it will be removed! |
 
 > Note: Keep in mind that deleting text does store the deleted text in th clipbard.
 
