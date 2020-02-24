@@ -101,33 +101,33 @@ You can change to visual-mode as described [below](#changing-mode).
 
 ## Jumping words <a name="jumping-words"></a>
 
-|    input     | action | example |
-|:------------:|:-------|:--------|
-| <kbd>w</kbd> | Jump to the next first character of a word. | `he[l]lo, vim` -> `hello, [v]im` |
-| <kbd>W</kbd> | Jump to the next first character after a space. | `he[l]lo, vim` -> `hello, [v]im` |
-| <kbd>e</kbd> | Jump to the next last character of a word. | `he[l]lo, vim` -> `hell[o], vim` |
-| <kbd>E</kbd> | Jump to the next last character before a space. | `he[l]lo, vim` -> `hello[,] vim` |
-| <kbd>b</kbd> | Jump to the previous first character of a word. | `hello, [v]im` -> `hello[,] vim` |
-| <kbd>B</kbd> | Jump to the previous first character before a space. | `hello, [v]im` -> `[h]ello, vim` |
+|    input     | mode | action | example |
+|:------------:|:----:|:-------|:--------|
+| <kbd>w</kbd> | normal, visual | Jump to the next first character of a word. | `he[l]lo, vim` -> `hello, [v]im` |
+| <kbd>W</kbd> | normal, visual | Jump to the next first character after a space. | `he[l]lo, vim` -> `hello, [v]im` |
+| <kbd>e</kbd> | normal, visual | Jump to the next last character of a word. | `he[l]lo, vim` -> `hell[o], vim` |
+| <kbd>E</kbd> | normal, visual | Jump to the next last character before a space. | `he[l]lo, vim` -> `hello[,] vim` |
+| <kbd>b</kbd> | normal, visual | Jump to the previous first character of a word. | `hello, [v]im` -> `hello[,] vim` |
+| <kbd>B</kbd> | normal, visual | Jump to the previous first character before a space. | `hello, [v]im` -> `[h]ello, vim` |
 
 
 ## Jumping by search <a name="jumping-by-search"></a>
 
-|    input     | action | example |
-|:------------:|:-------|:--------|
-| <kbd>f</kbd> + <kbd>any character (e.g. `i`)</kbd> | Jump to the next occurence of the provided character (inclusive). | `he[l]lo, vim` -> `hello, v[i]m` |
-| <kbd>t</kbd> + <kbd>any character (e.g. `i`)</kbd> | Jump to the next occurence of the provided character (exclusive). | `he[l]lo, vim` -> `hello, [v]im` |
-| <kbd>F</kbd> + <kbd>any character (e.g. `l`)</kbd> | Jump to the previous occurence of the provided character (inclusive). | `hello, v[i]m` -> `hel[l]o, vim` |
-| <kbd>T</kbd> + <kbd>any character (e.g. `l`)</kbd> | Jump to the previous occurence of the provided character (exclusive). | `hello, v[i]m` -> `hell[o], vim` |
+|    input     | mode | action | example |
+|:------------:|:----:|:-------|:--------|
+| <kbd>f</kbd> + <kbd>any character (e.g. `i`)</kbd> | normal, visual | Jump to the next occurence of the provided character (inclusive). | `he[l]lo, vim` -> `hello, v[i]m` |
+| <kbd>t</kbd> + <kbd>any character (e.g. `i`)</kbd> | normal, visual | Jump to the next occurence of the provided character (exclusive). | `he[l]lo, vim` -> `hello, [v]im` |
+| <kbd>F</kbd> + <kbd>any character (e.g. `l`)</kbd> | normal, visual | Jump to the previous occurence of the provided character (inclusive). | `hello, v[i]m` -> `hel[l]o, vim` |
+| <kbd>T</kbd> + <kbd>any character (e.g. `l`)</kbd> | normal, visual | Jump to the previous occurence of the provided character (exclusive). | `hello, v[i]m` -> `hell[o], vim` |
 
 
 ## Jumping lines <a name="jumping-lines"></a>
 
-|    input     | action | example |
-|:------------:|:-------|:--------|
-| <kbd>42gg</kbd> | Jump to start of line 42. | `lin[e] 5102` -> `[l]ine 42` |
-| <kbd>gg</kbd> | Jump to start of line 0. | `lin[e] 5102` -> `[l]ine 0` |
-| <kbd>G</kbd> | Jump to start of last line. | `lin[e] 5102` -> `[l]ast line` |
+|    input     | mode | action | example |
+|:------------:|:----:|:-------|:--------|
+| <kbd>42gg</kbd> | normal, visual | Jump to start of line 42. | `lin[e] 5102` -> `[l]ine 42` |
+| <kbd>gg</kbd> | normal, visual | Jump to start of line 0. | `lin[e] 5102` -> `[l]ine 0` |
+| <kbd>G</kbd> | normal, visual | Jump to start of last line. | `lin[e] 5102` -> `[l]ast line` |
 
 
 ## Changing mode <a name="changing-mode"></a>
