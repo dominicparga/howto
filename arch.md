@@ -28,6 +28,7 @@ Good pages to start
     1. [Install printer](#install-printer)
     1. [Install Visual-Studio-Code](#install-vscode)
 1. [General snippets and interesting stuff](#general)
+    1. [Monitoring system-resources with htop](#htop)
     1. [Printing system-info](#printing-system-info)
     1. [Check colors in terminal](#check-colors-in-terminal)
     1. [Event-Listening with evtest](#evtest)
@@ -217,6 +218,26 @@ For more information, see the [archwiki][archlinux/wiki/vscode].
 
 
 ## General snippets and interesting stuff <a name="general"></a>
+
+### Monitoring system-resources with htop <a name="htop"></a>
+
+[This blog][liquidweb/htop] explains some basics, for example the colors of the bars, which are:
+
+For CPU-usage
+
+- __Blue__: Low priority processes (nice > 0)
+- __Green__: Normal (user-) processes
+- __Red__: Kernel processes
+- __Yellow__: IRQ time
+- __Magenta__: Soft IRQ time
+- __Grey__: IO wait-time
+
+For memory-usage
+
+- __Green__: Used memory-pages
+- __Blue__: Buffer-pages
+- __Yellow__: Cache-pages
+
 
 ### Printing system-info <a name="printing-system-info"></a>
 
@@ -440,6 +461,7 @@ Now, `vscode` should open containing folders in `Files` again.
 [kde/bugs/plasma-wayland-crashes-after-login]: https://bugs.kde.org/show_bug.cgi?id=413223
 [kde/invent/fix-rdm-init-on-amd-cpus]: https://invent.kde.org/kde/krita/commit/2fdd504dfe6ec63b654ee0878c9f95cb69d4a6ad
 [kernel/v5.4/params]: https://www.kernel.org/doc/html/v5.4/admin-guide/kernel-parameters.html
+[liquidweb/htop]: https://www.liquidweb.com/kb/featured-freeware-htop/
 [manjaro/forum/cpu-rng-warning]: https://forum.manjaro.org/t/i-get-a-cpu-random-generator-warning-advising-me-to-disable-hardware-random-number-generation/116796
 [rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
 [texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
