@@ -1,7 +1,8 @@
 # Markdown
 
-If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][www_md_cheatsheet].
+If you stuck with syntax (e.g. how to include images?), checkout this [cheatsheet][github/adam-p/markdown-here/wiki/cheatsheet].
 Below comes a table of contents.
+
 
 ## Table of Contents <a name="toc"></a>
 
@@ -30,29 +31,35 @@ Typically, the table of contents doesn't appear in the TOC, but here, this conte
 
 ...
 
+
 ## Super Fancy Stuff <a name="super-fancy-stuff"></a>
 
 ...
 ```
 
+
 ## Links <a name="links"></a>
 
-Use links [directly](https://github.com/dominicparga) or with a [reference][www_github_dominicparga] in the end of the file.
+Use links [directly](https://github.com/dominicparga) or with a [reference][github/dominicparga] in the end of the file.
 
-I prefer always using references for consistency.
-Prefixing link-references with __www__ could help with readability, e.g. `www_github_dominicparga` referring to [me :3][www_github_dominicparga].
+I prefer using references instead of URLs and the following pros are my reasons to continue putting the links collected at the bottom of a file:
+
+- I had to change some links, which is easier, if you have all links at one spot. That's extra handy when it comes to CHANGELOG.md when working with vim.
+- With visual-studio-code and vim, it is easy to mark all the lines and sort them alphabetically, which groups same links and increases the overview.
+- Some references and especially nested links (like in badges or images) are easier to understand for me, if I put all links to the bottom and use the shortened reference-name instead of the long and clunky URL.
 
 ```markdown
-Use links [directly](https://github.com/dominicparga) or with a [reference][www_github_dominicparga] in the end of the file.
+Use links [directly](https://github.com/dominicparga) or with a [reference][github/dominicparga] in the end of the file.
 
 ...
 
-[www_github_dominicparga]: https://github.com/dominicparga
+[github/dominicparga]: https://github.com/dominicparga
 ```
+
 
 ## Images <a name="imgs"></a>
 
-To include images, you can use [markdown][www_md_cheatsheet_images] or [html][www_md_image_via_html].
+To include images, you can use [markdown][github/adam-p/markdown-here/wiki/cheatsheet/images] or [html][www_md_image_via_html].
 Paths are relative to the README containing the line.
 
 ```markdown
@@ -66,9 +73,11 @@ Paths are relative to the README containing the line.
 > Note: You can dump width or height and only provide one of them.
 > The other one scales automatically.
 
+
 ## Emoji <a name="emoji"></a>
 
-[Here][www_emoji] is a list of emoji and their codes (e.g. :smirk: `:smirk:`) in markdown.
+[Here][github/rxaviers/list-of-emojis] is a list of emoji and their codes (e.g. :smirk: `:smirk:`) in markdown.
+
 
 ## Style mentions <a name="style-mentions"></a>
 
@@ -96,6 +105,7 @@ You can look at this files raw version to see the written style, but in addition
   Mixing them could be done like `*__bold and italic__*`, giving *__bold and italic__*, but you should be consistent.
 - Horizontal lines (add `---` to an empty line) could help with readability.
 
+
 ## Code-blocks <a name="code-blocks"></a>
 
 Every code block should define a style.
@@ -114,6 +124,7 @@ Some examples (given in a code block):
 
 Highlighted monospace text can be written like `this`.
 
+
 ## Super Fancy Stuff <a name="super-fancy-stuff"></a>
 
 <details>
@@ -128,24 +139,23 @@ Hidden text.
 </details>
 ```
 
-badges ([`shields.io`](https://shields.io)) like
+badges ([`shields.io`][shields]) like
 
-[![License][www_license_badge]][www_license]
+[![License][github/self/license/badge]][github/self/license]
 
-[Visual Studio Code Linter Plugin][www_vscode_marketplace_markdownlint] enabling in-place linting of `markdown` files and thus ensuring consistency of Markdown files.
+[Visual Studio Code Linter Plugin][vscode/marketplace/markdownlint] enabling in-place linting of `markdown` files and thus ensuring consistency of Markdown files.
 
-[awesome markdown list][www_github_mundimark] - an [awesome list][www_github_awesome_list] showing the most awesome things one can do with markdown.
+[awesome markdown list][github/mundimark/awesome-markdown] - an [awesome list][github/topics/awesome-list] showing the most awesome things one can do with markdown.
 
-[www_md_cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
-[www_md_cheatsheet_images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
+
+[github/adam-p/markdown-here/wiki/cheatsheet]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+[github/adam-p/markdown-here/wiki/cheatsheet/images]: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images
+[github/dominicparga]: https://github.com/dominicparga
+[github/mundimark/awesome-markdown]: https://github.com/mundimark/awesome-markdown/pull/26/files
+[github/rxaviers/list-of-emojis]: https://gist.github.com/rxaviers/7360908
+[github/self/license]: https://github.com/dominicparga/howto/blob/master/LICENSE
+[github/self/license/badge]: https://img.shields.io/github/license/dominicparga/howto
+[github/topics/awesome-list]: https://github.com/topics/awesome-list
+[shields]: https://shields.io
+[vscode/marketplace/markdownlint]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
 [www_md_image_via_html]: https://stackoverflow.com/a/14747656
-[www_vscode_marketplace_markdownlint]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
-
-[www_emoji]: https://gist.github.com/rxaviers/7360908
-
-[www_github_dominicparga]: https://github.com/dominicparga
-[www_github_mundimark]: https://github.com/mundimark/awesome-markdown/pull/26/files
-[www_github_awesome_list]: https://github.com/topics/awesome-list
-
-[www_license_badge]: https://img.shields.io/github/license/dominicparga/howto
-[www_license]: https://github.com/dominicparga/howto/blob/master/LICENSE
