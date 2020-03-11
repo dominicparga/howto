@@ -6,18 +6,21 @@
 
 General info can be found here:
 
-- https://choosealicense.com/
+- [https://choosealicense.com/][choosealicense]
 
 Don't forget to edit copied licenses-text, e.g. adding the year and your name.
 
+
 ## Apache 2.0
 
-The `Apache-2.0`-license can be found [here][www_apache_2_license].
-An example for a `NOTICE`-file can be found [here][www_apache_2_notice].
+The `Apache-2.0`-license can be found [here][apache.org/license].
+An example for a `NOTICE`-file can be found [here][apache.org/notice].
+
 
 ## MIT
 
-The `MIT`-license can be found [here][www_mit_license].
+The `MIT`-license can be found [here][opensource.org/mit].
+
 
 ## Apache 2.0 vs. MIT
 
@@ -36,12 +39,22 @@ While the `MIT`-license tries to simplify these topics, leading to more freedom,
 
 Long story short, `Apache-2.0` grants more protection to the creator and his/her work by mentioning changes and protecting trademarks, while `MIT` focusses on the redistribution of the work.
 
+
 ## WTFPL
 
-The `WTFPL`-license can be found [here][www_wtfpl].
+The `WTFPL`-license can be found [here][wtfpl].
 It is what it's called: "You just DO WHAT THE FUCK YOU WANT TO".
 
-[www_apache_2_license]: https://www.apache.org/licenses/LICENSE-2.0
-[www_apache_2_notice]: https://www.apache.org/licenses/example-NOTICE.txt
-[www_mit_license]: https://opensource.org/licenses/mit-license.php
-[www_wtfpl]: http://www.wtfpl.net/about/
+
+## GPL
+
+Good and official source is [gnu.org][gnu.org/licenses/gplv3], e.g. when it comes to using GPL-software in own projects.
+There, you can find a nice pictured overview about compatible licenses and some explanations.
+
+
+[apache.org/license]: https://www.apache.org/licenses/LICENSE-2.0
+[apache.org/notice]: https://www.apache.org/licenses/example-NOTICE.txt
+[choosealicense]: https://choosealicense.com/
+[gnu.org/licenses/gplv3]: https://www.gnu.org/licenses/quick-guide-gplv3.html
+[opensource.org/mit]: https://opensource.org/licenses/mit-license.php
+[wtfpl]: http://www.wtfpl.net/about/
