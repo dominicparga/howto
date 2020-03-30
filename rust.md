@@ -17,18 +17,20 @@ Keep the [guiding principles and rationale][github/rust-dev-tools/fmt-rfcs/guide
     1. [`mod` vs `use`](#mod-vs-use)
     1. [Module and folder structure](#project-structure)
     1. [The Manifest Format](#manifest)
+1. [Nice stuff](#nice-stuff)
+    1. [Implement slice for custom type](#impl-slice-for-custom-type)
 
 
 ## File style <a name="file-style"></a>
 
-* Maximum line width is `100`.
+- Maximum line width is `100`.
   Exceptions can be made for String-constants and similar.
 
   _This is a good trade off between `120` and `80`.
   Humans have trouble reading the code with increasing line width.
   In general, more than `80` is not recommended._
 
-* Use `4 spaces` for indention (p.s.: [could help your salary][stackoverflow/salary]!).
+- Use `4 spaces` for indention (p.s.: [could help your salary][stackoverflow/salary]!).
 
 
 ## Some coding details <a name="coding-details"></a>
@@ -110,28 +112,28 @@ let toml = r#"
 
 [The official Rust docs][rust/docs/examples/error-handling] say:
 
-* An explicit `panic` is mainly useful for tests and dealing with unrecoverable errors.
+- An explicit `panic` is mainly useful for tests and dealing with unrecoverable errors.
   It may help with prototyping, but `unimplemented` is better.
-* The `Option` type is for when a value is optional or when the lack of a value is not an error condition.
+- The `Option` type is for when a value is optional or when the lack of a value is not an error condition.
   `unwrap` may be used, but `expect` should be preferred.
-* The `Result` type is used when there is a chance that things do go wrong and the caller has to deal with the problem.
+- The `Result` type is used when there is a chance that things do go wrong and the caller has to deal with the problem.
   Although `unwrap` and `expect` is provided, don't use it (unless it's a test or quick prototype).
 
 This citation from [this thread on reddit][reddit/rust/how-is-rust-safe-when-panics] adds some info wrt. `panic!()` vs `Result`, `Option`:
 > `panic!()`, `expect("my random logic error")` and `.unwrap()` should only be used when:
 >
-> * An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
-> * For the normal operation of testing frameworks such as [proptest][github/altsysrq/proptest].
-> * When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
+> - An irrecoverable error, such as out-of-memory, under which scenario it would be unreasonable for the program to continue execution.
+> - For the normal operation of testing frameworks such as [proptest][github/altsysrq/proptest].
+> - When you are sure the panic will never happen and when it would be a programmer logic error otherwise.
 >
 > Otherwise, you should prefer `Result<T, E>`, `Option<T>`, or similar mechanismus to handle errors due to user action. To make this ergonomic, you should use [the `?`-operator][rust/docs/question-mark-operator].
 
 
 ## Coding Conventions <a name="coding-conventions"></a>
 
-* [These official naming conventions][rust/docs/style/naming-conventions] should be used.
+- [These official naming conventions][rust/docs/style/naming-conventions] should be used.
 
-* Use `constants` over `magic numbers`!
+- Use `constants` over `magic numbers`!
 
   _Even you as the author will not know the meaning of every number after several months.
   And if you know, you will probably forget the precision of your constant and the places, where you put them (-> bad for debugging)._
@@ -162,7 +164,7 @@ This citation from [this thread on reddit][reddit/rust/how-is-rust-safe-when-pan
   let circum = PI_2 * radius;
   ```
 
-* Use __white spaces around binary operators__.
+- Use __white spaces around binary operators__.
   Exceptions can be made for special cases to improve readability (see below).
 
   ```diff
@@ -176,7 +178,7 @@ This citation from [this thread on reddit][reddit/rust/how-is-rust-safe-when-pan
   + let e = a*b + c*d;        // improves readability
   ```
 
-* In general, use `return` statements only in early returns.
+- In general, use `return` statements only in early returns.
   Rust is an expression-oriented language, which means every chunk of code has a return value (e.g. `match`, `for`, ...).
   Hence it's clear, that the last code snippet of a code block is the block's value.
 
@@ -371,6 +373,14 @@ fn main() {
 A very nice documentation about Rust's Manifest Format is provided [here][rust/nightly/docs/cargo/manifest].
 
 
+## Nice stuff <a name="nice-stuff"></a>
+
+### Implement slice for custom type <a name="impl-slice-for-custom-type"></a>
+
+- See [stackoverflow][stackoverflow/implementing-slice-for-custom-type]
+
+
+[stackoverflow/implementing-slice-for-custom-type]: https://stackoverflow.com/questions/57203009/implementing-slice-for-custom-type
 [dev.to/hertz4/howto-use-modules]: https://dev.to/hertz4/rust-module-essentials-12oi
 [github/altsysrq/proptest]: https://github.com/altsysrq/proptest
 [github/rust-dev-tools/fmt-rfcs/guide/principles]: https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/principles.md
