@@ -336,7 +336,7 @@ Some cool monospace-fonts
 More useful fonts/fonts-pkgs can be found [in the Archwiki][archlinux/wiki/schriftarten], e.g.
 
 - `ttf-liberation`, which is used in `libreoffice`-templates
-- [`ttf-ms-win10`][www_aur_ttf_ms_win10], which is a wrapper for local ms-fonts.
+- [`ttf-ms-win10`][archlinux/pkgs/ttf-ms-win10], which is a wrapper for local ms-fonts.
   Microsoft-Fonts can be added from an Windows-ISO as described [in the Archwiki][archlinux/wiki/msfonts-from-iso].
 
 
