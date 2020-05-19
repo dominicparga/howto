@@ -153,7 +153,7 @@ badges ([`shields.io`][shields]) like
 [github/dominicparga]: https://github.com/dominicparga
 [github/mundimark/awesome-markdown]: https://github.com/mundimark/awesome-markdown/pull/26/files
 [github/rxaviers/list-of-emojis]: https://gist.github.com/rxaviers/7360908
-[github/self/license]: https://github.com/dominicparga/howto/blob/master/LICENSE
+[github/self/license]: https://github.com/dominicparga/howto/blob/nightly/LICENSE
 [github/self/license/badge]: https://img.shields.io/github/license/dominicparga/howto
 [github/topics/awesome-list]: https://github.com/topics/awesome-list
 [self/code-blocks]: #code-blocks

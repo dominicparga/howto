@@ -79,7 +79,7 @@ This project uses [Gitflow Workflow][www_gitflow_workflow], a nice and clear way
 
 This means following branches are used:
 
-* `master`: the official release (using tags)
+* `master`: the official release (using tags) (EDIT: replaced by `nightly`)
 * `develop`: branch for active development
 * `release/<tag>`: temporary branch off `develop` for bug fixes and docs before getting merged into `master`
 * `feature/<name>`: branches for specific feature development
