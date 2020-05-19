@@ -6,13 +6,13 @@ Below comes a table of contents.
 
 ## Table of Contents <a name="toc"></a>
 
-1. [Table of Contents](#toc)
-1. [Links](#links)
-1. [Images](#imgs)
-1. [Emoji](#emoji)
-1. [Style mentions](#style-mentions)
-1. [Code-blocks](#code-blocks)
-1. [Super Fancy Stuff](#super-fancy-stuff)
+1. [Table of Contents][self/toc]
+1. [Links][self/links]
+1. [Images][self/imgs]
+1. [Emoji][self/emoji]
+1. [Style mentions][self/style-mentions]
+1. [Code-blocks][self/code-blocks]
+1. [Super Fancy Stuff][self/super-fancy-stuff]
 
 This TOC's source code is shown below.
 Please notice that every item starts with number 1.
@@ -21,13 +21,13 @@ Also cool is the inline html tag, that allows title names being independent of t
 Typically, the table of contents doesn't appear in the TOC, but here, this content is referred to the chapter.
 
 ```markdown
-1. [Table of Contents](#toc)
-1. [Links](#links)
-1. [Images](#imgs)
-1. [Emoji](#emoji)
-1. [Style mentions](#style-mentions)
-1. [Code-blocks](#code-blocks)
-1. [Super Fancy Stuff](#super-fancy-stuff)
+1. [Table of Contents][self/toc]
+1. [Links][self/links]
+1. [Images][self/imgs]
+1. [Emoji][self/emoji]
+1. [Style mentions][self/style-mentions]
+1. [Code-blocks][self/code-blocks]
+1. [Super Fancy Stuff][self/super-fancy-stuff]
 
 ...
 
@@ -59,7 +59,7 @@ Use links [directly](https://github.com/dominicparga) or with a [reference][gith
 
 ## Images <a name="imgs"></a>
 
-To include images, you can use [markdown][github/adam-p/markdown-here/wiki/cheatsheet/images] or [html][www_md_image_via_html].
+To include images, you can use [markdown][github/adam-p/markdown-here/wiki/cheatsheet/images] or [html][stackoverflow/md-image-via-html].
 Paths are relative to the README containing the line.
 
 ```markdown
@@ -156,6 +156,13 @@ badges ([`shields.io`][shields]) like
 [github/self/license]: https://github.com/dominicparga/howto/blob/master/LICENSE
 [github/self/license/badge]: https://img.shields.io/github/license/dominicparga/howto
 [github/topics/awesome-list]: https://github.com/topics/awesome-list
+[self/code-blocks]: #code-blocks
+[self/emoji]: #emoji
+[self/imgs]: #imgs
+[self/links]: #links
+[self/style-mentions]: #style-mentions
+[self/super-fancy-stuff]: #super-fancy-stuff
+[self/toc]: #toc
 [shields]: https://shields.io
+[stackoverflow/md-image-via-html]: https://stackoverflow.com/a/14747656
 [vscode/marketplace/markdownlint]: https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
-[www_md_image_via_html]: https://stackoverflow.com/a/14747656
