@@ -37,6 +37,8 @@ Good pages to start
     1. [Python](#python)
     1. [Random-number-generator](#random-number-generator)
     1. [Check kernel-default-settings](#kernel-default-settings)
+    1. [Check existing groups](#check-existing-groups)
+    1. [Linux Container with lxc/lxd](#linux-container)
 1. [Cool themes and icons](#themes-and-icons)
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
@@ -310,6 +312,46 @@ yay -S haveged
 Snippet: `zcat /proc/config.gz | grep CONFIG_RANDOM_TRUST_CPU`
 
 
+### Check existing groups <a name="check-existing-groups">
+
+```zsh
+getent group
+cat /etc/group
+
+# Syntax
+man group
+```
+
+
+### Linux Container with lxc/lxd <a name="linux-container"></a>
+
+Info can be found [here][archlinux/wiki/lxd].
+
+While `lxc` stands for `client`, the `lxd` represents the `daemon`.
+The daemon provides a socket and has root-rights.
+The client can send commands to this socket, e.g. to create containers.
+
+Installing `lxc` and `lxd`:
+
+```zsh
+yay -S lxc lxd
+```
+
+You can launch privileged and unprivileged containers.
+The former maps the container-root to the host-root, whereas the latter maps the container-root to some nobody-user.
+For unprivileged containers, create a `uid`- and `gid`-mapping by creating `/etc/subuid` and `/etc/subgid`:
+
+```text
+root:100000:65536
+```
+
+Look at this [super youtube-tutorial][youtube/lxc] as soon as `lxc/lxd` are running.
+The man in the video uses `lxc` without `sudo`.
+__ATTENTION:__ You can do this by adding your user to the `lxd`-group via `usermod -a -G lxd <user>`.
+This makes [privilege escalation][ubuntu/bugs/privilege-escalation] possible, basically meaning that this added user is able to create privileged containers, which can mount the host-system in and change everything with host-root-rights.
+By the way, same holds for [`docker`][docker].
+
+
 ## Cool themes and icons <a name="themes-and-icons"></a>
 
 Install them using `yay`, like `yay nordic-theme-git`.
@@ -451,6 +493,7 @@ Now, `vscode` should open containing folders in `Files` again.
 [archlinux/wiki/vscode]: https://wiki.archlinux.org/index.php/Visual_Studio_Code
 [askubuntu/color-test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
 [askubuntu/sddm-wrong-lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
+[docker]: https://www.docker.com/
 [gentoo/forum/sddm-us-keyboard-layout]: https://forums.gentoo.org/viewtopic-t-1031606-start-0.html
 [github/dominicparga/refind]: https://github.com/dominicparga/refind
 [github/evanprukhiser/refind-minimal]: https://github.com/EvanPurkhiser/rEFInd-minimal
@@ -465,5 +508,8 @@ Now, `vscode` should open containing folders in `Files` again.
 [manjaro/forum/cpu-rng-warning]: https://forum.manjaro.org/t/i-get-a-cpu-random-generator-warning-advising-me-to-disable-hardware-random-number-generation/116796
 [rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
 [texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
+[ubuntu/bugs/privilege-escalation]: https://bugs.launchpad.net/ubuntu/+source/lxd/+bug/1829071
+[youtube/lxc]: https://youtu.be/CWmkSj_B-wo
 [youtube/update-bios/gigabyte]: https://youtu.be/1SiJpDQ083Q
 [youtube/update-bios/msi]: https://youtu.be/SgTokymDCcs
+[archlinux/wiki/lxd]: https://wiki.archlinux.org/index.php/LXD
