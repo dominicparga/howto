@@ -28,6 +28,7 @@ Good pages to start
     1. [Install printer](#install-printer)
     1. [Install Visual-Studio-Code](#install-vscode)
 1. [General snippets and interesting stuff](#general)
+    1. [vpn with openconnect](#openconnect)
     1. [Monitoring system-resources with htop](#htop)
     1. [Printing system-info](#printing-system-info)
     1. [Check colors in terminal](#check-colors-in-terminal)
@@ -112,7 +113,6 @@ __SSID='my-wlan'
 nmcli device wifi connect "${__SSID}" password "$(cat tmp_pw.txt)"
 rm tmp_pw.txt
 ```
-
 
 ### Bootloader rEFInd <a name="refind"></a>
 
@@ -220,6 +220,13 @@ For more information, see the [archwiki][archlinux/wiki/vscode].
 
 
 ## General snippets and interesting stuff <a name="general"></a>
+
+
+### vpn with openconnect <a name="openconnect"></a>
+
+See [archwiki about OpenConnect][archlinux/wiki/openconnect].
+Don't forget the integration-section `;)`
+
 
 ### Monitoring system-resources with htop <a name="htop"></a>
 
@@ -485,8 +492,10 @@ Now, `vscode` should open containing folders in `Files` again.
 [archlinux/systemd#basic-usage]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
 [archlinux/wiki/installation-guide]: https://wiki.archlinux.org/index.php/installation_guide
 [archlinux/wiki/kde#discover-no-backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
+[archlinux/wiki/lxd]: https://wiki.archlinux.org/index.php/LXD
 [archlinux/wiki/mouse-polling-rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
 [archlinux/wiki/msfonts-from-iso]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
+[archlinux/wiki/openconnect]: https://wiki.archlinux.org/index.php/OpenConnect
 [archlinux/wiki/refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
 [archlinux/wiki/refind#refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [archlinux/wiki/schriftarten]: https://wiki.archlinux.de/title/Schriftarten
@@ -512,4 +521,3 @@ Now, `vscode` should open containing folders in `Files` again.
 [youtube/lxc]: https://youtu.be/CWmkSj_B-wo
 [youtube/update-bios/gigabyte]: https://youtu.be/1SiJpDQ083Q
 [youtube/update-bios/msi]: https://youtu.be/SgTokymDCcs
-[archlinux/wiki/lxd]: https://wiki.archlinux.org/index.php/LXD
