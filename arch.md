@@ -32,6 +32,7 @@ Good pages to start
     1. [Monitoring system-resources with htop](#htop)
     1. [Printing system-info](#printing-system-info)
     1. [Check colors in terminal](#check-colors-in-terminal)
+    1. [Activate colors for pacman (and yay)](#activate_colors_for_pacman)
     1. [Event-Listening with evtest](#evtest)
     1. [LaTeX or TeX Live](#latex)
     1. [Mouse-polling-rate](#mouse-polling-rate)
@@ -43,7 +44,8 @@ Good pages to start
 1. [Cool themes and icons](#themes-and-icons)
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
-    1. [Logging](#logging)
+    1. [Login doesn't work after updating pam](#login_doesnt_work_after_updating_pam)
+    1. [System-maintenance and logging](#system-maintenance_and_logging)
     1. [Could not find tools on server when updating/installing tools](#tools-not-found-while-updating)
     1. [Unrecognized tools or external HDD or whatever](#unrecognized-tools)
     1. [Screen flicker after resume from suspend (Radeon GPU)](#screen-flicker-after-suspend)
@@ -286,6 +288,11 @@ msgcat --color=test
 ```
 
 
+### Activate colors for pacman (and yay) <a name="activate_colors_for_pacman"></a>
+
+Uncomment `#Color` in `/etc/pacman.conf`.
+
+
 ### Event-Listening with evtest <a name="evtest"></a>
 
 Execute `sudo evtest` and follow instructions.
@@ -395,9 +402,26 @@ More useful fonts/fonts-pkgs can be found [in the Archwiki][archlinux/wiki/schri
 This can be used to check logs or access the system if something is not running accordingly.
 
 
-### Logging <a name="logging"></a>
+### Login doesn't work after updating pam <a name="login_doesnt_work_after_updating_pam"></a>
 
-Via `journalctl`, e.g. `journalctl --unit=sddm.service`
+Once, after updating the system, login didn't work.
+Reason for this was an update in a config of the login-service `pam`.
+When `pacman` updated `pam`, the config `/etc/pam.d/system-login` had merge-conflicts with the new version.
+To keep both versions, `pacman` adds the new version as `/etc/pam.d/system-login.pacnew`.
+Problem has been, that the updated `pam` needs the new config to work, hence crashed (or something) and login didn't work (even for root).
+
+To solve this: boot from an Bootalbe USB-stick, `chroot` into the system (see [installation-guide on archwiki][archlinux/wiki/installation-guide]) and resolve the merge-conflict.
+
+
+### System-maintenance and logging <a name="system-maintenance_and_logging"></a>
+
+Via `journalctl` and `systemctl`, e.g.
+
+- `systemctl --failed`
+- `journalctl -p 3 -xb`
+- `journalctl --unit=sddm.service`
+
+See [the archwiki][archlinux/wiki/system-maintenance] for very detailed info about system-maintenance.
 
 
 ### Could not find tools on server when updating/installing tools <a name="tools-not-found-while-updating"></a>
@@ -499,6 +523,7 @@ Now, `vscode` should open containing folders in `Files` again.
 [archlinux/wiki/refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#For_kernels_automatically_detected_by_rEFInd
 [archlinux/wiki/refind#refind_linux.conf]: https://wiki.archlinux.org/index.php/REFInd#refind_linux.conf
 [archlinux/wiki/schriftarten]: https://wiki.archlinux.de/title/Schriftarten
+[archlinux/wiki/system-maintenance]: https://wiki.archlinux.org/index.php/System_maintenance
 [archlinux/wiki/vscode]: https://wiki.archlinux.org/index.php/Visual_Studio_Code
 [askubuntu/color-test]: https://askubuntu.com/questions/27314/script-to-display-all-terminal-colors
 [askubuntu/sddm-wrong-lang]: https://askubuntu.com/questions/1040844/wrong-language-displayed-by-sddm-on-login-kubuntu-18-04
