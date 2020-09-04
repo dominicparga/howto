@@ -51,6 +51,8 @@ Good pages to start
     1. [Screen flicker after resume from suspend (Radeon GPU)](#screen-flicker-after-suspend)
     1. [CPU random generator seems to be failing (0xffffffff)](#0xffffffff)
     1. [vscode's cmd 'Open Containing Folder' opens vscode instead of Files](#vscode-open-folder)
+    1. [Can't read from NTFS-format (windows-partition)](#cant_read_from_ntfs-format)
+    1. [Unrecognized mount option windows_names](#unrecognized_mount_option_windows_names)
     1. [sp5100-tco: Watchdog hardware is disabled](#sp5100-tco_watchdog_hardware_is_disabled)
 
 
@@ -506,6 +508,18 @@ To solve this,
 Now, `vscode` should open containing folders in `Files` again.
 
 
+### Can't read from NTFS-format (windows-partition) <a name="cant_read_from_ntfs-format"></a>
+
+See [see troubleshooting for unrecognized mount option windows_names](#unrecognized_mount_option_windows_names)
+
+
+### Unrecognized mount option windows_names <a name="unrecognized_mount_option_windows_names"></a>
+
+Install `ntfs-3g`.
+
+Source: [the ubuntu-forum][ubuntu/forum/unrecognized_mount_option_windows_names]
+
+
 ### sp5100-tco: Watchdog hardware is disabled <a name="sp5100-tco_watchdog_hardware_is_disabled"></a>
 
 Add `blacklist sp5100_tco` to `/etc/modprobe.d/sp5100_tco.conf`.
@@ -555,6 +569,7 @@ See also: [archlinux-wiki for blacklisting kernel-modules][archlinux/wiki/kernel
 [rodsbooks/refind/configfile#stanzas]: https://www.rodsbooks.com/refind/configfile.html#stanzas
 [texmint.com/change-disk-partition-label]: https://www.tecmint.com/change-modify-linux-disk-partition-label-names/
 [ubuntu/bugs/privilege-escalation]: https://bugs.launchpad.net/ubuntu/+source/lxd/+bug/1829071
+[ubuntu/forum/unrecognized_mount_option_windows_names]: https://ubuntuforums.org/showthread.php?t=1902606
 [youtube/lxc]: https://youtu.be/CWmkSj_B-wo
 [youtube/update-bios/gigabyte]: https://youtu.be/1SiJpDQ083Q
 [youtube/update-bios/msi]: https://youtu.be/SgTokymDCcs
