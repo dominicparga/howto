@@ -51,6 +51,7 @@ Good pages to start
     1. [Screen flicker after resume from suspend (Radeon GPU)](#screen-flicker-after-suspend)
     1. [CPU random generator seems to be failing (0xffffffff)](#0xffffffff)
     1. [vscode's cmd 'Open Containing Folder' opens vscode instead of Files](#vscode-open-folder)
+    1. [sp5100-tco: Watchdog hardware is disabled](#sp5100-tco_watchdog_hardware_is_disabled)
 
 
 ## Notes when installing Arch <a name="install-arch"></a>
@@ -504,9 +505,19 @@ To solve this,
 
 Now, `vscode` should open containing folders in `Files` again.
 
+
+### sp5100-tco: Watchdog hardware is disabled <a name="sp5100-tco_watchdog_hardware_is_disabled"></a>
+
+Add `blacklist sp5100_tco` to `/etc/modprobe.d/sp5100_tco.conf`.
+
+Source: [archlinux-forum][archlinux/forum/watchdog_hardware_is_disabled]
+See also: [archlinux-wiki for blacklisting kernel-modules][archlinux/wiki/kernel_module/blacklisting]
+
+
 [archlinux/forum/0xffffffff]: https://bbs.archlinux.org/viewtopic.php?id=250624
 [archlinux/forum/radeon-screen-flicker]: https://bbs.archlinux.org/viewtopic.php?id=237084
 [archlinux/forum/sddm-keyboard-selection]: https://bbs.archlinux.org/viewtopic.php?id=194408
+[archlinux/forum/watchdog_hardware_is_disabled]: https://bbs.archlinux.org/viewtopic.php?id=239075
 [archlinux/groups]: https://www.archlinux.org/groups/
 [archlinux/pkgs]: https://www.archlinux.org/packages/
 [archlinux/pkgs/hplip]: https://www.archlinux.org/packages/extra/x86_64/hplip/
@@ -516,6 +527,7 @@ Now, `vscode` should open containing folders in `Files` again.
 [archlinux/systemd#basic-usage]: https://wiki.archlinux.org/index.php/Systemd#Basic_systemctl_usage
 [archlinux/wiki/installation-guide]: https://wiki.archlinux.org/index.php/installation_guide
 [archlinux/wiki/kde#discover-no-backends]: https://wiki.archlinux.org/index.php/KDE#Discover_does_not_show_any_applications
+[archlinux/wiki/kernel_module/blacklisting]: https://wiki.archlinux.org/index.php/Kernel_module#Blacklisting
 [archlinux/wiki/lxd]: https://wiki.archlinux.org/index.php/LXD
 [archlinux/wiki/mouse-polling-rate]: https://wiki.archlinux.org/index.php/Mouse_polling_rate
 [archlinux/wiki/msfonts-from-iso]: https://wiki.archlinux.org/index.php/Microsoft_fonts#Extracting_fonts_from_a_Windows_ISO
