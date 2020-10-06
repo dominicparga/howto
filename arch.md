@@ -223,7 +223,7 @@ Here is a workaround:
 
 - Execute `which hp-plugin` to get the executable, which is a symlink.
 - Follow the symlink to find the underlying `py`-script.
-- TL;DR: Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
+- __TLDR__ Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
   - When digging through this `py`-script (and imported modules in neighbouring `py`-scripts), you may find the download-function.
     In my case, the download-function is in `/usr/share/hplip/installer/pluginhandler.py`.
   - In case the plugin-path (pointing to a local file) is empty, the download-function gathers info from [this config][hplip/plugin.conf].
@@ -470,7 +470,7 @@ See [in the archlinux-wiki][archlinux/forum/radeon-screen-flicker]
 
 ### CPU random generator seems to be failing (0xffffffff) <a name="0xffffffff"></a>
 
-__TL;DR__ Solution is updating BIOS (source: [Manjaro-Forum][manjaro/forum/cpu-rng-warning]).
+__TLDR__ Solution is updating BIOS (source: [Manjaro-Forum][manjaro/forum/cpu-rng-warning]).
 If you have a mainboard from `msi`, check [this 3-min-video][youtube/update-bios/msi].
 For the `x570 Aorus Elite`, check [this video][youtube/update-bios/gigabyte].
 
