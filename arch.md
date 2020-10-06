@@ -214,7 +214,27 @@ yay -S hplip
 
 Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][archlinux/pkgs/hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
-If your printer needs a plugin (execute `hp-plugin` after installing `hplip`), you will find it [at hp][hp/printer-plugin-list].
+
+If your printer needs a plugin, you will find the answer [at hp][hp/printer-plugin-list].
+Executing `hp-plugin --interactive` after installing `hplip` should install the plugin.
+__HOWEVER__, at my machine in `6th October 2020`, this doesn't work.
+The error-message is something related to the checksum, but in fact, no file is downloaded at all.
+Here is a workaround:
+
+- Execute `which hp-plugin` to get the executable, which is a symlink.
+- Follow the symlink to find the underlying `py`-script.
+- TL;DR: Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
+  - When digging through this `py`-script (and imported modules in neighbouring `py`-scripts), you may find the download-function.
+    In my case, the download-function is in `/usr/share/hplip/installer/pluginhandler.py`.
+  - In case the plugin-path (pointing to a local file) is empty, the download-function gathers info from [this config][hplip/plugin.conf].
+  - When executing `hp-plugin --help`, your version is printed.
+    In my case, it is `3.20.6`.
+  - Search for this version in the config-file and find the url to the respective file `plugin.run`.
+    The key-file `plugin.run.asc` is needed as well.
+    Add `.asc` to the url or simply remove the url's suffix to find all relevant files listed.
+  - Remove the version and file from the url and find all plugin-files listed.
+    Again, look for your version (in my case, `hplip-3.20.6-plugin.run` and `hplip-3.20.6-plugin.run.asc`).
+- Execute `hp-plugin --interactive` and use the relative path to the directory, where you've just downloaded your plugin-files to.
 
 
 ### Install Visual-Studio-Code <a name="install-vscode"></a>
@@ -560,6 +580,8 @@ See also: [archlinux-wiki for blacklisting kernel-modules][archlinux/wiki/kernel
 [github/wiki/cascadia-code/install]: https://github.com/microsoft/cascadia-code/wiki/Installing-Cascadia-Code
 [github/wiki/fira-code/install]: https://github.com/tonsky/FiraCode/wiki/Linux-instructions#installing-with-a-package-manager
 [hp/printer-plugin-list]: https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html
+[hplip/plugin.conf]: http://hplip.sf.net/plugin.conf
+[hplip/plugins]: http://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/
 [itsfoss.com/steps-after-install]: https://itsfoss.com/things-to-do-after-installing-arch-linux/
 [kde/bugs/plasma-wayland-crashes-after-login]: https://bugs.kde.org/show_bug.cgi?id=413223
 [kde/invent/fix-rdm-init-on-amd-cpus]: https://invent.kde.org/kde/krita/commit/2fdd504dfe6ec63b654ee0878c9f95cb69d4a6ad
