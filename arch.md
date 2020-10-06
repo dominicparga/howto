@@ -215,26 +215,30 @@ yay -S hplip
 Then enter `http://localhost:631/admin` and add a new printer.
 In my case, the printer is `HP_Color_LaserJet_MFP_M277dw`, so I have added the respective PDD-file from [`hplib`][archlinux/pkgs/hplip] at `/usr/share/ppd/HP/hp-color_laserjet_pro_mfp_m277-ps.ppd.gz`
 
-If your printer needs a plugin, you will find the answer [at hp][hp/printer-plugin-list].
+Whether your printer needs a plugin, you will find [at hp][hp/printer-plugin-list].
 Executing `hp-plugin --interactive` after installing `hplip` should install the plugin.
-__HOWEVER__, at my machine in `6th October 2020`, this doesn't work.
+__HOWEVER__, on my machine at `6th October 2020`, this doesn't work.
 The error-message is something related to the checksum, but in fact, no file is downloaded at all.
 Here is a workaround:
 
-- Execute `which hp-plugin` to get the executable, which is a symlink.
-- Follow the symlink to find the underlying `py`-script.
-- __TLDR__ Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
-  - When digging through this `py`-script (and imported modules in neighbouring `py`-scripts), you may find the download-function.
-    In my case, the download-function is in `/usr/share/hplip/installer/pluginhandler.py`.
-  - In case the plugin-path (pointing to a local file) is empty, the download-function gathers info from [this config][hplip/plugin.conf].
-  - When executing `hp-plugin --help`, your version is printed.
-    In my case, it is `3.20.6`.
-  - Search for this version in the config-file and find the url to the respective file `plugin.run`.
-    The key-file `plugin.run.asc` is needed as well.
-    Add `.asc` to the url or simply remove the url's suffix to find all relevant files listed.
-  - Remove the version and file from the url and find all plugin-files listed.
-    Again, look for your version (in my case, `hplip-3.20.6-plugin.run` and `hplip-3.20.6-plugin.run.asc`).
+TLDR
+
+- When executing `hp-plugin --help`, your version is printed.
+  In my case, it is `3.20.6`.
+- Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
 - Execute `hp-plugin --interactive` and use the relative path to the directory, where you've just downloaded your plugin-files to.
+
+More details about finding the right files/urls
+
+- Execute `which hp-plugin` to find the executable, which is a symlink.
+- Follow the symlink to find the underlying `py`-script.
+- When digging through this `py`-script (and imported modules in neighbouring `py`-scripts), you may find the download-url.
+  In my case, the download-function is in `/usr/share/hplip/installer/pluginhandler.py`.
+- In case the plugin-path (pointing to a local file) is empty, the download-function gathers info from [this config][hplip/plugin.conf].
+- Search for your version in the config-file and find the url to the respective file `plugin.run`.
+  The key-file `plugin.run.asc` is needed as well.
+  Probably add `.asc` to the url, or simply remove the url's suffix to find all relevant files listed.
+  In the list, look for your version (in my case, `hplip-3.20.6-plugin.run` and `hplip-3.20.6-plugin.run.asc`).
 
 
 ### Install Visual-Studio-Code <a name="install-vscode"></a>
