@@ -12,6 +12,7 @@ There are plenty of help-pages, so this md-page just collects some useful snippe
     1. [Setup user-management](#setup-user-management)
     1. [Setup ssh](#ssh)
     1. [Setup domain and connect it with your server](#setup_domain_and_ddns)
+    1. [Setup TLS](#setup_tls)
 
 
 ## Notes when setting up the Raspberry Pi <a name="setup-raspi"></a>
@@ -158,6 +159,11 @@ TODO
 ### Setup domain and connect it with your server <a name="setup_domain_and_ddns"></a>
 
 TODO
+
+
+### Setup TLS <a name="setup_tls"></a>
+
+TODO: `https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/`
 
 
 [linuxhandbook/has_user_sudo-rights]: https://linuxhandbook.com/check-if-user-has-sudo-rights/
