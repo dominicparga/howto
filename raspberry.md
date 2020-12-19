@@ -6,25 +6,23 @@ It's main purpose is being a collection of some useful snippets or links.
 
 ## Table of Contents <a name="toc"></a>
 
-1. [Notes when setting up the Raspberry Pi](#setup-raspi)
-    1. [Handy commands](#handy_commands)
-    1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
-    1. [Setup Internet and update system](#setup_internet_and_update_system)
-    1. [Setup user-management](#setup-user-management)
-    1. [Setup ssh](#ssh)
-    1. [Setup domain and connect it with your server](#setup_domain_and_ddns)
-        1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
-        1. [Setup your router](#setup_router)
-    1. [Setup TLS](#setup_tls)
+1. [Handy commands](#handy_commands)
+1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
+1. [Setup Internet and update system](#setup_internet_and_update_system)
+1. [Setup user-management](#setup-user-management)
+1. [Setup ssh](#ssh)
+1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
+    1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
+    1. [Setup your router](#setup_router)
+1. [Setup TLS](#setup_tls)
+1. [Install nextcloud](#install_nextcloud)
 
-
-## Notes when setting up the Raspberry Pi <a name="setup-raspi"></a>
 
 I'm using my Raspberry Pi with `Ubuntu Server 20.04` headlessly, so just plain in the cmdline, without any Desktop like `Gnome` installed.
 In my experience, `Ubuntu` feels a bit heavy, but `Ubuntu Server 20.04` feels very light and is really nice to use.
 
 
-### Handy commands <a name="handy_commands"></a>
+## Handy commands <a name="handy_commands"></a>
 
 Some handy commands, e.g. from [linuxhandbook][linuxhandbook/list_users_in_group] or [linuxhandbook][linuxhandbook/has_user_sudo-rights].
 
@@ -47,7 +45,7 @@ grep '^sudo:.*$' /etc/group | cut -d: -f4
 ```
 
 
-### Install Ubuntu Server 20.04 <a name="install-ubuntu-server-20.04"></a>
+## Install Ubuntu Server 20.04 <a name="install-ubuntu-server-20.04"></a>
 
 Installing `Ubuntu Server 20.04` is very simple using the `Raspberry Pi Imager`.
 It's just writing the `OS` to the `SD`-card.
@@ -60,7 +58,7 @@ sudo dpkg-reconfigure keyboard-configuration
 ```
 
 
-### Setup Internet and update the system <a name="setup_internet_and_update_system"></a>
+## Setup Internet and update the system <a name="setup_internet_and_update_system"></a>
 
 Check if `nmcli` (`nm` for network-manager, `cli` for commandline-interface) is installed (for handling Internet via wifi).
 
@@ -90,7 +88,7 @@ nmcli --ask device wifi connect 'wifi-name'
 ```
 
 
-### Setup user-management <a name="setup-user-management"></a>
+## Setup user-management <a name="setup-user-management"></a>
 
 For more info, see [ubuntu.com][ubuntu/security-users].
 
@@ -198,7 +196,7 @@ Per default, this user `ubuntu` is in one of the groups `sudo`, `wheel` or `admi
     sudo userdel ubuntu
     ```
 
-### Setup ssh (secure shell) and ufw (firewall) <a name="ssh"></a>
+## Setup ssh (secure shell) and ufw (firewall) <a name="ssh"></a>
 
 Background for ssh: [digitalocean][digitalocean/ssh-encryption]
 
@@ -321,7 +319,7 @@ To get your global ip and enable port-forwarding (sometimes called port-permissi
 This is explained below.
 
 
-### Setup domain and connect it with your Raspberry Pi <a name="setup_domain_and_ddns"></a>
+## Setup domain and connect it to your Raspberry Pi <a name="setup_domain_and_ddns"></a>
 
 Assume we want to use `domain.com` as our server-domain.
 To reach the Raspberry Pi through the Internet, the following chain has to be complete:
@@ -338,7 +336,7 @@ In the following, we configure this domain according to my setup on `namecheap.c
 Your router is changing it's public ip-address on a regular basis (probably daily).
 So, to get the DNS-server to find your ip-address without updating the ip-address of `domain.com` at `namecheap.com` everyday, you might use dynamic DNS.
 
-#### Setup the DNS-server (via namecheap.com) <a name="setup_dns-server"></a>
+### Setup the DNS-server (via namecheap.com) <a name="setup_dns-server"></a>
 
 1. Buy or rent a domain, e.g. on `namecheap.com`, which has pretty nice documentation and a nice UI.
 
@@ -360,7 +358,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     - See [namecheap.com][namecheap/create_subdomain] for more info
 
 
-#### Setup your router <a name="setup_router"></a>
+### Setup your router <a name="setup_router"></a>
 
 1. Visit your router's settings page in your browser (e.g. `fritz.box` or by the network-ip, in my case `192.168.178.1`, as mentioned above).
 
@@ -396,7 +394,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
 You can hopefully connect via `ssh dominic@domain.com`.
 
 
-### Setup Apache and TLS <a name="setup_tls"></a>
+## Setup Apache and TLS <a name="setup_tls"></a>
 
 `TLS` is for accessing your domain via `https`.
 Great sources:
@@ -407,41 +405,64 @@ Great sources:
 - Create the file `/etc/apache2/sites-available/domain.com.conf` and edit `/etc/apache2/ports.conf` according to
 
   - [digitalocean][digitalocean/apache2-setup] for apache-setup
+
   - [ubuntu-wiki][ubuntu/wiki/mod_ssl] for `TLS`
+
   - [upload.com][upload/enhance_encryption] for enhancing encryption (in `/etc/apache2/mods-available/ssl.conf` and `/etc/apache2/sites-available/defaul-ssl.conf`)
+
   - Test your ssl-encryption via [this ssl-test][ssllabs/ssltest].
 
-Nice snippets:
+- [Apache-Docs: Directives in config-files][apache/docs/core]
 
-```zsh
-# firewall
-sudo ufw allow http
-sudo ufw allow https
-sudo ufw reload
+- [Apache-Docs: SSL/TLS Strong Encryption: How-To][apache/docs/ssl-tsl_strong_encryption]
 
-# install apache2
-sudo apt install apache2
-# install letsencrypt to create a certificate
-sudo apt install letsencrypt
+- Source: [serverfault-forum][serverfault/forum/which_apache-conf_is_used]
 
-# this timer will renew your certificates automatically
-sudo systemctl status certbot.timer
+  ```zsh
+  # NICE!
+  # check, which config is loaded at runtime
+  apache2ctl -V | grep SERVER_CONFIG_FILE
+  ```
 
-# deactivate apache2
-# such that certbot can use port 80 for creating the certificate
-sudo systemctl stop apache2
+- Nice snippets:
 
-# create your certificate
-sudo certbot certonly --standalone -d domain.com
-# or
-sudo certbot certonly --standalone --preferred-challenges http -d domain.com
+  ```zsh
+  # firewall
+  sudo ufw allow http
+  sudo ufw allow https
+  sudo ufw reload
 
-# reactivate apache2
-sudo systemctl stop apache2
-```
+  # install apache2
+  sudo apt install apache2
+  # install letsencrypt to create a certificate
+  sudo apt install letsencrypt
+
+  # this timer will renew your certificates automatically
+  sudo systemctl status certbot.timer
+
+  # deactivate apache2
+  # such that certbot can use port 80 for creating the certificate
+  sudo systemctl stop apache2
+
+  # create your certificate
+  sudo certbot certonly --standalone -d domain.com
+  # or
+  sudo certbot certonly --standalone --preferred-challenges http -d domain.com
+
+  # reactivate apache2
+  sudo systemctl stop apache2
+  ```
 
 
-[upload/enhance_encryption]: https://upcloud.com/community/tutorials/install-lets-encrypt-apache/
+## Install nextcloud <a name="install_nextcloud"></a>
+
+TODO https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#prerequisites-label
+
+TODO https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
+
+
+[apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
+[apache/docs/ssl-tsl_strong_encryption]: https://httpd.apache.org/docs/current/ssl/ssl_howto.html
 [devconnected/ssh-server]: https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/
 [digitalocean/apache2-setup]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
 [digitalocean/ssh-encryption]: https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
@@ -451,8 +472,10 @@ sudo systemctl stop apache2
 [linuxhandbook/list_users_in_group]: https://linuxhandbook.com/list-users-in-group-linux/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
+[serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/questions/12968/how-to-find-out-which-httpd-conf-apache-is-using-at-runtime
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
 [ssllabs/ssltest]: https://www.ssllabs.com/ssltest
 [superuser/input-keyboard-layout]: https://superuser.com/a/404507
 [ubuntu/security-users]: https://ubuntu.com/server/docs/security-users
 [ubuntu/wiki/mod_ssl]: https://wiki.ubuntuusers.de/Apache/mod_ssl/
+[upload/enhance_encryption]: https://upcloud.com/community/tutorials/install-lets-encrypt-apache/
