@@ -455,6 +455,12 @@ Great sources:
   # install letsencrypt to create a certificate
   sudo apt install letsencrypt
 
+  # enable needed modules in apache2
+  # ssl for encryption (https)
+  sudo a2enmod ssl
+  # for HSTS
+  sudo a2enmod headers
+
   # this timer will renew your certificates automatically
   sudo systemctl status certbot.timer
 
@@ -474,9 +480,8 @@ Great sources:
 
 ## Install nextcloud <a name="install_nextcloud"></a>
 
-TODO https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#prerequisites-label
-
-TODO https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
+In case you want to use `postgres`, look at this [blog (marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04)][marksei/install_nextcloud_on_ubuntu].
+I use this guide in addition to the official nextcloud's documentation ([Installation on Linux][nextcloud/docs/server/installation_on_linux] and [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/server/example_ubuntu]).
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
@@ -488,8 +493,11 @@ TODO https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubun
 [github/self/vim.md]: https://github.com/dominicparga/howto/blob/nightly/vim.md
 [linuxhandbook/has_user_sudo-rights]: https://linuxhandbook.com/check-if-user-has-sudo-rights/
 [linuxhandbook/list_users_in_group]: https://linuxhandbook.com/list-users-in-group-linux/
+[marksei/install_nextcloud_on_ubuntu]: https://www.marksei.com/how-to-install-nextcloud-20-on-ubuntu/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
+[nextcloud/docs/server/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
+[nextcloud/docs/server/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
 [ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
 [serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/questions/12968/how-to-find-out-which-httpd-conf-apache-is-using-at-runtime
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
