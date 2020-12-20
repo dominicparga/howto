@@ -221,16 +221,34 @@ sudo apt install openssh-server
 
 In `/etc/ssh/sshd_config`, you can configure your `sshd`, which stands for `ssh-daemon`.
 A daemon is a service, that is running in the background and waiting for something, e.g. a request through Internet to connect via `ssh` to your Raspberry Pi.
-I would edit barely nothing in this `/etc/ssh/sshd_config`, but make sure to prohibit login as root.
+Your sshd is already setup well, so I wouldn't change much in this `/etc/ssh/sshd_config`.
+However, some recommendations are mentioned below.
+
+> Per default, every user with a non-empty password is allowed to login (source: [stackexchange][stackexchange/which_users_are_allowed_to_log_in_via_ssh]).
+> To change this behaviour, [this blog (ostechnix)][ostechnix/ssh_access_per_user] might help.
 
 ```zsh
 # in shell
 sudo vim /etc/ssh/sshd_config
+```
 
+```zsh
 # in /etc/ssh/sshd_config
-# activate this line by removing '#' at the beginning
+
+# Prohibit login as root
 PermitRootLogin no
 
+# allow login only by users and password, not by public keys
+# (replace dominic by your username)
+AllowUsers dominic
+PublickeyAuthentication no
+
+# allow login only for users with non-empty password
+PasswordAuthentication yes
+PermitEmptyPasswords no
+```
+
+```zsh
 # back in shell: apply changes
 sudo systemctl restart sshd
 ```
@@ -472,9 +490,11 @@ TODO https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubun
 [linuxhandbook/list_users_in_group]: https://linuxhandbook.com/list-users-in-group-linux/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
+[ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
 [serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/questions/12968/how-to-find-out-which-httpd-conf-apache-is-using-at-runtime
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
 [ssllabs/ssltest]: https://www.ssllabs.com/ssltest
+[stackexchange/which_users_are_allowed_to_log_in_via_ssh]: https://unix.stackexchange.com/questions/36804/which-users-are-allowed-to-log-in-via-ssh-by-default
 [superuser/input-keyboard-layout]: https://superuser.com/a/404507
 [ubuntu/security-users]: https://ubuntu.com/server/docs/security-users
 [ubuntu/wiki/mod_ssl]: https://wiki.ubuntuusers.de/Apache/mod_ssl/
