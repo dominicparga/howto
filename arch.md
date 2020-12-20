@@ -228,6 +228,24 @@ TLDR
 - Download the `hplip-VERSION-plugin.run` and `hplip-VERSION-plugin.run.asc` of your version (`hp-plugin --help`) from [here][hplip/plugins].
 - Execute `hp-plugin --interactive` and use the relative path to the directory, where you've just downloaded your plugin-files to.
 
+```zsh
+# get version
+hp-plugin --help
+
+# Download key
+curl 'https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-VERSION-plugin.run.asc' -o "${HOME}/Downloads/hplip-VERSION-plugin.run.asc"
+
+# Download plugin-files
+curl 'https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins/hplip-VERSION-plugin.run' -o "${HOME}/Downloads/hplip-VERSION-plugin.run"
+
+# Install and use relative path to download-directory
+hp-plugin --interactive --path="${HOME}/Downloads"
+
+# Cleanup
+rm "${HOME}/Downloads/hplip-VERSION-plugin.run"
+rm "${HOME}/Downloads/hplip-VERSION-plugin.run.asc"
+```
+
 More details about finding the right files/urls
 
 - Execute `which hp-plugin` to find the executable, which is a symlink.
