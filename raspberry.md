@@ -10,7 +10,8 @@ It's main purpose is being a collection of some useful snippets or links.
 1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
 1. [Setup Internet and update system](#setup_internet_and_update_system)
 1. [Setup user-management](#setup-user-management)
-1. [Setup ssh](#ssh)
+1. [Setup ssh (secure shell)](#ssh)
+1. [Setup ufw (firewall)](#ufw)
 1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
     1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
     1. [Setup your router](#setup_router)
@@ -196,7 +197,7 @@ Per default, this user `ubuntu` is in one of the groups `sudo`, `wheel` or `admi
     sudo userdel ubuntu
     ```
 
-## Setup ssh (secure shell) and ufw (firewall) <a name="ssh"></a>
+## Setup ssh (secure shell) <a name="ssh"></a>
 
 Background for ssh: [digitalocean][digitalocean/ssh-encryption]
 
@@ -221,11 +222,16 @@ sudo apt install openssh-server
 
 In `/etc/ssh/sshd_config`, you can configure your `sshd`, which stands for `ssh-daemon`.
 A daemon is a service, that is running in the background and waiting for something, e.g. a request through Internet to connect via `ssh` to your Raspberry Pi.
-Your sshd is already setup well, so I wouldn't change much in this `/etc/ssh/sshd_config`.
-However, some recommendations are mentioned below.
 
 > Per default, every user with a non-empty password is allowed to login (source: [stackexchange][stackexchange/which_users_are_allowed_to_log_in_via_ssh]).
 > To change this behaviour, [this blog (ostechnix)][ostechnix/ssh_access_per_user] might help.
+
+Good sources for security are:
+
+- [howtogeek - The Best Ways to Secure Your SSH Server][howtogeek/best_ways_to_secure_ssh]
+- [raspberrypi][raspberrypi/security]
+- [6 ssh authentication methods to secure connection (sshd_config)][golinuxcloud/ssh-authentication-methods]
+- [howtogeek - How to Create and Install SSH Keys From the Linux Shell][howtogeek/ssh-copy-id]
 
 ```zsh
 # in shell
@@ -238,19 +244,44 @@ sudo vim /etc/ssh/sshd_config
 # Prohibit login as root
 PermitRootLogin no
 
-# allow login only by users and password, not by public keys
+# allow login only by public/private keys, not by password
 # (replace dominic by your username)
+PasswordAuthentication no
+PubkeyAuthentication yes
+# and only for specific users
 AllowUsers dominic
-PublickeyAuthentication no
+
+MaxAuthTries 6
+
 
 # allow login only for users with non-empty password
-PasswordAuthentication yes
+# (if passwords are enabled)
 PermitEmptyPasswords no
+
+# nope
+ChallengeResponseAuthentication no
+
+# you don't need it, so turn it off
+X11Forwarding no
+# yes so you will be logged out when sudo reboot
+UsePAM yes
 ```
 
 ```zsh
 # back in shell: apply changes
 sudo systemctl restart sshd
+```
+
+On your computer, that wants to access via `ssh`, create a `ssh`-key-pair and copy the public(!) key to the server.
+Please note, that you have to enable `PasswordAuthentication yes` to copy your public key.
+
+```zsh
+# create public/private key-pair
+ssh-keygen
+# enter info
+
+# copy to server
+ssh-copy-id dominic@parga.io
 ```
 
 > In contrary to [SCHKN][devconnected/ssh-server], I would not change the default-port.
@@ -278,6 +309,9 @@ sudo systemctl stop sshd
 sudo systemctl disable sshd
 ```
 
+
+## Setup ufw (firewall) <a name="#ufw"></a>
+
 Setup your firewall (ubuntu firewall, called `ufw`), which is basically just a door for incoming and leaving Internet-connections.
 A great source of code-snippets is [this blog][digitalocean/ufw_on_ubuntu_20.04].
 You define these connections by ports.
@@ -297,6 +331,9 @@ sudo ufw default deny incoming
 sudo ufw allow ssh
 # is equal to
 sudo ufw allow 22
+# better:
+# (limits access when trying to login more than 6 times in 30 seconds)
+sudo ufw limit ssh
 
 # for seeing the ports with their respective names, execute
 less /etc/services
@@ -306,6 +343,7 @@ sudo ufw delete allow ssh
 
 # enable ufw
 sudo ufw enable
+sudo systemctl restart ufw
 ```
 
 We're almost ready to connect.
@@ -409,7 +447,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     You want your router to call this URL, so the ip-address will be the new router's ip.
     ```
 
-You can hopefully connect via `ssh dominic@domain.com`.
+You can (hopefully) connect via `ssh dominic@domain.com`.
 
 
 ## Setup Apache and TLS <a name="setup_tls"></a>
@@ -480,9 +518,88 @@ Great sources:
 
 ## Install nextcloud <a name="install_nextcloud"></a>
 
-In case you want to use `postgres`, look at this [blog (marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04)][marksei/install_nextcloud_on_ubuntu].
-I use this guide in addition to the official nextcloud's documentation ([Installation on Linux][nextcloud/docs/server/installation_on_linux] and [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/server/example_ubuntu]).
+In case you want to use `postgres`, look at the following commands to setup the database for nextcloud.
+The source is [marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04][marksei/install_nextcloud_on_ubuntu], but these commands are same as in the mariadb-related commands in the nextcloud-documentation.
 
+```zsh
+# in shell
+sudo apt install postgresql
+sudo -u postgres psql
+```
+
+```sql
+# in psql
+CREATE DATABASE nextcloud;
+CREATE USER nextcloud_user WITH PASSWORD 'YOUR_PASSWORD_HERE';
+GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud_user;
+```
+
+After the postgres-setup, I used the official nextcloud's documentation [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/server/example_ubuntu] to install all required packages and downloaded nextcloud.
+
+```zsh
+# install all required packages (excluding mariadb/mysql)
+sudo apt update && sudo apt upgrade
+sudo apt install libapache2-mod-php7.4
+sudo apt install php7.4-pgsql
+sudo apt install php7.4-gd
+sudo apt install php7.4-curl
+sudo apt install php7.4-mbstring
+sudo apt install php7.4-intl
+sudo apt install php7.4-gmp
+sudo apt install php7.4-bcmath
+sudo apt install php7.4-imagick
+sudo apt install php7.4-xml
+sudo apt install php7.4-zip
+```
+
+```zsh
+# cd into Downloads
+cd && mkdir -p 'Downloads/tmp' && cd 'Downloads/tmp'
+
+# download nextcloud from https://nextcloud.com/install/
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip' -o 'nextcloud.zip'
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.sha256' -o 'nextcloud.zip.sha256'
+
+# Verify download
+sha256sum -c 'nextcloud.zip.sha25' < 'nextcloud.zip'
+
+# Verify pgp-signature
+wget 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.asc' -O 'nextcloud.zip.asc'
+wget 'https://nextcloud.com/nextcloud.asc' -O 'nextcloud.asc'
+gpg --import 'nextcloud.asc'
+gpg --verify 'nextcloud.zip.asc' 'nextcloud.zip'
+```
+
+```zsh
+# finalize
+unzip 'nextcloud.zip'
+sudo mv 'nextcloud' '/var/www/your.domain.com'
+
+# cleanup
+cd ..
+rm -r 'tmp'
+```
+
+Now, you can follow the [Installation on Linux - Apache Web server configuration][nextcloud/docs/server/installation_on_linux/apache_configuration].
+
+
+```zsh
+# setup /etc/apache2/sites-available/your.domain.com
+
+# needed for nextcloud
+sudo a2enmod rewrite
+sudo a2enmod env
+sudo a2enmod dir
+sudo a2enmod mime
+
+# finish installation
+sudo chown -R www-data:www-data /var/www/your.domain.com
+
+# restart
+sudo systemctl restart apache2
+```
+
+TODO: https://docs.nextcloud.com/server/20/admin_manual/issues/general_troubleshooting.html#service-discovery-label
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
 [apache/docs/ssl-tsl_strong_encryption]: https://httpd.apache.org/docs/current/ssl/ssl_howto.html
@@ -491,6 +608,9 @@ I use this guide in addition to the official nextcloud's documentation ([Install
 [digitalocean/ssh-encryption]: https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
 [digitalocean/ufw_on_ubuntu_20.04]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04
 [github/self/vim.md]: https://github.com/dominicparga/howto/blob/nightly/vim.md
+[golinuxcloud/ssh-authentication-methods]: https://www.golinuxcloud.com/openssh-authentication-methods-sshd-config/
+[howtogeek/best_ways_to_secure_ssh]: https://www.howtogeek.com/443156/the-best-ways-to-secure-your-ssh-server/
+[howtogeek/ssh-copy-id]: https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/
 [linuxhandbook/has_user_sudo-rights]: https://linuxhandbook.com/check-if-user-has-sudo-rights/
 [linuxhandbook/list_users_in_group]: https://linuxhandbook.com/list-users-in-group-linux/
 [marksei/install_nextcloud_on_ubuntu]: https://www.marksei.com/how-to-install-nextcloud-20-on-ubuntu/
@@ -498,7 +618,9 @@ I use this guide in addition to the official nextcloud's documentation ([Install
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
 [nextcloud/docs/server/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
 [nextcloud/docs/server/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
+[nextcloud/docs/server/installation_on_linux/apache_configuration]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#apache-configuration-label
 [ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
+[raspberrypi/security]: https://www.raspberrypi.org/documentation/configuration/security.md
 [serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/questions/12968/how-to-find-out-which-httpd-conf-apache-is-using-at-runtime
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
 [ssllabs/ssltest]: https://www.ssllabs.com/ssltest
