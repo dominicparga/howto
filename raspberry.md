@@ -6,6 +6,7 @@ It's main purpose is being a collection of some useful snippets or links.
 
 ## Table of Contents <a name="toc"></a>
 
+1. [Before you start](#before_start)
 1. [Handy commands](#handy_commands)
 1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
 1. [Setup Internet and update system](#setup_internet_and_update_system)
@@ -15,9 +16,16 @@ It's main purpose is being a collection of some useful snippets or links.
 1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
     1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
     1. [Setup your router](#setup_router)
-1. [Setup TLS](#setup_tls)
+1. [Setup an external drive for using mount-points (fstab)](#fstab)
+1. [Setup Apache and TLS](#setup_tls)
+1. [Setup (or remove) postgresql](#setup_postgresql)
 1. [Install nextcloud](#install_nextcloud)
+1. [Maintenance](#maintenance)
+    1. [Logging](#logging_and_troubleshooting)
+    1. [Backups](#backups)
 
+
+## Before you start <a name="before_start"></a>
 
 I'm using my Raspberry Pi with `Ubuntu Server 20.04` headlessly, so just plain in the cmdline, without any Desktop like `Gnome` installed.
 In my experience, `Ubuntu` feels a bit heavy, but `Ubuntu Server 20.04` feels very light and is really nice to use.
@@ -450,6 +458,83 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
 You can (hopefully) connect via `ssh dominic@domain.com`.
 
 
+## Setup an external drive for using mount-points (fstab) <a name="fstab"></a>
+
+In case you want to use an external drive to store your data via mounting, this chapter is for you.
+Note that I have added this functionality after setting up my nextcloud and I screwed my nextcloud up.
+So be careful with this chapter and make backups.
+
+Mounting (`mount --help`) is kind of making your harddrive accessable in your system.
+You can mount drives and add extra access-points for directories.
+
+
+### Difference between mount and symlink <a name="mount_vs_symlink"></a>
+
+The difference between mounting and symlinking is noticable when changing your root-directory (`/`, e.g. `cd /`).
+This happens using `chroot` or using containers like `Docker`.
+Imagine a symlink going to `/new_root/asdf`, but your current root `/` is already at `/new_root`.
+This symlink wouldn't work, since it would try to go to `/new_root/new_root/asdf`, which obviously doesn't exist.
+Mounting would still work, because mounting is done relative to your root-directory `/`.
+
+
+### Mount and bind
+
+In general, mounting-cmds are always `sudo mount <source> <destination>`.
+A source might be a partition or a mountpoint, but nothing else!
+So to mount only a certain directory of your external-storage-device, you have to mount the device first.
+
+Great sources:
+
+- General info about mounting and binding: [ubuntuusers][ubuntuusers/mount]
+- Info about `fstab` (e.g. syntax and short explanations): [ubuntu-help][ubuntu/fstab]
+- Info about `fstab` and automatically (un-)mounting devices: [archlinux][archlinux/fstab]
+
+```zsh
+# get (current!) disk-names (eg /dev/sda) or partition-names (eg /dev/sda1)
+sudo fdisk -l
+# shorter output and better overview, showing mountpoint
+sudo lsblk
+
+# get UUID (don't forget sudo or output might be empty)
+sudo blkid
+
+# mount device UUID=1234 to /mnt/1234
+sudo mkdir -p /mnt/1234
+sudo mount -U 1234 /mnt/1234
+
+# mount subdir from device of UUID=1234 to /home/dominic
+sudo mount /mnt/1234/subdir /home/dominic/subdir
+```
+
+You can edit `/etc/fstab` to mount at system-start.
+__Attention!__
+__If mounting with this file doesn't work (eg due to typo or missing directories), your system won't boot.__
+You would have to edit the file from another running linux-system (eg via USB).
+To validate your file, you might use the command below (source: [serverfault][serverfault/forum/validate_fstab_without_rebooting]).
+
+```zsh
+# in /etc/fstab
+
+# [Device] [Mount Point] [File System Type] [Options] [Dump] [Pass]
+UUID=1234 /mnt/1234 ext4 defaults 0 0
+```
+
+```zsh
+# in shell
+
+# To validate your /etc/fstab without rebooting
+# -f stands for --fake, not for --force
+sudo mount -fav`
+```
+
+TODO mounts:
+
+```zsh
+sudo rsync -av from-dir to-dir
+```
+Note: postgresql doesn't start with mounting -> Requires for systemctl: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+
+
 ## Setup Apache and TLS <a name="setup_tls"></a>
 
 `TLS` is for accessing your domain via `https`.
@@ -462,7 +547,7 @@ Great sources:
 
   - [digitalocean][digitalocean/apache2-setup] for apache-setup
 
-  - [ubuntu-wiki][ubuntu/wiki/mod_ssl] for `TLS`
+  - [ubuntuusers][ubuntuusers/mod_ssl] for `TLS`
 
   - [upload.com][upload/enhance_encryption] for enhancing encryption (in `/etc/apache2/mods-available/ssl.conf` and `/etc/apache2/sites-available/defaul-ssl.conf`)
 
@@ -516,10 +601,13 @@ Great sources:
   ```
 
 
-## Install nextcloud <a name="install_nextcloud"></a>
+## Setup (or remove) postgresql <a name="setup_postgresql"></a>
 
 In case you want to use `postgres`, look at the following commands to setup the database for nextcloud.
 The source is [marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04][marksei/install_nextcloud_on_ubuntu], but these commands are same as in the mariadb-related commands in the nextcloud-documentation.
+
+> Please note, that after installing `nextcloud` with following commands, your server, reachable under your domain, is waiting for setting up the nextcloud-admin.
+> If you won't (kind of) immediately visit your domain and setup your nextcloud-admin, someone else might do this. 8-)
 
 ```zsh
 # in shell
@@ -527,14 +615,47 @@ sudo apt install postgresql
 sudo -u postgres psql
 ```
 
+To move your data-directory, follow the great guide from [digitalocean][digitalocean/move_postgres].
+Just saying, I screwed it up.
+Hence I highly recommend NOT to delete your directories until everything is working (rebooting in between).
+
 ```sql
 # in psql
+
 CREATE DATABASE nextcloud;
+
+# maybe this command works (https://wiki.archlinux.org/index.php/Nextcloud#PostgreSQL)
+createuser -h localhost -P nextcloud
+# else use this
 CREATE USER nextcloud_user WITH PASSWORD 'YOUR_PASSWORD_HERE';
+
 GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud_user;
 ```
 
-After the postgres-setup, I used the official nextcloud's documentation [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/server/example_ubuntu] to install all required packages and downloaded nextcloud.
+Just in case you want to remove `postgres` completely (e.g. because you screwed up and want to reinstall it), use following commands from [ObjectRocket][objectrocket/remove_postgres]
+
+```zsh
+# uninstall postgresql
+sudo apt --purge remove postgresql
+sudo apt purge postgresql*
+sudo apt --purge remove postgresql postgresql-doc postgresql-common
+
+# get packages and remove them
+dpkg -l | grep postgres
+sudo apt --purge remove NAME
+# this might be replacable by using
+sudo apt autoremove
+
+# data-directories
+sudo rm -rf /var/lib/postgresql/
+sudo rm -rf /var/log/postgresql/
+sudo rm -rf /etc/postgresql/
+```
+
+
+## Install nextcloud <a name="install_nextcloud"></a>
+
+After the postgres-setup, I used the official nextcloud's documentation [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/example_ubuntu] to install all required packages and downloaded nextcloud.
 
 ```zsh
 # install all required packages (excluding mariadb/mysql)
@@ -557,22 +678,22 @@ sudo apt install php7.4-zip
 cd && mkdir -p 'Downloads/tmp' && cd 'Downloads/tmp'
 
 # download nextcloud from https://nextcloud.com/install/
-curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip' -o 'nextcloud.zip'
-curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.sha256' -o 'nextcloud.zip.sha256'
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip' -o 'nextcloud-20.0.3.zip'
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.sha256' -o 'nextcloud-20.0.3.zip.sha256'
 
 # Verify download
-sha256sum -c 'nextcloud.zip.sha25' < 'nextcloud.zip'
+sha256sum -c 'nextcloud-20.0.3.zip.sha256' < 'nextcloud-20.0.3.zip'
 
 # Verify pgp-signature
-wget 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.asc' -O 'nextcloud.zip.asc'
+wget 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.asc' -O 'nextcloud-20.0.3.zip.asc'
 wget 'https://nextcloud.com/nextcloud.asc' -O 'nextcloud.asc'
 gpg --import 'nextcloud.asc'
-gpg --verify 'nextcloud.zip.asc' 'nextcloud.zip'
+gpg --verify 'nextcloud-20.0.3.zip.asc' 'nextcloud-20.0.3.zip'
 ```
 
 ```zsh
 # finalize
-unzip 'nextcloud.zip'
+unzip 'nextcloud-20.0.3.zip'
 sudo mv 'nextcloud' '/var/www/your.domain.com'
 
 # cleanup
@@ -580,8 +701,7 @@ cd ..
 rm -r 'tmp'
 ```
 
-Now, you can follow the [Installation on Linux - Apache Web server configuration][nextcloud/docs/server/installation_on_linux/apache_configuration].
-
+Now, you can follow the [Installation on Linux - Apache Web server configuration][nextcloud/docs/installation_on_linux/apache_configuration], but the important commands are mentioned below.
 
 ```zsh
 # setup /etc/apache2/sites-available/your.domain.com
@@ -599,12 +719,53 @@ sudo chown -R www-data:www-data /var/www/your.domain.com
 sudo systemctl restart apache2
 ```
 
-TODO: https://docs.nextcloud.com/server/20/admin_manual/issues/general_troubleshooting.html#service-discovery-label
+
+## Maintenance <a name="maintenance"></a>
+
+Now, login as `admin` and click through your settings.
+Most important is probably the section `Overview` and `Basic settings` for setting up the admin-mail-account (for notifications).
+See [nextcloud-docs][nextcloud/docs/cron-jobs] for setting basic cron-jobs for your server.
+
+
+### Logging and troubleshooting <a name="logging_and_troubleshooting"></a>
+
+Nice tool from [nextcloud-help-forum][nextcloud/log-file-readability] for fabulizing json-output in cmdline:
+
+```zsh
+# install
+sudo apt install jq
+# get pretty json printed
+tail -f /var/www/html/data/nextcloud.log | jq
+```
+
+General logging-locations:
+
+- `sudo tail -f /var/www/your.domain.com/data/nextcloud.log | jq`
+- `sudo tail -f /var/log/postgresql/postgresql-12-main.log`
+- `sudo tail -f /var/log/apache2/access.log`
+- `sudo tail -f /var/log/apache2/error.log`
+- In your nextcloud, logged in as `admin`, under `Settings -> Logging`
+
+General troubleshooting:
+
+- `pg_clusters`
+- `sudo systemctl status/is-enabled postgresql`
+- `sudo systemctl status/is-enabled postgresql@12-main`
+
+
+### Backups <a name="backups"></a>
+
+TODO
+
+https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
+
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
 [apache/docs/ssl-tsl_strong_encryption]: https://httpd.apache.org/docs/current/ssl/ssl_howto.html
+[archlinux/fstab]: https://wiki.archlinux.org/index.php/Fstab#External_devices
 [devconnected/ssh-server]: https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/
 [digitalocean/apache2-setup]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
+[digitalocean/move_postgres]: https://www.digitalocean.com/community/tutorials/how-to-move-a-postgresql-data-directory-to-a-new-location-on-ubuntu-18-04
 [digitalocean/ssh-encryption]: https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
 [digitalocean/ufw_on_ubuntu_20.04]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04
 [github/self/vim.md]: https://github.com/dominicparga/howto/blob/nightly/vim.md
@@ -616,16 +777,22 @@ TODO: https://docs.nextcloud.com/server/20/admin_manual/issues/general_troublesh
 [marksei/install_nextcloud_on_ubuntu]: https://www.marksei.com/how-to-install-nextcloud-20-on-ubuntu/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
-[nextcloud/docs/server/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
-[nextcloud/docs/server/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
-[nextcloud/docs/server/installation_on_linux/apache_configuration]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#apache-configuration-label
+[nextcloud/docs/cron-jobs]: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
+[nextcloud/docs/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
+[nextcloud/docs/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
+[nextcloud/docs/installation_on_linux/apache_configuration]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#apache-configuration-label
+[nextcloud/log-file-readability]: https://help.nextcloud.com/t/log-file-readability/5698/47
+[objectrocket/remove_postgres]: https://kb.objectrocket.com/postgresql/how-to-completely-uninstall-postgresql-757
 [ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
 [raspberrypi/security]: https://www.raspberrypi.org/documentation/configuration/security.md
-[serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/questions/12968/how-to-find-out-which-httpd-conf-apache-is-using-at-runtime
+[serverfault/forum/validate_fstab_without_rebooting]: https://serverfault.com/a/509014
+[serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/q/12968
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
 [ssllabs/ssltest]: https://www.ssllabs.com/ssltest
 [stackexchange/which_users_are_allowed_to_log_in_via_ssh]: https://unix.stackexchange.com/questions/36804/which-users-are-allowed-to-log-in-via-ssh-by-default
 [superuser/input-keyboard-layout]: https://superuser.com/a/404507
+[ubuntu/fstab]: https://help.ubuntu.com/community/Fstab
 [ubuntu/security-users]: https://ubuntu.com/server/docs/security-users
-[ubuntu/wiki/mod_ssl]: https://wiki.ubuntuusers.de/Apache/mod_ssl/
+[ubuntuusers/mod_ssl]: https://wiki.ubuntuusers.de/Apache/mod_ssl/
+[ubuntuusers/mount]: https://wiki.ubuntuusers.de/mount/
 [upload/enhance_encryption]: https://upcloud.com/community/tutorials/install-lets-encrypt-apache/
