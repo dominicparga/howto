@@ -16,7 +16,12 @@ It's main purpose is being a collection of some useful snippets or links.
 1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
     1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
     1. [Setup your router](#setup_router)
-1. [Setup an external drive for using mount-points (fstab)](#fstab)
+1. [Setup an external drive for using mount-points (fstab)](#setup_external_drive)
+    1. [Difference between mount and symlink](#mount_vs_symlink)
+    1. [Format device](#format_device)
+    1. [Mount a device](#mount_device)
+    1. [Mount a device at system-start](#fstab)
+    1. [Update systemd to consider mounts](#systemd_considers_mount)
 1. [Setup Apache and TLS](#setup_tls)
 1. [Setup (or remove) postgresql](#setup_postgresql)
 1. [Install nextcloud](#install_nextcloud)
@@ -458,7 +463,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
 You can (hopefully) connect via `ssh dominic@domain.com`.
 
 
-## Setup an external drive for using mount-points (fstab) <a name="fstab"></a>
+## Setup an external drive for using mount-points (fstab) <a name="setup_external_drive"></a>
 
 In case you want to use an external drive to store your data via mounting, this chapter is for you.
 Note that I have added this functionality after setting up my nextcloud and I screwed my nextcloud up.
@@ -477,7 +482,12 @@ This symlink wouldn't work, since it would try to go to `/new_root/new_root/asdf
 Mounting would still work, because mounting is done relative to your root-directory `/`.
 
 
-### Mount and bind
+### Format device <a name="format_device"></a>
+
+TODO Partitioning (`sudo fdisk /dev/sda`) followed by `mkfs.ext4 /dev/sda1`
+
+
+### Mount a device <a name="mount_device"></a>
 
 In general, mounting-cmds are always `sudo mount <source> <destination>`.
 A source might be a partition or a mountpoint, but nothing else!
@@ -506,33 +516,93 @@ sudo mount -U 1234 /mnt/1234
 sudo mount /mnt/1234/subdir /home/dominic/subdir
 ```
 
+
+### Mount a device at system-start <a name="fstab"></a>
+
 You can edit `/etc/fstab` to mount at system-start.
 __Attention!__
 __If mounting with this file doesn't work (eg due to typo or missing directories), your system won't boot.__
 You would have to edit the file from another running linux-system (eg via USB).
-To validate your file, you might use the command below (source: [serverfault][serverfault/forum/validate_fstab_without_rebooting]).
+
+To validate your file without reboot, you might use the command below (source: [serverfault][serverfault/forum/validate_fstab_without_rebooting]).
+
+> Please note every slash (`/`) in the following commands, since they make a difference when using rsync.
 
 ```zsh
-# in /etc/fstab
+# stop current services
+sudo systemctl stop apache2
+sudo systemctl stop postgresql
+```
+
+```zsh
+# copying current content to mount
+sudo rsync -av /var/lib/postgresql /mnt/1234/var/lib
+# make local backup
+sudo rsync -av /var/lib/postgresql/ /var/lib/postgresql.backup
+# check backup-content before removing
+sudo ls -al /var/lib/postgresql.backup
+# rm files and dotfiles to preserve directory with current access-permissions
+sudo rm -r /var/lib/postgresql/*
+sudo rm -r /var/lib/postgresql/.*
+```
+
+```zsh
+# update /etc/fstab
 
 # [Device] [Mount Point] [File System Type] [Options] [Dump] [Pass]
 UUID=1234 /mnt/1234 ext4 defaults 0 0
+
+# postgresql
+# note the bind-option here
+/mnt/1234/var/lib/postgresql /var/lib/postgresql ext4 defaults,bind 0 0
+...
 ```
 
 ```zsh
 # in shell
 
+# Should be empty, but existent!
+sudo ls -al /var/lib/postgresql
+
 # To validate your /etc/fstab without rebooting
 # -f stands for --fake, not for --force
-sudo mount -fav`
+sudo mount -fav
+# still empty
+sudo ls -al /var/lib/postgresql
+# do mount (also checks, if directory exists)
+sudo mount -av
+
+# Should not be empty
+sudo ls -al /var/lib/postgresql
 ```
 
-TODO mounts:
+
+### Update systemd to consider mounts <a name="systemd_considers_mount"></a>
+
+Keep in mind, that your `systemd`-services (database, eg postgres, and apache2) need to know, that your drives are mounted.
+Otherwise, they might not start due to missing files, resulting in errors.
+
+Use the following directive for systemd.unit (`man systemd.unit`)
 
 ```zsh
-sudo rsync -av from-dir to-dir
+# general syntax
+RequiresMountsFor=mountpoint1 mountpoint2 ...
+
+# example for some postgresql-mountpoints
+RequiresMountsFor=/etc/postgresql /var/lib/postgresql /var/log/postgresql
 ```
-Note: postgresql doesn't start with mounting -> Requires for systemctl: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+
+in the service-files for postgresql (`/usr/lib/systemd/system/postgresql.service`) and apache2 (`/usr/lib/systemd/apache2.service`).
+Further, I recommend adding
+
+```zsh
+Requires=postgresql
+```
+
+to your `.../apache2.service`.
+Test your setup via 
+
+TODO Note: postgresql doesn't start with mounting -> Requires for systemctl: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 
 
 ## Setup Apache and TLS <a name="setup_tls"></a>
@@ -749,8 +819,11 @@ General logging-locations:
 General troubleshooting:
 
 - `pg_clusters`
-- `sudo systemctl status/is-enabled postgresql`
-- `sudo systemctl status/is-enabled postgresql@12-main`
+- `sudo systemctl status postgresql`
+- `sudo systemctl is-enabled postgresql`
+- `sudo systemctl list-dependencies postgresql`
+- `sudo systemctl status postgresql@12-main`
+- `sudo systemctl is-enabled postgresql@12-main`
 
 
 ### Backups <a name="backups"></a>
