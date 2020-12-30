@@ -21,7 +21,6 @@ It's main purpose is being a collection of some useful snippets or links.
     1. [Format device](#format_device)
     1. [Mount a device](#mount_device)
     1. [Mount a device at system-start](#fstab)
-    1. [Update systemd to consider mounts](#systemd_considers_mount)
 1. [Setup Apache and TLS](#setup_tls)
 1. [Setup (or remove) postgresql](#setup_postgresql)
 1. [Install nextcloud](#install_nextcloud)
@@ -524,17 +523,22 @@ __Attention!__
 __If mounting with this file doesn't work (eg due to typo or missing directories), your system won't boot.__
 You would have to edit the file from another running linux-system (eg via USB).
 
+Keep in mind, that your `systemd`-services (database, eg postgres, and apache2) need to know, that your drives are mounted.
+Otherwise, they might not start due to missing files, resulting in errors.
+One example is mounting `/etc/postgresql`, which leads to `postgresql@12-main.service` being dead in `sudo systemctl status` (after reboot).
+Hence consider mounting only data-directories, as described for postgresql in [digitalocean][digitalocean/move_postgres_data_dir].
+
 To validate your file without reboot, you might use the command below (source: [serverfault][serverfault/forum/validate_fstab_without_rebooting]).
 
 > Please note every slash (`/`) in the following commands, since they make a difference when using rsync.
 
 ```zsh
-# stop current services
+# in shell
+
+# stop related services
 sudo systemctl stop apache2
 sudo systemctl stop postgresql
-```
 
-```zsh
 # copying current content to mount
 sudo rsync -av /var/lib/postgresql /mnt/1234/var/lib
 # make local backup
@@ -544,10 +548,13 @@ sudo ls -al /var/lib/postgresql.backup
 # rm files and dotfiles to preserve directory with current access-permissions
 sudo rm -r /var/lib/postgresql/*
 sudo rm -r /var/lib/postgresql/.*
+
+# update /etc/fstab
+sudo vim /etc/fstab
 ```
 
 ```zsh
-# update /etc/fstab
+# in /etc/fstab
 
 # [Device] [Mount Point] [File System Type] [Options] [Dump] [Pass]
 UUID=1234 /mnt/1234 ext4 defaults 0 0
@@ -576,33 +583,7 @@ sudo mount -av
 sudo ls -al /var/lib/postgresql
 ```
 
-
-### Update systemd to consider mounts <a name="systemd_considers_mount"></a>
-
-Keep in mind, that your `systemd`-services (database, eg postgres, and apache2) need to know, that your drives are mounted.
-Otherwise, they might not start due to missing files, resulting in errors.
-
-Use the following directive for systemd.unit (`man systemd.unit`)
-
-```zsh
-# general syntax
-RequiresMountsFor=mountpoint1 mountpoint2 ...
-
-# example for some postgresql-mountpoints
-RequiresMountsFor=/etc/postgresql /var/lib/postgresql /var/log/postgresql
-```
-
-in the service-files for postgresql (`/usr/lib/systemd/system/postgresql.service`) and apache2 (`/usr/lib/systemd/apache2.service`).
-Further, I recommend adding
-
-```zsh
-Requires=postgresql
-```
-
-to your `.../apache2.service`.
-Test your setup via 
-
-TODO Note: postgresql doesn't start with mounting -> Requires for systemctl: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
+See section about backups for my selection of mounted directories.
 
 
 ## Setup Apache and TLS <a name="setup_tls"></a>
@@ -828,16 +809,31 @@ General troubleshooting:
 
 ### Backups <a name="backups"></a>
 
-TODO
+- Great sources
+  - [nextcloud - Backup][nextcloud/doc/backup]
+  - [ceos3c - How to Backup NextCloud and move them to another server][ceos3c/backup_nextcloud] (including nextcloud's maintenance-mode)
 
-https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
+I would mount:
+
+- `/var/lib/postgresql`
+  - containing `sudo -u postgres psql -c "show data_directory;"`
+- `/var/log/postgresql`
+- `/var/log/apache2`
+- `/var/www`
+  - `/var/www/your.nextcloud.com/config`
+  - `/var/www/your.nextcloud.com/data`
+  - `/var/www/your.nextcloud.com/themes`
+
+TODO: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
 [apache/docs/ssl-tsl_strong_encryption]: https://httpd.apache.org/docs/current/ssl/ssl_howto.html
 [archlinux/fstab]: https://wiki.archlinux.org/index.php/Fstab#External_devices
+[ceos3c/backup_nextcloud]: https://www.ceos3c.com/open-source/how-to-backup-nextcloud-and-move-them-to-another-server/
 [devconnected/ssh-server]: https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/
 [digitalocean/apache2-setup]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
+[digitalocean/move_postgres_data_dir]: https://www.digitalocean.com/community/tutorials/how-to-move-a-postgresql-data-directory-to-a-new-location-on-ubuntu-18-04
 [digitalocean/move_postgres]: https://www.digitalocean.com/community/tutorials/how-to-move-a-postgresql-data-directory-to-a-new-location-on-ubuntu-18-04
 [digitalocean/ssh-encryption]: https://www.digitalocean.com/community/tutorials/understanding-the-ssh-encryption-and-connection-process
 [digitalocean/ufw_on_ubuntu_20.04]: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-20-04
@@ -850,6 +846,7 @@ https://docs.nextcloud.com/server/20/admin_manual/configuration_server/backgroun
 [marksei/install_nextcloud_on_ubuntu]: https://www.marksei.com/how-to-install-nextcloud-20-on-ubuntu/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
+[nextcloud/doc/backup]: https://docs.nextcloud.com/server/20/admin_manual/maintenance/backup.html
 [nextcloud/docs/cron-jobs]: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 [nextcloud/docs/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
 [nextcloud/docs/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
