@@ -856,7 +856,11 @@ I would not mount:
   - `/var/log/postgresql`
   - `/var/log/apache2`
 
-TODO: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
+
+### Cronjobs
+
+- https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
+- https://linuxhandbook.com/crontab/
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
