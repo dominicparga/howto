@@ -860,8 +860,15 @@ I would not mount:
 
 ### Cronjobs
 
+TODO
 - https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 - https://linuxhandbook.com/crontab/
+- Cleanup or something?
+
+  ```zsh
+  sudo crontab -u www-date -e
+  */5 * * * * php -f /var/www/nextcloud.parga.io/cron.php
+  ```
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
