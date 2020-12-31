@@ -459,7 +459,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     You want your router to call this URL, so the ip-address will be the new router's ip.
     ```
 
-You can (hopefully) connect via `ssh dominic@domain.com`.
+You can (hopefully) connect via `ssh dominic@parga.io`.
 
 
 ## Setup an external drive for using mount-points (fstab) <a name="setup_external_drive"></a>
@@ -608,6 +608,8 @@ Great sources:
 
 - [Apache-Docs: SSL/TLS Strong Encryption: How-To][apache/docs/ssl-tsl_strong_encryption]
 
+- FYI: Some best practices for web-server-config from [Nextcloud webroot and data directory - best practices on Ubuntu 18.04 LTS][nextcloud/help/nextcloud_data_dir_best_practices]
+
 - Source: [serverfault-forum][serverfault/forum/which_apache-conf_is_used]
 
   ```zsh
@@ -657,9 +659,6 @@ Great sources:
 In case you want to use `postgres`, look at the following commands to setup the database for nextcloud.
 The source is [marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04][marksei/install_nextcloud_on_ubuntu], but these commands are same as in the mariadb-related commands in the nextcloud-documentation.
 
-> Please note, that after installing `nextcloud` with following commands, your server, reachable under your domain, is waiting for setting up the nextcloud-admin.
-> If you won't (kind of) immediately visit your domain and setup your nextcloud-admin, someone else might do this. 8-)
-
 ```zsh
 # in shell
 sudo apt install postgresql
@@ -706,22 +705,36 @@ sudo rm -rf /etc/postgresql/
 
 ## Install nextcloud <a name="install_nextcloud"></a>
 
+> Please note, that after installing `nextcloud` with following commands, your server, reachable under your domain, is waiting for setting up the nextcloud-admin.
+> If you won't (kind of) immediately visit your domain and setup your nextcloud-admin, someone else might do this. 8-)
+
+>__ATTENTION!__ It is highly recommended to change the default-location of nextcloud's data-directory (`/var/www/nextcloud.parga.io/data`) to [prevent issues from misconfiguration of the web-server][nextcloud/help/move_nextcloud_data_dir].
+>This should be done when setting up the admin.
+>Doing this after the installation needs to tinker around with the database.
+
 After the postgres-setup, I used the official nextcloud's documentation [Example installation on Ubuntu 20.04 LTS][nextcloud/docs/example_ubuntu] to install all required packages and downloaded nextcloud.
+Additional packages might be mentioned in the complete [nextcloud's documentation][nextcloud/docs].
+The following is the combination of both, that I have installed.
 
 ```zsh
 # install all required packages (excluding mariadb/mysql)
 sudo apt update && sudo apt upgrade
+# required
 sudo apt install libapache2-mod-php7.4
-sudo apt install php7.4-pgsql
-sudo apt install php7.4-gd
-sudo apt install php7.4-curl
-sudo apt install php7.4-mbstring
-sudo apt install php7.4-intl
-sudo apt install php7.4-gmp
 sudo apt install php7.4-bcmath
-sudo apt install php7.4-imagick
+sudo apt install php7.4-common
+sudo apt install php7.4-curl
+sudo apt install php7.4-gd
+sudo apt install php7.4-gmp
+sudo apt install php7.4-json
+sudo apt install php7.4-mbstring
 sudo apt install php7.4-xml
 sudo apt install php7.4-zip
+# database (pick yours)
+sudo apt install php7.4-pgsql
+# recommended
+sudo apt install php7.4-imagick
+sudo apt install php7.4-intl
 ```
 
 ```zsh
@@ -729,23 +742,23 @@ sudo apt install php7.4-zip
 cd && mkdir -p 'Downloads/tmp' && cd 'Downloads/tmp'
 
 # download nextcloud from https://nextcloud.com/install/
-curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip' -o 'nextcloud-20.0.3.zip'
-curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.sha256' -o 'nextcloud-20.0.3.zip.sha256'
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.4.zip' -o 'nextcloud-20.0.4.zip'
+curl 'https://download.nextcloud.com/server/releases/nextcloud-20.0.4.zip.sha256' -o 'nextcloud-20.0.4.zip.sha256'
 
 # Verify download
-sha256sum -c 'nextcloud-20.0.3.zip.sha256' < 'nextcloud-20.0.3.zip'
+sha256sum -c 'nextcloud-20.0.4.zip.sha256' < 'nextcloud-20.0.4.zip'
 
 # Verify pgp-signature
-wget 'https://download.nextcloud.com/server/releases/nextcloud-20.0.3.zip.asc' -O 'nextcloud-20.0.3.zip.asc'
+wget 'https://download.nextcloud.com/server/releases/nextcloud-20.0.4.zip.asc' -O 'nextcloud-20.0.4.zip.asc'
 wget 'https://nextcloud.com/nextcloud.asc' -O 'nextcloud.asc'
 gpg --import 'nextcloud.asc'
-gpg --verify 'nextcloud-20.0.3.zip.asc' 'nextcloud-20.0.3.zip'
+gpg --verify 'nextcloud-20.0.4.zip.asc' 'nextcloud-20.0.4.zip'
 ```
 
 ```zsh
 # finalize
-unzip 'nextcloud-20.0.3.zip'
-sudo mv 'nextcloud' '/var/www/your.domain.com'
+unzip 'nextcloud-20.0.4.zip'
+sudo mv 'nextcloud' '/var/www/nextcloud.parga.io'
 
 # cleanup
 cd ..
@@ -755,7 +768,7 @@ rm -r 'tmp'
 Now, you can follow the [Installation on Linux - Apache Web server configuration][nextcloud/docs/installation_on_linux/apache_configuration], but the important commands are mentioned below.
 
 ```zsh
-# setup /etc/apache2/sites-available/your.domain.com
+# setup /etc/apache2/sites-available/nextcloud.parga.io
 
 # needed for nextcloud
 sudo a2enmod rewrite
@@ -764,10 +777,24 @@ sudo a2enmod dir
 sudo a2enmod mime
 
 # finish installation
-sudo chown -R www-data:www-data /var/www/your.domain.com
+sudo chown -R www-data:www-data /var/www/nextcloud.parga.io
+sudo chown -R www-data:www-data /opt/nextcloud.parga.io/data
 
 # restart
 sudo systemctl restart apache2
+```
+
+Take a look at the settings and dig a little through [nextcloud's official documentation][nextcloud/docs].
+To improve your server, play around a little in the settings.
+You should have a look at [nextcloud - Hardening and security guidance][nextcloud/docs/hardening_and_security_guidance], e.g. for giving php read-access to `/dev/urandom` (as described in the [nextcloud's help-forum][nextcloud/help/php-access_to_/dev/urandom]).
+
+Here are some settings for your `/etc/php/7.4/apache2/php.ini`.
+
+```php
+memory_limit 512M
+upload_max_filesize 2M
+post_max_size 8M
+open_basedir = /dev/urandom
 ```
 
 
@@ -791,7 +818,8 @@ tail -f /var/www/html/data/nextcloud.log | jq
 
 General logging-locations:
 
-- `sudo tail -f /var/www/your.domain.com/data/nextcloud.log | jq`
+- `sudo tail -f /var/log/nextcloud/nextcloud.log | jq`
+  - before: `sudo tail -f /var/www/nextcloud.parga.io/data/nextcloud.log | jq`
 - `sudo tail -f /var/log/postgresql/postgresql-12-main.log`
 - `sudo tail -f /var/log/apache2/access.log`
 - `sudo tail -f /var/log/apache2/error.log`
@@ -815,14 +843,18 @@ General troubleshooting:
 
 I would mount:
 
-- `/var/lib/postgresql`
-  - containing `sudo -u postgres psql -c "show data_directory;"`
-- `/var/log/postgresql`
-- `/var/log/apache2`
-- `/var/www`
+- data-directories from `/var/www` (according to [nextcloud-backups][nextcloud/doc/backup])
   - `/var/www/your.nextcloud.com/config`
   - `/var/www/your.nextcloud.com/data`
   - `/var/www/your.nextcloud.com/themes`
+- `/var/lib/postgresql`
+  - containing `sudo -u postgres psql -c "show data_directory;"`
+
+I would not mount:
+
+- logging causes much traffic with the harddrive, hence uses it more, hence (probably) less lifetime?
+  - `/var/log/postgresql`
+  - `/var/log/apache2`
 
 TODO: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 
@@ -847,10 +879,15 @@ TODO: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/bac
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
 [nextcloud/doc/backup]: https://docs.nextcloud.com/server/20/admin_manual/maintenance/backup.html
+[nextcloud/docs]: https://docs.nextcloud.com/
 [nextcloud/docs/cron-jobs]: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 [nextcloud/docs/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
+[nextcloud/docs/hardening_and_security_guidance]: https://docs.nextcloud.com/server/13/admin_manual/configuration_server/harden_server.html
 [nextcloud/docs/installation_on_linux]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html
 [nextcloud/docs/installation_on_linux/apache_configuration]: https://docs.nextcloud.com/server/20/admin_manual/installation/source_installation.html#apache-configuration-label
+[nextcloud/help/move_nextcloud_data_dir]: https://help.nextcloud.com/t/admin-manual-recommends-placing-data-directory-outside-web-root-why/22225
+[nextcloud/help/nextcloud_data_dir_best_practices]: https://help.nextcloud.com/t/nextcloud-webroot-and-data-directory-best-practices-on-ubuntu-18-04-lts/54927/9
+[nextcloud/help/php-access_to_/dev/urandom]: https://help.nextcloud.com/t/give-php-read-access-to-dev-urandom/27576
 [nextcloud/log-file-readability]: https://help.nextcloud.com/t/log-file-readability/5698/47
 [objectrocket/remove_postgres]: https://kb.objectrocket.com/postgresql/how-to-completely-uninstall-postgresql-757
 [ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
