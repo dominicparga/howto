@@ -674,10 +674,10 @@ Hence I highly recommend NOT to delete your directories until everything is work
 
 CREATE DATABASE nextcloud;
 
+CREATE USER nextcloud_user WITH PASSWORD 'YOUR_PASSWORD_HERE';
+# TODO is the following working instead?
 # maybe this command works (https://wiki.archlinux.org/index.php/Nextcloud#PostgreSQL)
 createuser -h localhost -P nextcloud
-# else use this
-CREATE USER nextcloud_user WITH PASSWORD 'YOUR_PASSWORD_HERE';
 
 GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud_user;
 ```
@@ -845,7 +845,8 @@ I would mount:
 
 - data-directories from `/var/www` (according to [nextcloud-backups][nextcloud/doc/backup])
   - `/var/www/your.nextcloud.com/config`
-  - `/var/www/your.nextcloud.com/data`
+  - `/opt/nextcloud.parga.io/data`
+    - before, but changed (see above) `/var/www/your.nextcloud.com/data`
   - `/var/www/your.nextcloud.com/themes`
 - `/var/lib/postgresql`
   - containing `sudo -u postgres psql -c "show data_directory;"`
