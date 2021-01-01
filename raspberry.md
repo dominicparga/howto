@@ -863,6 +863,7 @@ I would not mount:
 TODO
 - https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 - https://linuxhandbook.com/crontab/
+- https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/
 - Cleanup or something?
 
   ```zsh
