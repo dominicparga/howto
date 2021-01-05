@@ -483,7 +483,31 @@ Mounting would still work, because mounting is done relative to your root-direct
 
 ### Format device <a name="format_device"></a>
 
-TODO Partitioning (`sudo fdisk /dev/sda`) followed by `mkfs.ext4 /dev/sda1`
+```zsh
+# get disk's current name, e.g. /dev/sdb
+# (might be different after reboot!)
+sudo fdisk -l
+
+# Create partitions with GPT partition table
+sudo fdisk /dev/sdb
+```
+
+```markdown
+# in fdisk-tool
+- delete partition
+- create partition table
+- create new partition
+- change partition type to 'Linux filesystem'
+- write
+```
+
+```zsh
+# format partition /dev/sdb1
+sudo mkfs.ext4 /dev/sdb1
+
+# get partition's UUID for mounting
+sudo blkid 281d6519-1086-42d0-a2ab-0fbd797434fc
+```
 
 
 ### Mount a device <a name="mount_device"></a>
@@ -870,6 +894,18 @@ TODO
   sudo crontab -u www-date -e
   */5 * * * * php -f /var/www/nextcloud.parga.io/cron.php
   ```
+
+
+### Optimizing disk-usage
+
+Playing around with other flags might destroy your disk, so have a look at the manual!
+
+Harmless snippets:
+
+```zsh
+# show info about your disk
+sudo hdparm -C /dev/disk/by-uuid/1234
+```
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
