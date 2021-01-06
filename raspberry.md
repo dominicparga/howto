@@ -889,8 +889,13 @@ Great sources
 
 List of backupped files:
 
-- TODOasdf
-- TODO Checking size of tar-commands: https://unix.stackexchange.com/q/124052
+- Some configs
+  - `/etc/postgresql`
+  - `/etc/apache2`
+- Nextcloud
+  - `/var/www/nextcloud.parga.io/config`
+  - `/var/www/nextcloud.parga.io/themes`
+  - `/opt/nextcloud.parga.io/data`
 - logging
   - `/var/log/postgresql`
   - `/var/log/apache2`
@@ -903,6 +908,11 @@ List of backupped files:
     # -> create file and execute it
     sudo PGPASSWORD='1234' pg_dump 'nextcloud' -h '127.0.0.1' -U 'nextcloud_user' -F p -f '/mnt/backup/yyyy-mm-dd/database.psql.dump'
     ```
+
+Cool snippets for checking directory-size
+
+- `ls -alh`
+- TODO Checking size of tar-commands: https://unix.stackexchange.com/q/124052
 
 
 ### Cronjobs <a name="cronjobs"></a>
