@@ -10,7 +10,7 @@ It's main purpose is being a collection of some useful snippets or links.
 1. [Handy commands](#handy_commands)
 1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
 1. [Setup Internet and update system](#setup_internet_and_update_system)
-1. [Setup user-management](#setup-user-management)
+1. [Setup user-management](#setup_user_management)
 1. [Setup ssh (secure shell)](#ssh)
 1. [Setup ufw (firewall)](#ufw)
 1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
@@ -26,7 +26,9 @@ It's main purpose is being a collection of some useful snippets or links.
 1. [Install nextcloud](#install_nextcloud)
 1. [Maintenance](#maintenance)
     1. [Logging](#logging_and_troubleshooting)
-    1. [Backups](#backups)
+    1. [Backups and compressing data (using tar)](#backups_and_tar)
+    1. [cronjobs](#cronjobs)
+    1. [Optimizing disk-usage](#optimizing_disk_usage)
 
 
 ## Before you start <a name="before_start"></a>
@@ -101,7 +103,7 @@ nmcli --ask device wifi connect 'wifi-name'
 ```
 
 
-## Setup user-management <a name="setup-user-management"></a>
+## Setup user-management <a name="setup_user_management"></a>
 
 For more info, see [ubuntu.com][ubuntu/security-users].
 
@@ -607,7 +609,26 @@ sudo mount -av
 sudo ls -al /var/lib/postgresql
 ```
 
-See section about backups for my selection of mounted directories.
+I would mount:
+
+- data-directories from `/var/www` (according to [nextcloud-backups][nextcloud/doc/backup])
+  - `/var/www/your.nextcloud.com/config`
+  - `/opt/nextcloud.parga.io/data`
+    - before (changed, see above): `/var/www/your.nextcloud.com/data`
+  - `/var/www/your.nextcloud.com/themes`
+
+- The database
+
+  Your files are probably at `/var/lib/postgresql/12/main`, printed by
+
+  ```zsh
+  sudo -u postgres psql -c "show data_directory;"
+  ```
+
+- Logging
+  - `/var/log/postgresql`
+  - `/var/log/apache2`
+  - `/var/log/nextcloud`
 
 
 ## Setup Apache and TLS <a name="setup_tls"></a>
@@ -689,9 +710,9 @@ sudo apt install postgresql
 sudo -u postgres psql
 ```
 
-To move your data-directory, follow the great guide from [digitalocean][digitalocean/move_postgres].
-Just saying, I screwed it up.
-Hence I highly recommend NOT to delete your directories until everything is working (rebooting in between).
+To move your data-directory (not necessary due to mounts), follow the great guide from [digitalocean][digitalocean/move_postgres].
+
+Setup nextcloud-database in `postgres`:
 
 ```sql
 # in psql
@@ -859,30 +880,32 @@ General troubleshooting:
 - `sudo systemctl is-enabled postgresql@12-main`
 
 
-### Backups <a name="backups"></a>
+### Backups and compressing data (using tar) <a name="backups_and_tar"></a>
 
-- Great sources
-  - [nextcloud - Backup][nextcloud/doc/backup]
-  - [ceos3c - How to Backup NextCloud and move them to another server][ceos3c/backup_nextcloud] (including nextcloud's maintenance-mode)
+Great sources
 
-I would mount:
+- [nextcloud - Backup][nextcloud/doc/backup]
+- [ceos3c - How to Backup NextCloud and move them to another server][ceos3c/backup_nextcloud] (including nextcloud's maintenance-mode)
 
-- data-directories from `/var/www` (according to [nextcloud-backups][nextcloud/doc/backup])
-  - `/var/www/your.nextcloud.com/config`
-  - `/opt/nextcloud.parga.io/data`
-    - before, but changed (see above) `/var/www/your.nextcloud.com/data`
-  - `/var/www/your.nextcloud.com/themes`
-- `/var/lib/postgresql`
-  - containing `sudo -u postgres psql -c "show data_directory;"`
+List of backupped files:
 
-I would not mount:
-
-- logging causes much traffic with the harddrive, hence uses it more, hence (probably) less lifetime?
+- TODOasdf
+- TODO Checking size of tar-commands: https://unix.stackexchange.com/q/124052
+- logging
   - `/var/log/postgresql`
   - `/var/log/apache2`
+  - `/var/log/nextcloud`
+- Database
+  - do not copy files according to [Reddit][reddit/why_pg_dump_instead_of_copying], but use this command (see [nextcloud's docs][nextcloud/docs/backup_postgres] and [this blog of tecmint][tecmint/backup_and_restore_postgres] for details) to work with sql-files:
+
+    ```zsh
+    # NOTE: let this be stored in bash-history
+    # -> create file and execute it
+    sudo PGPASSWORD='1234' pg_dump 'nextcloud' -h '127.0.0.1' -U 'nextcloud_user' -F p -f '/mnt/backup/yyyy-mm-dd/database.psql.dump'
+    ```
 
 
-### Cronjobs
+### Cronjobs <a name="cronjobs"></a>
 
 TODO
 - https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
@@ -896,22 +919,72 @@ TODO
   ```
 
 
-### Optimizing disk-usage
+### Optimizing disk-usage <a name="optimizing_disk_usage"></a>
 
-Playing around with other flags might destroy your disk, so have a look at the manual!
+Playing around with disk-tools might destroy your disk, so be careful and only execute commands, that you can understand!
+I suggest taking a look at the manuals.
 
-Harmless snippets:
+With `hdparm`, you can send some drives into standby-mode.
+> Please note, that this means, that the writing-/reading-stick is being parked, causing wear at your disk.
+> I can't find the source, but there
+> It's the trade-off between power-consumption (and noice) and wearing out your disk.
+> I assume, in almost every case, you don't have to mess around with `hdparm`.
+> It's just for saving power (hence money) or reducing noice.
 
-```zsh
-# show info about your disk
-sudo hdparm -C /dev/disk/by-uuid/1234
-```
+Good sources:
+
+- [Very nice discussion about disks][debian/forum/aggressive_power-management]
+
+  Also mentioning the tool `smartmontools` with its binary `smartctl`.
+
+  ```zsh
+  # note: no partition is provided, but the disk
+  date && sudo smartctl -a /dev/sda
+
+  # show cycle-count of your disk
+  date && sudo smartctl -a /dev/sda | grep Load_Cycle_Count
+  ```
+
+- [How to play around with basic `hdparm`-commands][linuxundich/hdparm/drives_automatic_standby] and [Info about APM-values][ubuntuusers/Notebook-Festplatten-Bug]
+
+  > Note: `apm` stands for `advanced power management`.
+
+  Harmless snippets for `hdparm`:
+
+  ```zsh
+  # IMPORTANT: use the manual
+  man hdparm
+
+  # show info about your disk
+  # (or show unknown in case your disk doesn't support hdparm)
+  sudo hdparm -C /dev/disk/by-uuid/1234
+
+  # check your apm-setting
+  sudo hdparm -B /dev/disk/by-uuid/1234
+
+  # ATTENTION
+  # - set apm-value to very low power-consumption hence much wear (if keeping this value for days/months)
+  # - values are nice explained in the manual
+  # - holds until reboot
+  sudo hdparm -B 1 /dev/disk/by-uuid/1234
+  ```
+
+- [How to configure `/etc/hdparm.conf`][armbian/forum/config_hdparmconfig]
+
+  Please note, that you don't have a `systemctl`-service running for hdparm, because it is nothing, that has to be executed very often.
+  Hence, your `/etc/hdparm.conf` is called in `/lib/hdparm/hdparm-functions`.
+  You don't have to change anything in `/lib/hdparm/hdparm-functions` (and shouldn't), but it might help when configuring `hdparm`.
+
+- In the first year, around 5% of the tested disks fail.
+  (Indirect source: [How Long Do Hard Drives Last? Lifespan And Signs Of Failure (mentioning study and showing plots)][prosofteng/how_long_do_hard_drives_last])
 
 
 [apache/docs/core]: https://httpd.apache.org/docs/current/mod/core.html
 [apache/docs/ssl-tsl_strong_encryption]: https://httpd.apache.org/docs/current/ssl/ssl_howto.html
 [archlinux/fstab]: https://wiki.archlinux.org/index.php/Fstab#External_devices
+[armbian/forum/config_hdparmconfig]: https://forum.armbian.com/topic/9889-solved-with-hd-idle-configuring-hdparmconfig-to-spindown-hdds-when-not-in-use/
 [ceos3c/backup_nextcloud]: https://www.ceos3c.com/open-source/how-to-backup-nextcloud-and-move-them-to-another-server/
+[debian/forum/aggressive_power-management]: https://debianforum.de/forum/viewtopic.php?t=101050
 [devconnected/ssh-server]: https://devconnected.com/how-to-install-and-enable-ssh-server-on-ubuntu-20-04/
 [digitalocean/apache2-setup]: https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
 [digitalocean/move_postgres_data_dir]: https://www.digitalocean.com/community/tutorials/how-to-move-a-postgresql-data-directory-to-a-new-location-on-ubuntu-18-04
@@ -924,11 +997,13 @@ sudo hdparm -C /dev/disk/by-uuid/1234
 [howtogeek/ssh-copy-id]: https://www.howtogeek.com/424510/how-to-create-and-install-ssh-keys-from-the-linux-shell/
 [linuxhandbook/has_user_sudo-rights]: https://linuxhandbook.com/check-if-user-has-sudo-rights/
 [linuxhandbook/list_users_in_group]: https://linuxhandbook.com/list-users-in-group-linux/
+[linuxundich/hdparm/drives_automatic_standby]: https://linuxundich.de/hardware/festplatten-automatisch-im-betrieb-in-den-standby-schalten/
 [marksei/install_nextcloud_on_ubuntu]: https://www.marksei.com/how-to-install-nextcloud-20-on-ubuntu/
 [namecheap/create_subdomain]: https://www.namecheap.com/support/knowledgebase/article.aspx/9776/2237/how-to-create-a-subdomain-for-my-domain/
 [namecheap/dyndns-update-url]: https://www.namecheap.com/support/knowledgebase/article.aspx/29/11/how-do-i-use-a-browser-to-dynamically-update-the-hosts-ip/
 [nextcloud/doc/backup]: https://docs.nextcloud.com/server/20/admin_manual/maintenance/backup.html
 [nextcloud/docs]: https://docs.nextcloud.com/
+[nextcloud/docs/backup_postgres]: https://docs.nextcloud.com/server/20/admin_manual/maintenance/backup.html#postgresql
 [nextcloud/docs/cron-jobs]: https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
 [nextcloud/docs/example_ubuntu]: https://docs.nextcloud.com/server/20/admin_manual/installation/example_ubuntu.html
 [nextcloud/docs/hardening_and_security_guidance]: https://docs.nextcloud.com/server/13/admin_manual/configuration_server/harden_server.html
@@ -940,15 +1015,19 @@ sudo hdparm -C /dev/disk/by-uuid/1234
 [nextcloud/log-file-readability]: https://help.nextcloud.com/t/log-file-readability/5698/47
 [objectrocket/remove_postgres]: https://kb.objectrocket.com/postgresql/how-to-completely-uninstall-postgresql-757
 [ostechnix/ssh_access_per_user]: https://ostechnix.com/allow-deny-ssh-access-particular-user-group-linux/
+[prosofteng/how_long_do_hard_drives_last]: https://www.prosofteng.com/blog/how-long-do-hard-drives-last/
 [raspberrypi/security]: https://www.raspberrypi.org/documentation/configuration/security.md
+[reddit/why_pg_dump_instead_of_copying]: https://www.reddit.com/r/PostgreSQL/comments/jlu3zt/do_i_need_pg_dump_if_db_is_already_on_a_separate/?utm_source=share&utm_medium=web2x&context=3
 [serverfault/forum/validate_fstab_without_rebooting]: https://serverfault.com/a/509014
 [serverfault/forum/which_apache-conf_is_used]: https://serverfault.com/q/12968
 [serverspace/letsencrypt]: https://serverspace.us/support/help/how-to-get-lets-encrypt-ssl-on-ubuntu/
 [ssllabs/ssltest]: https://www.ssllabs.com/ssltest
 [stackexchange/which_users_are_allowed_to_log_in_via_ssh]: https://unix.stackexchange.com/questions/36804/which-users-are-allowed-to-log-in-via-ssh-by-default
 [superuser/input-keyboard-layout]: https://superuser.com/a/404507
+[tecmint/backup_and_restore_postgres]: https://www.tecmint.com/backup-and-restore-postgresql-database/
 [ubuntu/fstab]: https://help.ubuntu.com/community/Fstab
 [ubuntu/security-users]: https://ubuntu.com/server/docs/security-users
 [ubuntuusers/mod_ssl]: https://wiki.ubuntuusers.de/Apache/mod_ssl/
 [ubuntuusers/mount]: https://wiki.ubuntuusers.de/mount/
+[ubuntuusers/Notebook-Festplatten-Bug]: https://wiki.ubuntuusers.de/Notebook-Festplatten-Bug/
 [upload/enhance_encryption]: https://upcloud.com/community/tutorials/install-lets-encrypt-apache/
