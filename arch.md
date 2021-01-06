@@ -112,10 +112,15 @@ nmcli device show
 # List nearby wifi networks
 nmcli device wifi list
 
-# Connect to a wifi network without password being stored in history
+# connect to a wifi network with password being asked interactively
+nmcli --ask device wifi connect "${ssid}"
+
+# OR
+
+# connect to a wifi network without password being stored in history
 vim tmp_pw.txt
-__SSID='my-wlan'
-nmcli device wifi connect "${__SSID}" password "$(cat tmp_pw.txt)"
+ssid='my-wlan'
+nmcli device wifi connect "${ssid}" password "$(cat tmp_pw.txt)"
 rm tmp_pw.txt
 ```
 
