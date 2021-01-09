@@ -105,7 +105,7 @@ nmcli --ask device wifi connect 'wifi-name'
 
 ## Setup user-management <a name="setup_user_management"></a>
 
-For more info, see [ubuntu.com][ubuntu/security-users].
+For more info, see [ubuntu.com][ubuntu/security-users] and [howtogeek - How to Use the chmod Command on Linux][howtogeek/chmod_explanations].
 
 The initial user and password are predefined and probably `ubuntu` (both user and password).
 Per default, this user `ubuntu` is in one of the groups `sudo`, `wheel` or `admin` (all three are kind of the same thing with different names for backwards-compatibility).
@@ -880,6 +880,13 @@ General troubleshooting:
 - `sudo systemctl is-enabled postgresql@12-main`
 
 
+TODO
+
+- List of supported directives in Apache-logging: `https://www.apacheviewer.com/log-format/`
+- Infos about Apache-logging: `https://httpd.apache.org/docs/2.4/logs.html`
+- Example-mail-server with everything (including some logging-commands): `https://123qwe.com/tutorial-debian-10/`
+
+
 ### Backups and compressing data (using tar) <a name="backups_and_tar"></a>
 
 Great sources
@@ -918,9 +925,11 @@ Cool snippets for checking directory-size
 ### Cronjobs <a name="cronjobs"></a>
 
 TODO
-- https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs
-- https://linuxhandbook.com/crontab/
-- https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/
+
+- Renew LetsEncrypt certificate: `https://community.letsencrypt.org/t/renew-letsencrypt-certificate/34677`
+- `https://docs.nextcloud.com/server/20/admin_manual/configuration_server/background_jobs_configuration.html#cron-jobs`
+- `https://linuxhandbook.com/crontab/`
+- `https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/`
 - Cleanup or something?
 
   ```zsh
@@ -1041,3 +1050,4 @@ Good sources:
 [ubuntuusers/mount]: https://wiki.ubuntuusers.de/mount/
 [ubuntuusers/Notebook-Festplatten-Bug]: https://wiki.ubuntuusers.de/Notebook-Festplatten-Bug/
 [upload/enhance_encryption]: https://upcloud.com/community/tutorials/install-lets-encrypt-apache/
+[howtogeek/chmod_explanations]: https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/
