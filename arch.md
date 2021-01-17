@@ -44,6 +44,7 @@ Good pages to start
 1. [Cool themes and icons](#themes-and-icons)
 1. [Fonts](#fonts)
 1. [Troubleshooting](#troubleshooting)
+    1. [Booting into black screen with blinking cursor](#booting_into_black_screen_with_blinking_cursor)
     1. [Login doesn't work after updating pam](#login_doesnt_work_after_updating_pam)
     1. [System-maintenance and logging](#system-maintenance_and_logging)
     1. [Could not find tools on server when updating/installing tools](#tools-not-found-while-updating)
@@ -215,6 +216,9 @@ If discover shows `No application back-ends found, please report to your distrib
 ```zsh
 yay -S cups cups-pdf
 yay -S hplip
+sudo systemctl start cups
+# for automatically starting after reboot
+sudo systemctl enable cups
 ```
 
 Then enter `http://localhost:631/admin` and add a new printer.
@@ -450,6 +454,11 @@ More useful fonts/fonts-pkgs can be found [in the Archwiki][archlinux/wiki/schri
 
 `CTRL`, `ALT` and e.g. `F2` selects another `tty`.
 This can be used to check logs or access the system if something is not running accordingly.
+
+
+### Booting into black screen with blinking cursor <a name="booting_into_black_screen_with_blinking_cursor"></a>
+
+Solution: Switch `TTY` with `ALT`, `F2` and back with `ALT`, `F1`.
 
 
 ### Login doesn't work after updating pam <a name="login_doesnt_work_after_updating_pam"></a>
