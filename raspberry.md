@@ -833,14 +833,28 @@ Take a look at the settings and dig a little through [nextcloud's official docum
 To improve your server, play around a little in the settings.
 You should have a look at [nextcloud - Hardening and security guidance][nextcloud/docs/hardening_and_security_guidance], e.g. for giving php read-access to `/dev/urandom` (as described in the [nextcloud's help-forum][nextcloud/help/php-access_to_/dev/urandom]).
 
-Here are some settings for your `/etc/php/7.4/apache2/php.ini`.
+You can find some settings for your `/etc/php/7.4/apache2/php.ini` in this file.
 
 ```php
 memory_limit 512M
 upload_max_filesize 2M
 post_max_size 8M
-open_basedir = /dev/urandom
 ```
+
+I would set them in your `/etc/apache2/sites-available/nextcloud.parga.io.conf`.
+
+```zsh
+## in nextcloud.parga.io.conf
+<Directory /var/www/nextcloud.parga.io/>
+  php_admin_value memory_limit 1024M
+  php_admin_value upload_max_filesize 10G
+  php_admin_value post_max_size 8M
+</Directory>
+```
+
+You can see whether your nextcloud has these settings accepted in the admin's settings (probably under `System`).
+Please note, that you can not upload large files in case you have too low numbers here.
+But too large numbers make your server vulnerable for attacks (by your users, who should be trustworthy anyways because it's your server).
 
 
 ## Maintenance <a name="maintenance"></a>
