@@ -1,0 +1,293 @@
+Hallo.
+Dieses Dokument dient als kleine Einführung für vim und soll den Einstieg
+erleichtern. Vim ist quasi überall vorinstalliert und dient der
+Textbearbeitung, ähnlich wie nano (oder Notepad++). Vorteil ist, dass es in
+der Konsole läuft, also ohne grafisches Interface. Außerdem verwendet das
+praktische Tool less, mit dem Files in der Konsole angeschaut werden können,
+ebenfalls vim-Kommandos. Obwohl vim eine steile Lernkurve hat, ist die
+Grundidee sehr simpel. Es wird zwischen
+- Textbetrachtung (normal-mode)
+- Textmarkierung (visual-mode)
+- Schreiben von Text (insert-mode)
+unterschieden. Wir werden in diesem Dokument erst recht spät den normal-mode
+verlassen.
+
+Kurze Grundbefehle, bevor es richtig losgeht:
+- Mit der escape-Taste gelangst du stets in den normal-mode.
+- Mit :w (write) und Enter wird das Dokument gespeichert.
+- Mit :q (quit) und Enter wird das Dokument geschlossen, falls das Dokument
+  keine ungespeicherte Änderung hat.
+- Mit :wq und Enter wird gespeichert und geschlossen.
+  Die Kurzform :x ist dazu identisch.
+- Mit :q! (force quit) und Enter wird unabhängig von ungespeicherten
+  Änderungen geschlossen.
+
+Außerhalb des insert-mode werden Tasten als Kommando interpretiert. Es gibt
+Kommandos mit und ohne sogenannte Motion. Eine Motion beschreibt eine
+Bewegung des Cursors. Mehr vim-Theorie gibt es nicht. Der Rest ist das Lernen
+der Kommandos und Motions.
+
+Los gehts!
+
+Wir starten im normal-mode und lernen erst einmal grundlegende Motions. Es
+folgt eine Auflistung von Motions, bevor diese nochmal aufgelistet
+und intensiver ausprobiert werden können. Vorher aber wichtig: Mit zz scrollt
+die View so, dass der Cursor zentriert ist. Mit h, j, k, l wird der Cursor
+nach links, unten, oben und rechts bewegt.
+
+An regulären Ausdrücken angelehnt sind die Motions ^ und $, welche an den
+Anfang und ans Ende der Zeile springen. Ersteres ignoriert Whitespaces am
+    Anfang der Zeile. Möchtest du das nicht, dann schafft 0 (null) Abhilfe und
+setzt den Cursor auf Position 0 der Zeile. Gerne ein wenig damit rumspielen.
+
+Klar, wir lernen nicht vim, um einzelne Zeichen springen zu können. Mit w
+(word) springst du an den nächsten Anfang eines Wortes, mit e (end) ans
+nächste Ende eines Wortes. Rückwärts springst du mit b (back). Sonderzeichen
+werden als einzelnes Wort gesehen, außer du verwendest Großbuchstaben.
+
+Da wir nun erste Motions kennen, wie wäre es mit unserem ersten Kommando?
+Gelöscht wird mit der Eingabe des Buchstabens d (delete), was den Beginn
+markiert, gefolgt von einer Motion, was das Ende markiert. Probiere mal mit
+den oberen Motions den folgenden Text zu löschen. Bewege dazu den Cursor
+lieber in die Mitte der Textblöcke, bevor du löschst.
+
+Hier sind nochmal alle bisherigen Motions aufgelistet in der Übersicht:
+    w/W  e/E  b/B  ^  $  0  h  j  k  l
+Das Löschen-Kommando ist d.
+
+--------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Tellus in metus vulputate
+eu scelerisque. Nulla malesuada pellentesque elit eget. Leo integer malesuada
+nunc vel risus. Suspendisse sed nisi lacus sed viverra tellus in hac
+habitasse. Nec feugiat in fermentum posuere urna nec. Dui id ornare arcu odio
+ut. Faucibus in ornare quam viverra. Vestibulum mattis ullamcorper velit sed
+ullamcorper morbi. Imperdiet dui accumsan sit amet nulla facilisi morbi
+tempus. Condimentum lacinia quis vel eros donec ac odio tempor. Interdum
+posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Ut tortor
+pretium viverra suspendisse potenti nullam ac. Ac auctor augue mauris augue
+neque gravida in. Nisl tincidunt eget nullam non nisi est sit amet. Dis
+parturient montes nascetur ridiculus.
+
+Montes nascetur ridiculus mus mauris vitae ultricies. Fermentum iaculis eu
+non diam phasellus vestibulum lorem. Sit amet mattis vulputate enim nulla. Mi
+proin sed libero enim. Sed felis eget velit aliquet. Est ultricies integer
+quis auctor elit. Urna condimentum mattis pellentesque id nibh tortor id
+aliquet. Tristique senectus et netus et malesuada fames. Pharetra convallis
+posuere morbi leo urna molestie at elementum. Pellentesque eu tincidunt
+tortor aliquam nulla facilisi cras. Amet porttitor eget dolor morbi. Dolor
+sit amet consectetur adipiscing elit pellentesque habitant. Facilisi nullam
+vehicula ipsum a arcu cursus vitae congue. Bibendum neque egestas congue
+quisque egestas. Sed arcu non odio euismod lacinia at quis. Tellus elementum
+sagittis vitae et leo duis ut diam quam.
+
+Et ultrices neque ornare aenean. Aliquet risus feugiat in ante metus dictum
+at tempor. In hendrerit gravida rutrum quisque. Accumsan in nisl nisi
+scelerisque eu ultrices vitae. Nibh tellus molestie nunc non blandit massa.
+Orci dapibus ultrices in iaculis nunc sed augue. Urna nec tincidunt praesent
+semper feugiat nibh sed pulvinar. Mauris pharetra et ultrices neque ornare.
+Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla.
+Facilisis volutpat est velit egestas. Bibendum ut tristique et egestas quis
+ipsum suspendisse. Scelerisque eu ultrices vitae auctor eu augue. Ultrices
+eros in cursus turpis. Tincidunt lobortis feugiat vivamus at augue eget arcu
+dictum varius. Augue interdum velit euismod in pellentesque massa placerat
+duis. Tempor orci dapibus ultrices in iaculis nunc sed augue lacus.
+
+Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Ac
+turpis egestas maecenas pharetra convallis. Egestas quis ipsum suspendisse
+ultrices gravida dictum fusce ut. Enim blandit volutpat maecenas volutpat
+blandit aliquam. Ornare suspendisse sed nisi lacus sed viverra tellus in hac.
+Amet cursus sit amet dictum sit amet justo donec. Cum sociis natoque
+penatibus et magnis. Morbi tristique senectus et netus et malesuada fames.
+Sed faucibus turpis in eu mi bibendum neque. Proin fermentum leo vel orci
+porta non pulvinar. Diam donec adipiscing tristique risus nec feugiat.
+Pharetra massa massa ultricies mi.
+
+Eget velit aliquet sagittis id. Dapibus ultrices in iaculis nunc. Facilisi
+morbi tempus iaculis urna id volutpat lacus laoreet. Nunc scelerisque viverra
+mauris in aliquam sem fringilla ut morbi. Vel quam elementum pulvinar etiam
+non quam lacus suspendisse. Ultricies mi quis hendrerit dolor magna eget est.
+Morbi blandit cursus risus at. Suspendisse faucibus interdum posuere lorem
+ipsum dolor. Porttitor leo a diam sollicitudin tempor id eu nisl. Tellus
+mauris a diam maecenas sed. Nulla porttitor massa id neque aliquam vestibulum
+morbi. Fringilla est ullamcorper eget nulla. Praesent tristique magna sit
+amet purus. Facilisi etiam dignissim diam quis.
+--------------------------------------------------------------------------------
+Tippe nun zz für eine bessere Ansicht.
+
+Sehr gut!
+
+Eine zusätzliche Motion ist %, wenn der Cursor auf einer Klammer steht. Durch
+% wird zur korrespondierenden Klammer gesprungen. Mit d% kann also alles von
+der aktuellen Klammer bis zur korrespondierenden Klammer
+gelöscht werden.
+
+Alle Motions bisher bestanden aus einem Zeichen. Es gibt auch
+Motions, die 2 Zeichen erwarten. Dazu zählen f (find) bzw t (to), diesmal
+gefolgt von einem Zeichen, zu dem gesprungen werden soll (inklusiv oder
+exklusiv). Also die Eingabe fg springt mit dem Cursor zum nächsten Vorkommen
+von g. Die Eingabe von tg springt eine Stelle vor das g. Entsprechend löscht
+dfg alles bis zum nächsten Vorkommen von g, inklusive dem g. Großbuchstaben
+(F, T) springen rückwärts.
+
+Die nächsten beiden Motions sind für Programmierer wichtig, funktionieren aber
+ausschließlich mit vorangegangenem Kommando. Mit di (insert) und einer
+Klammer kann alles innerhalb der Klammern gelöscht werden. Mit da (around)
+und einer Klammer werden auch die Klammern gelöscht. Das funktioniert mit
+allen möglichen umschließenden Zeichen, also auch beispielsweise mit
+Anführungsstrichen " oder '. Anstelle von Klammern kann auch diw/diW
+eingegeben werden, um das aktuelle Wort zu löschen, in dem sich der Cursor
+befindet.
+
+Okay, 2 Motions gibt es doch noch. Merke dir die aktuelle Zeile, bevor du
+weiter liest. Mit 27gg oder 27G springt der Cursor in die 27. Zeile des
+Dokuments. Mit gg wird in die erste Zeile gesprungen, mit G in die letzte
+Zeile. Trolle können beim Kollegen dgg eintippen und das gesamte Dokument bis
+zur Cursorposition löschen.
+
+Probiere dich gerne wieder ein wenig aus.
+Kurze Übersicht zu den neuen Motions:
+    %  f/F  t/T
+    <cmd>i(  <cmd>i}  <cmd>i"  <cmd>iw/<cmd>iW
+    <cmd>a(  <cmd>a}  <cmd>a"  <cmd>aw/<cmd>aW
+und die vorherigen Motions sind:
+    w/W  e/E  b/B  ^  $  0  h  j  k  l
+Das Löschen-Kommando ist d.
+
+--------------------------------------------------------------------------------
+// Bewege den Cursor zwischen die Anführungsstriche "
+// und drücke da"
+public static String createGreetings() {
+    String greetings = "Hello!";
+    // Versuche hier zB das Eintippen von dt;
+    greetings += " Nice to meet you.";
+    greetings += " I know, vim has so many motions..";
+    greetings += " But good news: just one more motion is coming!";
+    greetings += " If you like vim so far,";
+    greetings += " the key is to just keep on using vim.";
+    return greetings;
+}
+
+// Bewege den Cursor in die Methode,
+// sei im normal-mode (drücke escape, um sicherzugehen)
+// und tippe di}
+public static void main(String[] args) {
+    final String greetings = createGreetings();
+    System.out.println(greetings);
+}
+--------------------------------------------------------------------------------
+Tippe nun zz für eine bessere Ansicht.
+
+Als nächstes wollen wir uns den insert-mode genauer anschauen. Der
+insert-mode ist eigentlich schnell erklärt, aber weil es vim ist, gibt es ein
+paar praktische Komandos dazu. Im normal-mode kann durch i (insert) vor das
+aktuelle Zeichen oder mit a (after) nach dem aktuellen Zeichen in den
+insert-mode gewechselt werden. Im insert-mode kann Text getippt werden. Mit
+esc wird in den normal-mode zurück gewechselt. Durch c (change) und eine
+Motion wird d (delete) mit i (insert) kombiniert. Beispielsweise kann durch
+das Tippen von ciw analog zu diw das aktuelle Wort gelöscht werden, aber
+anschließend befindest du dich direkt im insert-mode. Durch s wird das
+Zeichen, auf dem der Cursor steht, gelöscht und in den insert-mode
+gewechselt. Das heißt, hier wird keine Motion benötigt.
+
+Kurze Übersicht zum insert-mode:
+    (i)nsert  (a)fter  (c)hange  s
+
+Der visual-mode ist noch etwas spannender als der insert-mode. Durch v
+gelangst du in den visual-mode. Nun kannst du den Cursor wie im normal-mode
+bewegen und alle bisherigen Motions verwenden, nur wird dabei Text markiert.
+Durch esc wird abgebrochen. Mit d kannst du den markierten Text löschen, mit
+c oder s landest du dabei direkt im insert-mode. Durch V (Großbuchstabe)
+markierst du zeilenweise statt zeichenweise.
+
+Die letzten Motions sind super wichtig. Mit der Eingabe von / oder
+? und einem regulären Ausdruck (den du mit Enter bestätigst) kannst du
+vorwärts bzw. rückwärts suchen. Die Suchergebnisse springst du mit n oder N
+in der jeweiligen Suchrichtung vorwärts bzw. rückwärts. Da es sich bei n und
+N um eine Motion handelt, können sie theoretisch mit allen entsprechenden
+Kommandos kombiniert werden (zB markieren mit vn). Genauso kannst du im
+visual-mode ein neues Pattern mit / oder ? suchen. Mit # wird automatisch das
+Wort, in dem der Cursor sich aktuell befindet, als Suchpattern verwendet.
+
+Kurze Übersicht zur Suche:
+    /  ?  #
+    n  N
+
+Zu erwähnen sind noch folgende praktische Kommandos:
+
+    .
+    Wiederholt das zuletzt getätigte Kommando. Sehr praktisch!
+
+    u (undo)
+    Macht die letzte Änderung rückgängig.
+
+    Steuerung und r
+    Läuft rückwärts durch die undo-Historie, stellt also Änderungen wieder her.
+
+    y (yank)
+    Mit Motion im normal-mode kopiert das den entsprechenden Text. Viel
+    wichtiger aber, im visual-mode kopiert es den markierten Text.
+
+    p (paste)
+    Fügt hinter dem Cursor die Zwischenablage ein. Ein Großbuchstabe P fügt
+    vor dem Cursor ein.
+
+    x
+    Löscht das Zeichen, wo sich der Cursor aktuell befindet. Das Wechseln in
+    den insert-mode mit s ist damit identisch zu xi.
+
+    d (delete)
+    Eigentlich schon bekannt, aber die Wahrheit ist, dass d ausschneidet und
+    nicht einfach löscht.
+
+    dd
+    Schneidet die aktuelle Zeile aus.
+
+    3dd
+    Schneidet 3 Zeilen aus, beginnend mit der aktuellen Zeile. Allgemein
+    lassen sich mit Zahlen die Motions und Kommandos mehrfach ausführen. Zum
+    Beispiel wird mit der Eingabe 3w zum 3. Anfang eines Wortes gesprungen
+    und mit d3w oder 3dw wird entsprechend gelöscht.
+
+    Großbuchstaben für i, d, c
+    I = ^i
+    D = d$
+    C = Da
+
+    r (replace)
+    Ersetzt im normal-mode das aktuelle Zeichen durch das eingegebene
+    Zeichen. Als Großbuchstabe wird einfach überschrieben, bis esc gedrückt
+    wird. Im visual-mode ersetzt r jedes markierte Zeichen durch das
+    eingegebene Zeichen.
+
+Zum Abschluss wird es noch ein wenig fancy. Mit qj können die eingegebenen
+Kommandos aufgezeichnet und unter dem Buchstaben j gespeichert werden. Durch
+erneutes Drücken von q wird die Aufzeichnung beendet. Durch @j wird die
+Aufzeichnung erneut, vollautomatisch, abgespielt. Statt j kann jeder
+beliebige Buchstabe verwendet werden. Aufgrund der komplexen Motions und
+Kommandos kann sich hier ausgetobt werden. Das ist teilweise sehr praktisch
+bei Refactoring.
+
+Beispiel:
+Bewege den Cursor in die erste Zeile und tippe folgende Zeichenfolge.
+    qj      Beginne die Aufnahme in j
+    0w      Gehe zum Variablennamen
+    iasdf   Wechsel in insert-mode und tippe asdf plus ein Leerzeichen
+    esc     Wechsel zurück in normal-mode
+    f"      Bewege den Cursor zum nächsten "
+    vf"y    Markiere den String und kopiere ihn
+    0ww#    Bewege den Cursor in den Variablennamen und packe ihn in die Suche
+    vep     Ersetze den Variablennamen durch den kopierten String
+    /asdf   Suche nach asdf
+    enter   Bestätige die Suche und springe damit zu asdf
+    dd      Lösche die Zeile
+    q       Beende die Aufnahme
+    @j      Wiederhole alles mit Pavol
+
+String stephan = "Stephan";
+String pavol = "Pavol";
+String dominic = "Dominic";
+
+System.out.println(stephan);
+System.out.println(pavol);
+System.out.println(dominic);

@@ -1,4 +1,4 @@
-# Vim
+# Vim and Cheatsheet
 
 Vim is a way of navigating and editing text-files.
 What makes vim special is its separation of __viewing__ text and __editing__ text.
@@ -67,6 +67,7 @@ This page just covers basics like saving the file.
 | <kbd>u</kbd> | normal | Undo changes. |
 | <kbd>strg</kbd> + <kbd>r</kbd> | normal | Redo = Undo undo = Undo inverse. |
 | <kbd>/</kbd> (or <kbd>?</kbd>) | normal | Enter search-pattern afterwards, searching forward (or backwards) |
+| <kbd>#</kbd> | normal | Search backwards, but with current word as search-pattern |
 | <kbd>n</kbd> (or <kbd>N</kbd>) | normal | Jump to next (previous) occurence of last search-pattern. |
 
 
