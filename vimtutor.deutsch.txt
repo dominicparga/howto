@@ -227,6 +227,9 @@ Zu erwähnen sind noch folgende praktische Kommandos:
     y (yank)
     Mit Motion im normal-mode kopiert das den entsprechenden Text. Viel
     wichtiger aber, im visual-mode kopiert es den markierten Text.
+    
+    yy (yank line)
+    Kopiert die aktuelle Zeile.
 
     p (paste)
     Fügt hinter dem Cursor die Zwischenablage ein. Ein Großbuchstabe P fügt
