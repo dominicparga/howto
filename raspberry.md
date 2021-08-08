@@ -440,7 +440,8 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     You don't need it and it's just a possible security-risk.
 
 1. Enable `DynDNS` and your router will inform your domain-provider automatically in case of a ip-change.
-    Enter your credentials for your domain-provider (`namecheap.com` in my case).
+    Enter your credentials for your domain-provider.
+    In my case, this is `namecheap.com`.
     Since `namecheap.com` is not pre-configured, you have to use the update-URL, which is provided by `namecheap.com` on some [documentation-website][namecheap/dyndns-update-url].
     The URL will be something like `https://dynamicdns.park-your-domain.com/update?host=@&domain=domain.com&password=asdfasdf` as explained in the following.
 
@@ -459,6 +460,23 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     [IP]:
     If not provided, the caller of this URL uses its own ip-address.
     You want your router to call this URL, so the ip-address will be the new router's ip.
+    ```
+
+    The requested credentials are filled as following.
+    Yes, it is your own domain and yes, it is the ddns-password.
+
+    ```text
+    Update-URL:
+    see above
+
+    Domainname:
+    domain.com
+
+    Username:
+    domain.com
+
+    Password:
+    asdfasdf
     ```
 
 You can (hopefully) connect via `ssh dominic@parga.io`.
