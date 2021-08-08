@@ -1,0 +1,290 @@
+Hello.
+This document serves as little introduction for vim and is intended to help
+you getting started. Vim is preinstalled on many devices and is a tool for
+editing text, similar to nano (or Notepad++). One advantage of vim is, that
+it runs in console and without graphical UI. Further, a practical tool called
+less for viewing files in the console is also using vim-commands. While vim
+has a steep learning curve, it's base idea is quite simple. It distinguishes
+between
+- viewing text (normal-mode)
+- marking text (visual-mode)
+- writing text (insert-mode)
+We will leave the normal-mode quite late in this document.
+
+Before we start, here are some basic commands:
+- With the escape-key, you get back to normal-mode.
+- With :w (write) and enter, the document is being saved.
+- With :q (quit) and enter, the document is being closed, if the document has
+  no unsaved changes.
+- With :wq and enter, the document is being written and closed.
+  The abbreviation :x is identical.
+- With :q! (force quit) and enter, the document is being closed and unsaved
+  changes will be discarded.
+
+Outside of the insert-mode, keys are interpreted as commands. There are
+commands with and without so-called motions. A motion describes a
+cursor-movement. That's all with vim's theory. The rest is learning commands
+and motions.
+
+Let's go!
+
+First off, we will start in normal-mode and learn some basic motions. A list
+of motions is shown below, before you can play around with them afterwards.
+But before we start: you can scroll with zz such that the cursor is centered.
+With h, j, k, l you can move the cursor left, down, up and right.
+
+Similar to regular expressions, the motions ^ and $ can jump to the start and
+end of the current line. Further ignores whitespaces at the line's beginning.
+    If you don't want this behaviour, you can use 0 (zero) to set the cursor to
+position 0 of the current line. Feel free to play around with these commands.
+
+Of course, we are not learning vim to jump single characters. With w (word),
+you can jump to the next beginning of a word. With e (end) you can jump to
+the next end of a word. Jumping backwards is done by pressing b (back).
+Special characters are treated as single word, except you use capital letters
+for the motions.
+
+Because we now know our first motions, how about our first command? The
+deletion-commands uses the letter d (delete) to use the current cursor's
+position as starting point for deletion, followed by a motion marking the end
+of the deletion. Play around with above motions and try to delete the
+following text. I suggest to move the cursor into the middle of the
+text-blocks, before you start the deletion.
+
+Here are all motions known so far:
+    w/W  e/E  b/B  ^  $  0  h  j  k  l
+The command for deletion is d.
+
+--------------------------------------------------------------------------------
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Tellus in metus vulputate
+eu scelerisque. Nulla malesuada pellentesque elit eget. Leo integer malesuada
+nunc vel risus. Suspendisse sed nisi lacus sed viverra tellus in hac
+habitasse. Nec feugiat in fermentum posuere urna nec. Dui id ornare arcu odio
+ut. Faucibus in ornare quam viverra. Vestibulum mattis ullamcorper velit sed
+ullamcorper morbi. Imperdiet dui accumsan sit amet nulla facilisi morbi
+tempus. Condimentum lacinia quis vel eros donec ac odio tempor. Interdum
+posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Ut tortor
+pretium viverra suspendisse potenti nullam ac. Ac auctor augue mauris augue
+neque gravida in. Nisl tincidunt eget nullam non nisi est sit amet. Dis
+parturient montes nascetur ridiculus.
+
+Montes nascetur ridiculus mus mauris vitae ultricies. Fermentum iaculis eu
+non diam phasellus vestibulum lorem. Sit amet mattis vulputate enim nulla. Mi
+proin sed libero enim. Sed felis eget velit aliquet. Est ultricies integer
+quis auctor elit. Urna condimentum mattis pellentesque id nibh tortor id
+aliquet. Tristique senectus et netus et malesuada fames. Pharetra convallis
+posuere morbi leo urna molestie at elementum. Pellentesque eu tincidunt
+tortor aliquam nulla facilisi cras. Amet porttitor eget dolor morbi. Dolor
+sit amet consectetur adipiscing elit pellentesque habitant. Facilisi nullam
+vehicula ipsum a arcu cursus vitae congue. Bibendum neque egestas congue
+quisque egestas. Sed arcu non odio euismod lacinia at quis. Tellus elementum
+sagittis vitae et leo duis ut diam quam.
+
+Et ultrices neque ornare aenean. Aliquet risus feugiat in ante metus dictum
+at tempor. In hendrerit gravida rutrum quisque. Accumsan in nisl nisi
+scelerisque eu ultrices vitae. Nibh tellus molestie nunc non blandit massa.
+Orci dapibus ultrices in iaculis nunc sed augue. Urna nec tincidunt praesent
+semper feugiat nibh sed pulvinar. Mauris pharetra et ultrices neque ornare.
+Tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla.
+Facilisis volutpat est velit egestas. Bibendum ut tristique et egestas quis
+ipsum suspendisse. Scelerisque eu ultrices vitae auctor eu augue. Ultrices
+eros in cursus turpis. Tincidunt lobortis feugiat vivamus at augue eget arcu
+dictum varius. Augue interdum velit euismod in pellentesque massa placerat
+duis. Tempor orci dapibus ultrices in iaculis nunc sed augue lacus.
+
+Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere ac. Ac
+turpis egestas maecenas pharetra convallis. Egestas quis ipsum suspendisse
+ultrices gravida dictum fusce ut. Enim blandit volutpat maecenas volutpat
+blandit aliquam. Ornare suspendisse sed nisi lacus sed viverra tellus in hac.
+Amet cursus sit amet dictum sit amet justo donec. Cum sociis natoque
+penatibus et magnis. Morbi tristique senectus et netus et malesuada fames.
+Sed faucibus turpis in eu mi bibendum neque. Proin fermentum leo vel orci
+porta non pulvinar. Diam donec adipiscing tristique risus nec feugiat.
+Pharetra massa massa ultricies mi.
+
+Eget velit aliquet sagittis id. Dapibus ultrices in iaculis nunc. Facilisi
+morbi tempus iaculis urna id volutpat lacus laoreet. Nunc scelerisque viverra
+mauris in aliquam sem fringilla ut morbi. Vel quam elementum pulvinar etiam
+non quam lacus suspendisse. Ultricies mi quis hendrerit dolor magna eget est.
+Morbi blandit cursus risus at. Suspendisse faucibus interdum posuere lorem
+ipsum dolor. Porttitor leo a diam sollicitudin tempor id eu nisl. Tellus
+mauris a diam maecenas sed. Nulla porttitor massa id neque aliquam vestibulum
+morbi. Fringilla est ullamcorper eget nulla. Praesent tristique magna sit
+amet purus. Facilisi etiam dignissim diam quis.
+--------------------------------------------------------------------------------
+Press zz for a better overview.
+
+Very nice!
+
+An additional motion is %, if the cursor is on a bracket. Via %, the cursor
+jumps to the corresponding bracket. Hence, using d%, you can delete
+everything from the current bracket up to its corresponding bracket.
+
+All motions up to now consist of one single character. However, there are
+motions expecting 2 characters. This includes f (find) and t (to), this time
+followed by a character, that should be jumped to (including and excluding
+the character). For example, the input fg moves the cursor to the next
+occurence of g in the current line. Similar, dfg deletes everything from the
+current cursor-position up to the next occurence of g, including g (because
+we use f instead of t). Capital letters (F, T) jump backwards.
+
+The next two motions are important for programmers, but they need a command
+before. With input di (insert) and a bracket, e.g. di[, , you can delete
+everything inside this kind of bracket. With da (around) and a bracket, the
+respective brackets are deleted as well. This works with all kind of
+enclosing characters, even with quotation marks " or '. Instead of brackets,
+you can use diw/diW to delete the word where the cursor currently stands in.
+
+Okay, 2 more motions before you can play around again. Before we continue,
+please remember the current line. With 29gg or 29G, the cursor jumps into the
+line 29 of this document. With gg, it jumps to the very first line, while G
+leads to the very last line. Trolls might enter dgg at the colleagues
+document to delete the first half of the document.
+
+Feel free to play around.
+
+Here are all new motions:
+    %  f/F  t/T
+    <cmd>i(  <cmd>i}  <cmd>i"  <cmd>iw/<cmd>iW
+    <cmd>a(  <cmd>a}  <cmd>a"  <cmd>aw/<cmd>aW
+and the motions from earlier.
+    w/W  e/E  b/B  ^  $  0  h  j  k  l
+The command for deletion is d.
+
+--------------------------------------------------------------------------------
+// Move the cursor between the quotation-marks "
+// and enter da"
+public static String createGreetings() {
+    String greetings = "Hello!";
+    // Versuche hier zB das Eintippen von dt;
+    greetings += " Nice to meet you.";
+    greetings += " I know, vim has so many motions..";
+    greetings += " But good news: just one more motion is coming!";
+    greetings += " If you like vim so far,";
+    greetings += " the key is to just keep on using vim.";
+    return greetings;
+}
+
+// Move the cursor into the method
+// be in normal-mode (press escape to be sure)
+// and enter di}
+public static void main(String[] args) {
+    final String greetings = createGreetings();
+    System.out.println(greetings);
+}
+--------------------------------------------------------------------------------
+You might want to press zz for a better view.
+
+Next, we want to take a look at the insert-mode. Explaining the insert-mode
+is done quickly, but because it is vim, some handy handy commands come with
+it. In normal-mode, you can press i (insert) to get in insertion-mode before
+the current cursor's character. Pressing a (after) enters the insertion-mode
+after the current cursor's character. In insertion-mode, you can write text.
+You get back to normal-mode by pressing escape. By pressing c (change) and a
+motion, you combine d (delete) and i (insert). For example, the input ciw is
+identical to diw, but you are in insert-mode afterwards. Pressing s deletes
+the current cursor's character and enters insert-mode. Hence you don't need
+any motion here.
+
+Short overview about the insert-mode:
+    (i)nsert  (a)fter  (c)hange  s
+
+The visual-mode is more interesting than the insert-mode. By pressing v, you
+get into the visual-mode. Now, you can move the cursor around as in the
+normal-mode (with all known motions so far). However, while moving, text is
+marked. You stop by pressing escape and get back to normal-mode. In
+visual-mode, you can delete the marked text by pressing d. With c or s, you
+enter insert-mode in addition. By pressing V (capital), you mark line-wise
+instead of character-wise
+
+The last motions are super important. With pressing / or ? and a regular
+expression (and confirming by pressing enter), you can search forwards or
+backwards. You can jump through all occurences of your search-pattern by
+pressing n or N, going with or against your search-direction. Because n and N
+are motions again, you can combine them with with commands as well (e.g. marking using vn).
+Similar, you can search for a pattern in visual-mode by pressing / and ?.
+With #, you automatically search for the cursor's underlying word.
+
+Short overview for the search:
+    /  ?  #
+    n  N
+
+These handy commands should also be mentioned:
+
+    .
+    Repeats the last executed command. Very handy!
+
+    u (undo)
+    Makes the last change undone.
+
+    Ctrl and r
+    Goes backwards through the undo-history, so makes undo undone.
+
+    y (yank)
+    Followed by a motion, in normal-mode, it copies the respective text. More
+    important, in visual-mode, it copies marked text.
+
+    yy (yank line)
+    Copies the current cursor's line.
+
+    p (paste)
+    Inserts text from clipboart after the cursor's character. A capital
+    letter P adds it before the cursor.
+
+    x
+    Deletes the current cursor's character. Changing into insert-mode using s
+    is identical to xi.
+
+    d (delete)
+    Already known, but the truth is: d doesn't delete, but cuts out (and
+    hence stores the text into the clipboard).
+
+    dd
+    Cuts out the current line.
+
+    3dd
+    Cuts out 3 lines, starting with the cursor's current line. In general,
+    numbers let execute motions and commands multiple times. For example,
+    with input 3w, you can jump to the 3. beginning of a word. The respective
+    text is deleted by pressing d3w or 3dw.
+
+    Capital letters for i, d, c
+    I = ^i
+    D = d$
+    C = Da
+
+    r (replace)
+    In normal-mode, replaces the current cursor's character by the pressed
+    character. Used as capital letter, you start replacing text while typing
+    until escape is pressed. In visual-mode, r replaces every marked
+    character by the typed one.
+
+In the end, some more fancy stuff. With qj, commands can be recorded and
+stored unter the letter j. By pressing q again, the recording stops. Pressing
+@j replays the recorded keys, automatically. Instead of j you can use any
+arbitrary character. This recording can be very handy when refactoring.
+
+Example:
+Move the cursor into the first line and type following inputs.
+    qj      Start recording in j
+    0w      Go to the variable-name
+    iasdf   Enter insert-mode and type asdf, followed by a whitespace
+    esc     Go back to normal-mode
+    f"      Move the cursor to the next "
+    vf"y    Mark and copy the complete string
+    0ww#    Move the cursor to the variable-name and start searching for it
+    vep     Replace the variable-name by the copied string
+    /asdf   Search for asdf
+    enter   Confirm search and jump back to asdf
+    dd      Delete the line
+    q       Stop recording
+    @j      Repeat everything automatically with the next person
+
+String stephan = "Stephan";
+String pavol = "Pavol";
+String dominic = "Dominic";
+
+System.out.println(stephan);
+System.out.println(pavol);
+System.out.println(dominic);
