@@ -471,6 +471,12 @@ Problem has been, that the updated `pam` needs the new config to work, hence cra
 
 To solve this: boot from an Bootalbe USB-stick, `chroot` into the system (see [installation-guide on archwiki][archlinux/wiki/installation-guide]) and resolve the merge-conflict.
 
+In general, to find `pacnew`-files, you might play around with
+
+`sudo find . -type f -exec grep -i "pacnew" --color=auto {} +`
+
+for finding `.pacnew`-files.
+
 
 ### System-maintenance and logging <a name="system-maintenance_and_logging"></a>
 
