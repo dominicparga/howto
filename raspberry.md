@@ -798,6 +798,9 @@ sudo apt install php7.4-pgsql
 # recommended
 sudo apt install php7.4-imagick
 sudo apt install php7.4-intl
+
+# Module php-imagick in this instance has no SVG support. For better compatibility it is recommended to install it.
+sudo apt install php libmagickcore-6.q16-6-extra
 ```
 
 ```zsh
