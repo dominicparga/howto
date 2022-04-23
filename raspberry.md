@@ -4,40 +4,40 @@ Although this description seems to be complete, it might be not.
 It's main purpose is being a collection of some useful snippets or links.
 
 
-## Table of Contents <a name="toc"></a>
+## Table of Contents
 
-1. [Before you start](#before_start)
-1. [Handy commands](#handy_commands)
-1. [Install Ubuntu Server 20.04](#install-ubuntu-server-20.04)
-1. [Setup Internet and update system](#setup_internet_and_update_system)
-1. [Setup user-management](#setup_user_management)
-1. [Setup ssh (secure shell)](#ssh)
-1. [Setup ufw (firewall)](#ufw)
-1. [Setup domain and connect it to your server](#setup_domain_and_ddns)
-    1. [Setup the DNS-server (via namecheap.com)](#setup_dns-server)
-    1. [Setup your router](#setup_router)
-1. [Setup an external drive for using mount-points (fstab)](#setup_external_drive)
-    1. [Difference between mount and symlink](#mount_vs_symlink)
-    1. [Format device](#format_device)
-    1. [Mount a device](#mount_device)
-    1. [Mount a device at system-start](#fstab)
-1. [Setup Apache and TLS](#setup_tls)
-1. [Setup (or remove) postgresql](#setup_postgresql)
-1. [Install nextcloud](#install_nextcloud)
+1. [Before you start](#before-you-start)
+1. [Handy commands](#handy-commands)
+1. [Install Ubuntu Server 20.04](#install-ubuntu-server-2004)
+1. [Setup Internet and update system](#setup-internet-and-update-the-system)
+1. [Setup user-management](#setup-user-management)
+1. [Setup ssh (secure shell)](#setup-ssh-secure-shell)
+1. [Setup ufw (firewall)](#setup-ufw-firewall)
+1. [Setup domain and connect it to your server](#setup-domain-and-connect-it-to-your-raspberry-pi)
+    1. [Setup the DNS-server (via namecheap.com)](#setup-the-dns-server-via-namecheapcom)
+    1. [Setup your router](#setup-your-router)
+1. [Setup an external drive for using mount-points (fstab)](#setup-an-external-drive-for-using-mount-points-fstab)
+    1. [Difference between mount and symlink](#difference-between-mount-and-symlink)
+    1. [Format device](#format-device)
+    1. [Mount a device](#mount-a-device)
+    1. [Mount a device at system-start](#mount-a-device-at-system-start)
+1. [Setup Apache and TLS](#setup-apache-and-tls)
+1. [Setup (or remove) postgresql](#setup-or-remove-postgresql)
+1. [Install nextcloud](#install-nextcloud)
 1. [Maintenance](#maintenance)
-    1. [Logging](#logging_and_troubleshooting)
-    1. [Backups and compressing data (using tar)](#backups_and_tar)
+    1. [Logging and troubleshooting](#logging-and-troubleshooting)
+    1. [Backups and compressing data (using tar)](#backups-and-compressing-data-using-tar)
     1. [cronjobs](#cronjobs)
-    1. [Optimizing disk-usage](#optimizing_disk_usage)
+    1. [Optimizing disk-usage](#optimizing-disk-usage)
 
 
-## Before you start <a name="before_start"></a>
+## Before you start
 
 I'm using my Raspberry Pi with `Ubuntu Server 20.04` headlessly, so just plain in the cmdline, without any Desktop like `Gnome` installed.
 In my experience, `Ubuntu` feels a bit heavy, but `Ubuntu Server 20.04` feels very light and is really nice to use.
 
 
-## Handy commands <a name="handy_commands"></a>
+## Handy commands
 
 Some handy commands, e.g. from [linuxhandbook][linuxhandbook/list_users_in_group] or [linuxhandbook][linuxhandbook/has_user_sudo-rights].
 
@@ -60,7 +60,7 @@ grep '^sudo:.*$' /etc/group | cut -d: -f4
 ```
 
 
-## Install Ubuntu Server 20.04 <a name="install-ubuntu-server-20.04"></a>
+## Install Ubuntu Server 20.04
 
 Installing `Ubuntu Server 20.04` is very simple using the `Raspberry Pi Imager`.
 It's just writing the `OS` to the `SD`-card.
@@ -73,7 +73,7 @@ sudo dpkg-reconfigure keyboard-configuration
 ```
 
 
-## Setup Internet and update the system <a name="setup_internet_and_update_system"></a>
+## Setup Internet and update the system
 
 Check if `nmcli` (`nm` for network-manager, `cli` for commandline-interface) is installed (for handling Internet via wifi).
 
@@ -103,7 +103,7 @@ nmcli --ask device wifi connect 'wifi-name'
 ```
 
 
-## Setup user-management <a name="setup_user_management"></a>
+## Setup user-management
 
 For more info, see [ubuntu.com][ubuntu/security-users] and [howtogeek - How to Use the chmod Command on Linux][howtogeek/chmod_explanations].
 
@@ -211,7 +211,7 @@ Per default, this user `ubuntu` is in one of the groups `sudo`, `wheel` or `admi
     sudo userdel ubuntu
     ```
 
-## Setup ssh (secure shell) <a name="ssh"></a>
+## Setup ssh (secure shell)
 
 Background for ssh: [digitalocean][digitalocean/ssh-encryption]
 
@@ -324,7 +324,7 @@ sudo systemctl disable sshd
 ```
 
 
-## Setup ufw (firewall) <a name="#ufw"></a>
+## Setup ufw (firewall)
 
 Setup your firewall (ubuntu firewall, called `ufw`), which is basically just a door for incoming and leaving Internet-connections.
 A great source of code-snippets is [this blog][digitalocean/ufw_on_ubuntu_20.04].
@@ -389,7 +389,7 @@ To get your global ip and enable port-forwarding (sometimes called port-permissi
 This is explained below.
 
 
-## Setup domain and connect it to your Raspberry Pi <a name="setup_domain_and_ddns"></a>
+## Setup domain and connect it to your Raspberry Pi
 
 Assume we want to use `domain.com` as our server-domain.
 To reach the Raspberry Pi through the Internet, the following chain has to be complete:
@@ -406,7 +406,7 @@ In the following, we configure this domain according to my setup on `namecheap.c
 Your router is changing it's public ip-address on a regular basis (probably daily).
 So, to get the DNS-server to find your ip-address without updating the ip-address of `domain.com` at `namecheap.com` everyday, you might use dynamic DNS.
 
-### Setup the DNS-server (via namecheap.com) <a name="setup_dns-server"></a>
+### Setup the DNS-server (via namecheap.com)
 
 1. Buy or rent a domain, e.g. on `namecheap.com`, which has pretty nice documentation and a nice UI.
 
@@ -428,7 +428,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
     - See [namecheap.com][namecheap/create_subdomain] for more info
 
 
-### Setup your router <a name="setup_router"></a>
+### Setup your router
 
 1. Visit your router's settings page in your browser (e.g. `fritz.box` or by the network-ip, in my case `192.168.178.1`, as mentioned above).
 
@@ -482,7 +482,7 @@ So, to get the DNS-server to find your ip-address without updating the ip-addres
 You can (hopefully) connect via `ssh dominic@parga.io`.
 
 
-## Setup an external drive for using mount-points (fstab) <a name="setup_external_drive"></a>
+## Setup an external drive for using mount-points (fstab)
 
 In case you want to use an external drive to store your data via mounting, this chapter is for you.
 Note that I have added this functionality after setting up my nextcloud and I screwed my nextcloud up.
@@ -492,7 +492,7 @@ Mounting (`mount --help`) is kind of making your harddrive accessable in your sy
 You can mount drives and add extra access-points for directories.
 
 
-### Difference between mount and symlink <a name="mount_vs_symlink"></a>
+### Difference between mount and symlink
 
 The difference between mounting and symlinking is noticable when changing your root-directory (`/`, e.g. `cd /`).
 This happens using `chroot` or using containers like `Docker`.
@@ -501,7 +501,7 @@ This symlink wouldn't work, since it would try to go to `/new_root/new_root/asdf
 Mounting would still work, because mounting is done relative to your root-directory `/`.
 
 
-### Format device <a name="format_device"></a>
+### Format device
 
 ```zsh
 # get disk's current name, e.g. /dev/sdb
@@ -530,7 +530,7 @@ sudo blkid 281d6519-1086-42d0-a2ab-0fbd797434fc
 ```
 
 
-### Mount a device <a name="mount_device"></a>
+### Mount a device
 
 In general, mounting-cmds are always `sudo mount <source> <destination>`.
 A source might be a partition or a mountpoint, but nothing else!
@@ -560,7 +560,7 @@ sudo mount /mnt/1234/subdir /home/dominic/subdir
 ```
 
 
-### Mount a device at system-start <a name="fstab"></a>
+### Mount a device at system-start
 
 You can edit `/etc/fstab` to mount at system-start.
 __Attention!__
@@ -649,7 +649,7 @@ I would mount:
   - `/var/log/nextcloud`
 
 
-## Setup Apache and TLS <a name="setup_tls"></a>
+## Setup Apache and TLS
 
 `TLS` is for accessing your domain via `https`.
 Great sources:
@@ -717,7 +717,7 @@ Great sources:
   ```
 
 
-## Setup (or remove) postgresql <a name="setup_postgresql"></a>
+## Setup (or remove) postgresql
 
 In case you want to use `postgres`, look at the following commands to setup the database for nextcloud.
 The source is [marksei - How to install NextCloud 20 on Ubuntu 18.04/19.04/19.10/20.04][marksei/install_nextcloud_on_ubuntu], but these commands are same as in the mariadb-related commands in the nextcloud-documentation.
@@ -766,7 +766,7 @@ sudo rm -rf /etc/postgresql/
 ```
 
 
-## Install nextcloud <a name="install_nextcloud"></a>
+## Install nextcloud
 
 > Please note, that after installing `nextcloud` with following commands, your server, reachable under your domain, is waiting for setting up the nextcloud-admin.
 > If you won't (kind of) immediately visit your domain and setup your nextcloud-admin, someone else might do this. 8-)
@@ -878,14 +878,14 @@ Please note, that you can not upload large files in case you have too low number
 But too large numbers make your server vulnerable for attacks (by your users, who should be trustworthy anyways because it's your server).
 
 
-## Maintenance <a name="maintenance"></a>
+## Maintenance
 
 Now, login as `admin` and click through your settings.
 Most important is probably the section `Overview` and `Basic settings` for setting up the admin-mail-account (for notifications).
 See [nextcloud-docs][nextcloud/docs/cron-jobs] for setting basic cron-jobs for your server.
 
 
-### Logging and troubleshooting <a name="logging_and_troubleshooting"></a>
+### Logging and troubleshooting
 
 Nice tool from [nextcloud-help-forum][nextcloud/log-file-readability] for fabulizing json-output in cmdline:
 
@@ -922,7 +922,7 @@ TODO
 - Example-mail-server with everything (including some logging-commands): `https://123qwe.com/tutorial-debian-10/`
 
 
-### Backups and compressing data (using tar) <a name="backups_and_tar"></a>
+### Backups and compressing data (using tar)
 
 Great sources
 
@@ -957,7 +957,7 @@ Cool snippets for checking directory-size
 - TODO Checking size of tar-commands: https://unix.stackexchange.com/q/124052
 
 
-### Cronjobs <a name="cronjobs"></a>
+### Cronjobs
 
 TODO
 
@@ -973,7 +973,7 @@ TODO
   ```
 
 
-### Optimizing disk-usage <a name="optimizing_disk_usage"></a>
+### Optimizing disk-usage
 
 Playing around with disk-tools might destroy your disk, so be careful and only execute commands, that you can understand!
 I suggest taking a look at the manuals.
