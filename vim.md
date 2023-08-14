@@ -159,7 +159,7 @@ Also motions..
 | <kbd>i</kbd> | `hell[o], vim` -> `hell\|o, vim` | normal | insert | Go to insert-mode in front of current character. |
 | <kbd>a</kbd> | `hell[o], vim` -> `hello\|, vim` | normal | insert | Go to insert-mode behind current character. |
 | <kbd>I</kbd> | `hell[o], vim` -> `\|hello, vim` | normal | insert | short for <kbd>0i</kbd> |
-| <kbd>A</kbd> | `hell[o], vim` -> `hello, vim|` | normal | insert | short for <kbd>$a</kbd> |
+| <kbd>A</kbd> | `hell[o], vim` -> `hello, vim\|` | normal | insert | short for <kbd>$a</kbd> |
 | <kbd>s</kbd> | `hell[o], vim` -> `hell\|, vim` | normal | insert | Remove character at cursor's position and go to insert-mode. |
 | <kbd>S</kbd> | `hell[o], vim` -> `\|` | normal | insert | Remove line's content (without the line-break) and go to insert-mode. |
 | <kbd>c</kbd> + motion | | normal | insert | Remove characters as defined by the motion and go to insert mode. |
